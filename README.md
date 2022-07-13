@@ -1,3 +1,4 @@
+
 # administrator_houniaoliuxue
 
 ## Project setup
@@ -15,5 +16,8 @@ npm run serve
 npm run build
 ```
 
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+### 简要介绍
+数据库课设——候鸟留学项目的管理员前端页面
+
+本项目还在开发中，以后再来细讲咯！
+
