@@ -1,20 +1,24 @@
 import { createRouter, createWebHashHistory } from 'vue-router'
-import HomeView from '../views/HomeView.vue'
-
+import LoginPage from '../views/LoginPage.vue'
+import InfoPage from '../views/InfoPage.vue'
+import { ElMessage } from 'element-plus'
 const routes = [
   {
-    path: '/',
-    name: 'home',
-    component: HomeView
+    path:'/login',
+    name:'login',
+    component:LoginPage,
+    meta:{
+      title:'登录'
+    }
   },
   {
-    path: '/about',
-    name: 'about',
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/AboutView.vue')
-  }
+    path:'/information',
+    name:'information',
+    component:InfoPage,
+    meta:{
+      title:'个人信息'
+    }
+  },
 ]
 
 const router = createRouter({
@@ -22,4 +26,31 @@ const router = createRouter({
   routes
 })
 
+router.afterEach(to=>{
+  document.title=to.meta.title;//更改标题
+})
+
+router.beforeEach(to=>{
+  if(to.matched.some(record=>record.meta.requireAuth)){
+    //如果需要验证登录状态
+    if(store.state.is_login==true){
+      return true
+    }
+    else{
+      ElMessage({
+        message: '请先登录',
+        type: 'warning',
+        showClose:true,
+        duration:2000
+      })
+      return{
+        path:'/login',
+        query:{redirect:to.fullPath}
+      }
+    }
+  }
+  else{
+    return true
+  }
+})
 export default router
