@@ -1,6 +1,8 @@
 import { createRouter, createWebHashHistory } from 'vue-router'
 import LoginPage from '../views/LoginPage.vue'
 import InfoPage from '../views/InfoPage.vue'
+import NewsCollation from '../views/NewsCollation.vue'
+import NewsRelease from '../views/NewsRelease.vue'
 import { ElMessage } from 'element-plus'
 const routes = [
   {
@@ -17,6 +19,22 @@ const routes = [
     component:InfoPage,
     meta:{
       title:'个人信息'
+    }
+  },
+  {
+    path:'/news_collation',
+    name:'news_collation',
+    component:NewsCollation,
+    meta:{
+      title:'管理留学快讯'
+    }
+  },
+  {
+    path:'/news_release',
+    name:'news_release',
+    component:NewsRelease,
+    meta:{
+      title:'发布留学快讯'
     }
   },
 ]
