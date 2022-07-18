@@ -3,6 +3,8 @@ import LoginPage from '../views/LoginPage.vue'
 import InfoPage from '../views/InfoPage.vue'
 import NewsCollation from '../views/NewsCollation.vue'
 import NewsRelease from '../views/NewsRelease.vue'
+import QuestionCheckCenter from '../views/QuestionCheckCenter.vue'
+import QuestionCheck from '../views/QuestionCheck.vue'
 import { ElMessage } from 'element-plus'
 const routes = [
   {
@@ -35,6 +37,22 @@ const routes = [
     component:NewsRelease,
     meta:{
       title:'发布留学快讯'
+    }
+  },
+  {
+    path:'/question_check_center',
+    name:'question_check_center',
+    component:QuestionCheckCenter,
+    meta:{
+      title:'问题审核中心'
+    }
+  },
+  {
+    path:'/question_check',
+    name:'question_check',
+    component:QuestionCheck,
+    meta:{
+      title:'问题审核'
     }
   },
 ]
