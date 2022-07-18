@@ -22,7 +22,7 @@
       <el-menu-item index="5-1">修改高校信息</el-menu-item>
       <el-menu-item index="5-2">修改排名信息</el-menu-item>
     </el-sub-menu>
-    <el-menu-item index="6">
+    <el-menu-item index="6" @click="goNewsCollation">
       <span>留学快讯管理</span>
     </el-menu-item>
   </el-menu>
@@ -35,6 +35,11 @@ export default {
     goInfomation() {
       router.push({
         name: "information",
+      });
+    },
+    goNewsCollation() {
+      router.push({
+        name: "news_collation",
       });
     },
   },
