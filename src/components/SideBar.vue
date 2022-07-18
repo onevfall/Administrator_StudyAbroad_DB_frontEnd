@@ -14,8 +14,8 @@
     <el-sub-menu index="3">
       <template #title>审核</template>
       <el-menu-item index="3-1" @click="goQuestionCheckCenter">审核问题</el-menu-item>
-        <el-menu-item index="3-2">审核动态</el-menu-item>
-        <el-menu-item index="3-3">审核回答</el-menu-item>
+        <el-menu-item index="3-2" @click="goBlogCheckCenter">审核动态</el-menu-item>
+        <el-menu-item index="3-3" @click="goAnswerCheckCenter">审核回答</el-menu-item>
         <el-menu-item index="3-4">审核学历</el-menu-item>
     </el-sub-menu>
     <el-menu-item index="4">
@@ -49,6 +49,16 @@ export default {
     goQuestionCheckCenter() {
       router.push({
         name: "question_check_center",
+      });
+    },
+    goAnswerCheckCenter() {
+      router.push({
+        name: "answer_check_center",
+      });
+    },
+    goBlogCheckCenter() {
+      router.push({
+        name: "blog_check_center",
       });
     },
   },

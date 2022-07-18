@@ -5,6 +5,10 @@ import NewsCollation from '../views/NewsCollation.vue'
 import NewsRelease from '../views/NewsRelease.vue'
 import QuestionCheckCenter from '../views/QuestionCheckCenter.vue'
 import QuestionCheck from '../views/QuestionCheck.vue'
+import AnswerCheckCenter from '../views/AnswerCheckCenter.vue'
+import AnswerCheck from '../views/AnswerCheck.vue'
+import BlogCheckCenter from '../views/BlogCheckCenter.vue'
+import BlogCheck from '../views/BlogCheck.vue'
 import { ElMessage } from 'element-plus'
 const routes = [
   {
@@ -53,6 +57,38 @@ const routes = [
     component:QuestionCheck,
     meta:{
       title:'问题审核'
+    }
+  },
+  {
+    path:'/answer_check_center',
+    name:'answer_check_center',
+    component:AnswerCheckCenter,
+    meta:{
+      title:'回答审核中心'
+    }
+  },
+  {
+    path:'/answer_check',
+    name:'answer_check',
+    component:AnswerCheck,
+    meta:{
+      title:'问题审核'
+    }
+  },
+  {
+    path:'/blog_check_center',
+    name:'blog_check_center',
+    component:BlogCheckCenter,
+    meta:{
+      title:'动态审核中心'
+    }
+  },
+  {
+    path:'/blog_check',
+    name:'blog_check',
+    component:BlogCheck,
+    meta:{
+      title:'动态审核'
     }
   },
 ]

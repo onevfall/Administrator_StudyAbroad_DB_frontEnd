@@ -1,5 +1,5 @@
 <!--
-描述：具体问题审核
+描述：具体回答审核
 作者：王若晗
 -->
 
@@ -9,24 +9,19 @@
       <el-card class="box-card">
         <template #header>
           <div class="card-header">
-            <span>审核问题</span>
+            <span>审核回答</span>
           </div>
         </template>
         <div class="card-content">
           <el-row style="margin-top:20px">
             <el-col :span="3"></el-col>
-            <el-col :span="4" style="text-align:left">问题ID：</el-col>
-            <el-col :span="4" style="text-align:left">{{ question_info.QuestionId }}</el-col>
+            <el-col :span="4" style="text-align:left">回答ID：</el-col>
+            <el-col :span="4" style="text-align:left">{{ answer_info.AnswerId }}</el-col>
           </el-row>
           <el-row style="margin-top:50px">
             <el-col :span="3"></el-col>
-            <el-col :span="4" style="text-align:left">问题标题：</el-col>
-            <el-col :span="10" style="text-align:left">{{ question_info.QuestionTitle }}</el-col>
-          </el-row>
-          <el-row style="margin-top:50px">
-            <el-col :span="3"></el-col>
-            <el-col :span="4" style="text-align:left">问题内容：</el-col>
-            <el-col :span="10" style="text-align:left">{{ question_info.QuestionContent }}</el-col>
+            <el-col :span="4" style="text-align:left">回答内容：</el-col>
+            <el-col :span="10" style="text-align:left">{{ answer_info.AnswerContent }}</el-col>
           </el-row>
           <el-row style="margin-top:50px">
             <el-col :span="3"></el-col>
@@ -57,13 +52,13 @@
 import { ElMessage } from 'element-plus'
 import axios from "axios";
 export default ({
-  name: "QuestionCheck",
+  name: "AnswerCheck",
   data() {
     return {
         ReviewResult:null,
         ReviewReason:null,
-        question_id:10,
-        question_info:[],
+        answer_id:2,
+        answer_info:[],
         administrator_id:99,
     };
   },
@@ -74,29 +69,30 @@ export default ({
         ElMessage.error('请选择是否审核通过');
       }
       else{
-        axios.post("check/submit_question", {
-          question_id:this.question_id,
+        axios.post("check/submit_answer", {
+          answer_id:this.answer_id,
           administrator_id:this.administrator_id,
           review_result:this.ReviewResult,
           review_reason:this.ReviewReason,
         })
         .then((res) => {
-          console.log(this.question_id);
+          console.log(this.answer_id);
           console.log(this.administrator_id);
           console.log(this.ReviewResult);
           console.log(this.ReviewReason);
           console.log(res);
           var response = res.data;
           console.log(response.status);
+          console.log(this.answer_info);
           if (response.status == true) {
             //若审核成功
             ElMessage({
-              message: "ID为"+this.question_id+ "的问题审核成功！",
+              message: "ID为"+this.answer_id+ "的回答审核成功！",
               type: "success",
               showClose: true,
               duration: 2000,
             });
-            this.$router.replace({name:"question_check_center"});
+            this.$router.replace({name:"answer_check_center"});
           }
           else{
             //若审核失败
@@ -111,18 +107,17 @@ export default ({
     }
   },
   created(){
-    this.question_id=this.$route.query.question_id;
-    console.log(this.question_id);
+    this.answer_id=this.$route.query.answer_id;
     axios({
-      url: "check/single_question",
+      url: "check/single_answer",
       method: "get",
       params: {
-        question_id:this.question_id,
+        answer_id:this.answer_id,
       },
       })
       .then((res) => {
         console.log(res.data.data);
-        this.question_info=res.data.data;
+        this.answer_info=res.data.data;
       })
       .catch((err) => {
         console.log(err);
