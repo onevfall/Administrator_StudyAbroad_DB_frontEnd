@@ -73,14 +73,8 @@
         <el-row class="info-content">
           <el-col :span="6"></el-col>
           <el-col :span="4" style="text-align:left">注册时间</el-col>
-          <el-col :span="6" style="text-align:left">
-            <el-input v-model="create_time" v-if="isUpdating['time']"></el-input>
-            <div v-if="!isUpdating['time']">{{create_time}}</div>
-          </el-col>
-          <el-col :span="4" style="text-align:left">
-            <el-button text="primary" type="primary" v-if="!isUpdating['time']" @click="update('time')">修改</el-button>
-            <el-button text="primary" type="primary" v-if="isUpdating['time']" @click="confirm('time')">确认</el-button>
-          </el-col>
+          <el-col :span="6" style="text-align:left">{{create_time}}</el-col>
+          <el-col :span="4" style="text-align:left"></el-col>
           <el-col :span="2"></el-col>
         </el-row>
       </el-card>
@@ -101,7 +95,7 @@ export default {
       phone: "",
       email: "",
       create_time: "",
-      isUpdating: {"name":false,"gender":false,"phone":false,"email":false,"time":false},
+      isUpdating: {"name":false,"gender":false,"phone":false,"email":false},
     };
   },
   methods: {
@@ -110,6 +104,17 @@ export default {
     },
     confirm: function(key) {
       this.isUpdating[key] = false;
+      console.log(this.phone);
+      axios.post("administrator",{
+        admin_id: 0,
+        admin_name: this.name,
+        admin_gender: this.gender == "女" ? 'f' : 'm',
+        admin_phone: this.phone,
+        admin_email: this.email,
+      })
+      .then((res) => {
+        console.log(res);
+      })
     },
   },
   components: {
@@ -117,7 +122,7 @@ export default {
   },
   created() {
     axios({
-      url: "Administrator",
+      url: "administrator",
       method: "get",
       params: {
         admin_id: 0,
