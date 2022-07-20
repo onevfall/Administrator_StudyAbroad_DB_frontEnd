@@ -9,6 +9,7 @@ import AnswerCheckCenter from '../views/AnswerCheckCenter.vue'
 import AnswerCheck from '../views/AnswerCheck.vue'
 import BlogCheckCenter from '../views/BlogCheckCenter.vue'
 import BlogCheck from '../views/BlogCheck.vue'
+import ModifyUniversityInfo from '../views/ModifyUniversityInfo.vue'
 import { ElMessage } from 'element-plus'
 const routes = [
   {
@@ -89,6 +90,14 @@ const routes = [
     component:BlogCheck,
     meta:{
       title:'动态审核'
+    }
+  },
+  {
+    path:'/modify_university_info',
+    name:'modify_university_info',
+    component:ModifyUniversityInfo,
+    meta:{
+      title:'修改高校信息'
     }
   },
 ]
