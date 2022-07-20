@@ -23,7 +23,7 @@
     </el-menu-item>
     <el-sub-menu index="5">
       <template #title>高校管理</template>
-      <el-menu-item index="5-1">修改高校信息</el-menu-item>
+      <el-menu-item index="5-1" @click="goModifyUniversityInfo">修改高校信息</el-menu-item>
       <el-menu-item index="5-2">修改排名信息</el-menu-item>
     </el-sub-menu>
     <el-menu-item index="6" @click="goNewsCollation">
@@ -61,6 +61,11 @@ export default {
         name: "blog_check_center",
       });
     },
+    goModifyUniversityInfo() {
+      router.push({
+        name: "modify_university_info",
+      })
+    }
   },
 };
 </script>
