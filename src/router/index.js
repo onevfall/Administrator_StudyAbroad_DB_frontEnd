@@ -3,6 +3,13 @@ import LoginPage from '../views/LoginPage.vue'
 import InfoPage from '../views/InfoPage.vue'
 import NewsCollation from '../views/NewsCollation.vue'
 import NewsRelease from '../views/NewsRelease.vue'
+import QuestionCheckCenter from '../views/QuestionCheckCenter.vue'
+import QuestionCheck from '../views/QuestionCheck.vue'
+import AnswerCheckCenter from '../views/AnswerCheckCenter.vue'
+import AnswerCheck from '../views/AnswerCheck.vue'
+import BlogCheckCenter from '../views/BlogCheckCenter.vue'
+import BlogCheck from '../views/BlogCheck.vue'
+import ModifyUniversityInfo from '../views/ModifyUniversityInfo.vue'
 import { ElMessage } from 'element-plus'
 const routes = [
   {
@@ -35,6 +42,62 @@ const routes = [
     component:NewsRelease,
     meta:{
       title:'发布留学快讯'
+    }
+  },
+  {
+    path:'/question_check_center',
+    name:'question_check_center',
+    component:QuestionCheckCenter,
+    meta:{
+      title:'问题审核中心'
+    }
+  },
+  {
+    path:'/question_check',
+    name:'question_check',
+    component:QuestionCheck,
+    meta:{
+      title:'问题审核'
+    }
+  },
+  {
+    path:'/answer_check_center',
+    name:'answer_check_center',
+    component:AnswerCheckCenter,
+    meta:{
+      title:'回答审核中心'
+    }
+  },
+  {
+    path:'/answer_check',
+    name:'answer_check',
+    component:AnswerCheck,
+    meta:{
+      title:'问题审核'
+    }
+  },
+  {
+    path:'/blog_check_center',
+    name:'blog_check_center',
+    component:BlogCheckCenter,
+    meta:{
+      title:'动态审核中心'
+    }
+  },
+  {
+    path:'/blog_check',
+    name:'blog_check',
+    component:BlogCheck,
+    meta:{
+      title:'动态审核'
+    }
+  },
+  {
+    path:'/modify_university_info',
+    name:'modify_university_info',
+    component:ModifyUniversityInfo,
+    meta:{
+      title:'修改高校信息'
     }
   },
 ]
