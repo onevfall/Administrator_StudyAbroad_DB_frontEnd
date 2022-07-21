@@ -1,5 +1,4 @@
 <template>
-  <!-- <h1>这里是快讯管理页！</h1> -->
   <div
     class="radius"
     :style="{
@@ -11,14 +10,8 @@
     <div class="common-layout">
       <el-container>
         <el-header style="height: 220px">
-          <!-- <el-card shadow:hover class="card1" style="margin-top: 10%">
-            发布留学快讯
-            <el-button type="primary" @click="goPublishingPage"
-              >发布页面</el-button
-            >
-          </el-card> -->
           <el-container>
-            <el-main style="width: 50%">
+            <el-main style="width: 60%">
               <el-card
                 shadow:hover
                 class="card1"
@@ -30,16 +23,15 @@
                 </el-button>
               </el-card>
             </el-main>
-            <el-main style="width: 50%">
+            <el-main style="width: 60%">
               <el-card
                 shadow:hover
-                class="card1"
+                class="card2"
                 style="background-color: rgba(255, 240, 254, 0.674)"
               >
                 <div class="cardTitle2">查询留学快讯</div>
-                <el-form-item label="快讯ID">
-                  <!-- <el-input placeholder="请输入快讯ID" /> -->
-                  <input v-model="message" placeholder="请输入快讯ID" />
+                <el-form-item label="查找快讯">
+                  <input v-model="message" placeholder="请输入快讯关键字" />
                 </el-form-item>
                 <el-button type="primary" round @click="refreshNews"
                   >查询</el-button
@@ -52,18 +44,15 @@
           <el-card
             shadow:hover
             class="card3"
-            style="background-color: aliceblue; margin-left: 3%; width: 93.5%"
+            style="background: whitesmoke; width: 99%"
           >
             <div class="cardTitle3">相关搜索结果</div>
             <el-divider>
-              <div
-                class="el-divider__text is-center"
-                style="background: aliceblue"
-              >
+              <div class="el-divider__text is-center">
                 <el-icon><star-filled /></el-icon>
               </div>
             </el-divider>
-            <el-row justify="left" gutter="6" style="margin-bottom: 0px">
+            <!-- <el-row justify="left" gutter="6" style="margin-bottom: 0px">
               <el-col span="8" :offset="20">
                 <el-button type="primary" text @click="goPublishingPage">
                   修改
@@ -74,64 +63,90 @@
                   撤销
                 </el-button>
               </el-col>
-            </el-row>
-            <!-- <el-divider/> -->
-            <!-- <el-row justify="left" gutter="60">
-            <el-col span="8" :offset="20">
-            <el-button type="primary" text @click="goPublishingPage">
-              撤销
-            </el-button>
-             </el-col>
-             </el-row> -->
-            <el-row justify="left">
-              <el-col span="24" style="text-align: left">
-                <div style="font-weight: bold">快讯ID：</div>
-                {{ news_info.NewsFlashId }}
-              </el-col>
-            </el-row>
-            <el-row justify="left" style="text-align: left">
-              <el-col span="24">
-                <div style="font-weight: bold">快讯标题：</div>
-                {{ news_info.NewsFlashTitle }}
-              </el-col>
-              <!-- <el-col span="8"> -->
-              <!-- <el-button type="primary" text @click="goPublishingPage">
-              修改
-            </el-button> -->
-              <!-- </el-col> -->
-            </el-row>
-            <el-row justify="left">
-              <el-col span="24" style="text-align: left">
-                <div style="font-weight: bold; text-align: left">
-                  快讯时间：
-                </div>
-                {{ news_info.NewsFlashDate }}
-              </el-col>
-            </el-row>
-            <el-row justify="left" style="text-align: left">
-              <el-col span="24">
-                <div style="font-weight: bold">快讯针对地区：</div>
-                {{ news_info.NewsFlashRegion }}
-              </el-col>
-              <!-- <el-col span="8" :offset="6">
-            <el-button type="primary" text @click="goPublishingPage">
-              撤销
-            </el-button>
-             </el-col> -->
-            </el-row>
-            <!-- <el-row justify="left">
-              <el-col span="24"> -->
-            <div style="text-align: left">
-              <div style="font-weight: bold">快讯内容：</div>
-              {{ news_info.NewsFlashContent }}
-            </div>
-            <!-- </el-col>
             </el-row> -->
+
+            <div class="infinite-list-wrapper">
+              <ul
+                v-infinite-scroll="load"
+                class="list"
+                :infinite-scroll-disabled="disabled"
+              >
+                <li
+                  v-for="news in this.news_info_list"
+                  :key="news"
+                  class="list-item"
+                >
+                  <div class="common-layout2">
+                    <el-container>
+                      <el-aside width="200px">
+                        <el-image
+                          style="width: 198px; height: 183px"
+                          :src="news.NewsFlashImage"
+                          :fit="fit"
+                          class="imgBorder"
+                        />
+                      </el-aside>
+                      <el-main
+                        style="width: 550px; height: 185px"
+                        class="mainColor"
+                      >
+                        <el-card style="height: 183px; background: aliceblue">
+                          <template #header>
+                            <div class="card-header2">
+                              
+
+                              <span style="width: 40%">
+                                {{ news.NewsFlashTitle }}
+
+                                <br />
+                              </span>
+                              <el-tag class="ml-2" type="primary" size="small">
+                                {{ news.NewsFlashDate.replace("T", " ") }}
+                              </el-tag>
+                              <el-tag class="ml-2" type="success" size="small">
+                                {{ news.NewsFlashRegion }}
+                              </el-tag>
+                              <el-tag
+                                class="ml-2"
+                                type="warning"
+                                size="small"
+                                >{{ news.NewsFlashTag }}</el-tag
+                              >
+                            </div>
+                          </template>
+                          <div class="content_main">
+                            {{ news.NewsFlashSummary }}
+                          </div>
+                        </el-card>
+                      </el-main>
+                      <el-aside width="10%" class="mainColor">
+                        <el-button
+                          type="primary"
+                          @click="deleteNews"
+                          style="margin-top: 40%"
+                        >
+                          撤销
+                        </el-button>
+                        <el-button
+                          type="primary"
+                          @click="reviseNews"
+                          style="margin-left: 0%; margin-top: 20%"
+                        >
+                          修改
+                        </el-button>
+                      </el-aside>
+                    </el-container>
+                  </div>
+                </li>
+              </ul>
+            </div>
           </el-card>
         </el-main>
         <el-footer style="height: auto">
-          全部快讯
-          <el-divider />
+          <div style="font-weight: bold; font-size: 25px">全部快讯</div>
+          <el-divider style="margin-bottom: 0.5%">
+            <el-icon><star-filled /></el-icon>
+          </el-divider>
           <div class="infinite-list-wrapper" style="overflow: auto">
             <ul
               v-infinite-scroll="load"
@@ -147,16 +162,20 @@
                   <el-container>
                     <el-aside width="200px">
                       <el-image
-                        style="width: 200px; height: auto"
+                        style="width: 198px; height: 183px"
                         :src="news.NewsFlashImage"
                         :fit="fit"
+                        class="imgBorder"
                       />
                     </el-aside>
-                    <el-main style="width: 600px" class="mainColor">
-                      <el-card>
+                    <el-main
+                      style="width: 600px; height: 185px"
+                      class="mainColor"
+                    >
+                      <el-card style="height: 183px; background: aliceblue">
                         <template #header>
                           <div class="card-header2">
-                            ID：{{ news.NewsFlashId }}
+                            
 
                             <span style="width: 40%">
                               {{ news.NewsFlashTitle }}
@@ -164,7 +183,7 @@
                               <br />
                             </span>
                             <el-tag class="ml-2" type="primary" size="small">
-                              {{ news.NewsFlashDate }}
+                              {{ news.NewsFlashDate.replace("T", " ") }}
                             </el-tag>
                             <el-tag class="ml-2" type="success" size="small">
                               {{ news.NewsFlashRegion }}
@@ -179,11 +198,19 @@
                         </div>
                       </el-card>
                     </el-main>
-                    <el-aside width="10%">
-                      <el-button type="primary" text @click="goPublishingPage">
+                    <el-aside width="10%" class="mainColor">
+                      <el-button
+                        type="primary"
+                        @click="deleteNews(news.NewsFlashId)"
+                        style="margin-top: 40%"
+                      >
                         撤销
                       </el-button>
-                      <el-button type="primary" text @click="goPublishingPage" style="margin-left:0%">
+                      <el-button
+                        type="primary"
+                        @click="reviseNews"
+                        style="margin-left: 0%; margin-top: 20%"
+                      >
                         修改
                       </el-button>
                     </el-aside>
@@ -191,8 +218,8 @@
                 </div>
               </li>
             </ul>
-            <p v-if="loading">Loading...</p>
-            <p v-if="noMore">No more</p>
+            <p v-if="loading" style="margin-top: 10%">Loading...</p>
+            <p v-if="noMore" style="margin-top: 10%">No more</p>
           </div>
         </el-footer>
       </el-container>
@@ -210,17 +237,30 @@ export default {
         path: "news_release",
       });
     },
-    // goNewsDetail(new_info) {
-    //   // alert("跳转至id为"+ this.new_info.NewsFlashId+"的快讯详情页面")
-    //   console.log("开始跳");
-    //   console.log(new_info.NewsFlashId);
-    //   this.$router.push({
-    //     path: "news",
-    //     query: {
-    //       news_id: new_info.NewsFlashId,
-    //     },
-    //   });
-    // },
+    deleteNews(id) {
+      // alert("将删除这条快讯");
+      axios({
+        url: "newsflash" + "?newsflash_id=" + id,
+
+        method: "delete",
+      })
+        .then((res) => {
+          console.log(id);
+          console.log(res);
+        })
+        .catch((errMsg) => {
+          console.log(errMsg);
+        });
+      this.$router.push({
+        path: "news_collation",
+        query: {
+          news_id: -1,
+        },
+      });
+    },
+    reviseNews() {
+      alert("将修改这条快讯");
+    },
     refreshNews() {
       console.log("开始跳");
       console.log(this.message);
@@ -230,6 +270,7 @@ export default {
           news_id: this.message,
         },
       });
+      console.log("路由已修改");
     },
     getParams() {
       this.news_id = this.$route.query.news_id;
@@ -251,52 +292,13 @@ export default {
       noMore: computed(() => this.count >= 20),
       disabled: computed(() => this.loading || this.noMore),
       news_info: "",
+      news_info_list: [],
       news_relevant: [],
-      news_id: -1,
+      news_id: "",
       message: "",
     };
   },
   created() {
-    //在此处向服务器请求数据，初始化所需变量
-    // var tem_info = {
-    //   NewsFlashId: 1,
-    //   NewsFlashImage: "../assets/logo.png",
-    //   NewsFlashDate: "2022-6-29",
-    //   NewsFlashTitle: "黄渡理工暑期不允许留校学生出校",
-    //   NewsFlashTag: "黄渡理工",
-    //   NewsFlashRegion: "江苏",
-    //   NewsFlashSummary:
-    //     "近日，《关于疫情期间黄渡理工留校管理条例》经黄渡理工十一届人大常委会第七次会议通过，报道",
-    // };
-    // for (let i = 0; i < 4; ++i) {
-    //   this.news_relevant.push(tem_info);
-    // }
-    // console.log(this.news_relevant);
-    // this.news_info = tem_info;
-    // console.log(this.news_info);
-    // this.news_info.NewsFlashSummary =
-    //   "123近日，《关于疫情期间黄渡理工留校管理条例》经黄渡理工十一届人大常委会第七次会议通过，报道近日，《关于疫情期间黄渡理工留校管理条例》经黄渡理工十一届人大常委会第七次会议通过，报道近日，《关于疫情期间黄渡理工留校管理条例》经黄渡理工十一届人大常委会第七次会议通过，报道近日，《关于疫情期间黄渡理工留校管理条例》经黄渡理工十一届人大常委会第七次会议通过，报道";
-    axios({
-      url: "newsflash/single" + "?newsflash_id=" + this.news_id,
-
-      method: "get",
-    })
-      .then((res) => {
-        console.log(res);
-        console.log(res.data);
-        console.log(res.data.data);
-
-        this.news_info = res.data.data;
-        console.log(this.news_info);
-      })
-      .catch((errMsg) => {
-        console.log(errMsg);
-      });
-    // axios({
-    //   url: "newsflash/all",
-
-    //   method: "get",
-    // })
     axios
       .get("newsflash/all")
       .then((res) => {
@@ -316,12 +318,13 @@ export default {
   watch: {
     $route(to, from) {
       console.log("2022");
-      if (to.path == "/news_collation") {
+      this.getParams();
+      if (to.path == "/news_collation" && this.news_id != -1) {
         console.log(to.path);
-        this.getParams();
+
         //在此处向服务器请求数据，给所需变量重新赋值
         axios({
-          url: "newsflash/single" + "?newsflash_id=" + this.news_id,
+          url: "newsflash/search" + "?keyword=" + this.news_id,
 
           method: "get",
         })
@@ -331,8 +334,41 @@ export default {
             console.log(res.data);
             console.log(res.data.data);
 
-            this.news_info = res.data.data;
+            this.news_info_list = res.data.data.newsflashs;
+
+            console.log(this.news_info_list);
+          })
+          .catch((errMsg) => {
+            console.log(errMsg);
+          });
+        axios({
+          url: "newsflash/single" + "?newsflash_id=" + this.news_id,
+
+          method: "get",
+        })
+          .then((res) => {
+            console.log(res);
+            console.log(res.data);
+            console.log(res.data.data);
+
+            this.news_info_list.push(res.data.data);
             console.log(this.news_info);
+          })
+          .catch((errMsg) => {
+            console.log(errMsg);
+          });
+      } else if (to.path == "/news_collation" &&this.news_id == -1) {
+        axios
+          .get("newsflash/all")
+          .then((res) => {
+            console.log("test");
+            console.log(res);
+
+            console.log(res.data);
+            console.log(res.data.data);
+            console.log(res.data.data.newsflashs);
+            this.news_relevant = res.data.data.newsflashs;
+            console.log(this.news_relevant);
           })
           .catch((errMsg) => {
             console.log(errMsg);
@@ -367,7 +403,15 @@ export default {
 .card1 {
   width: 95%;
   height: 200px;
-  margin-left: 2%;
+  margin-left: -4.5%;
+  font-weight: bold;
+  font-size: 25px;
+  font-family: "Times New Roman", Times, serif;
+}
+.card2 {
+  width: 95%;
+  height: 200px;
+  margin-left: 7%;
   font-weight: bold;
   font-size: 25px;
   font-family: "Times New Roman", Times, serif;
@@ -400,11 +444,15 @@ export default {
 }
 
 .common-layout2 {
-  margin-bottom: 5%;
+  margin-bottom: 0%;
 }
 .mainColor {
   background-color: aliceblue;
   color: aliceblue;
+  padding: 0px;
+  /* border-top: 1px grey solid;
+  border-bottom: 1px grey solid;
+  border-right: 1px grey solid; */
 }
 .card-header2 {
   display: flex;
@@ -426,5 +474,10 @@ export default {
   justify-content: center;
   height: 250px;
   background: white;
+  margin-bottom: -6%;
+  margin-left: -4.5%;
+}
+.imgBorder {
+  border: 1px rgb(166, 209, 247) solid;
 }
 </style>
