@@ -15,7 +15,7 @@
               <el-card
                 shadow:hover
                 class="card1"
-                style="background-color: aliceblue"
+                
               >
                 <div class="cardTitle1">发布留学快讯</div>
                 <el-button type="primary" round @click="goPublishingPage">
@@ -472,9 +472,10 @@ export default {
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 250px;
+  height: auto;
   background: white;
-  margin-bottom: -6%;
+  
+  margin-bottom: 3%;
   margin-left: -4.5%;
 }
 .imgBorder {
