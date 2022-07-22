@@ -84,6 +84,7 @@
 
 <script>
 import axios from "axios";
+import store from "@/store";
 export default {
   name: "InfoPage",
   data() {
@@ -124,6 +125,10 @@ export default {
       
   },
   created() {
+    // if(this.$store.state.is_login)
+    // {
+
+    // }
     axios({
       url: "administrator",
       method: "get",
@@ -136,6 +141,7 @@ export default {
       if (res.data.status) {
         var source_data = res.data.data;
         console.log(source_data)
+        store.commit("loginIn", source_data);
         this.admin_id = source_data.AdministratorId;
         this.name = source_data.AdministratorName;
         this.profile = source_data.AdministratorProfile;
