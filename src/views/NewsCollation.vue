@@ -48,22 +48,10 @@
           >
             <div class="cardTitle3">相关搜索结果</div>
             <el-divider>
-              <div class="el-divider__text is-center">
+              <div class="el-divider__text is-center" style="background-color:whitesmoke">
                 <el-icon><star-filled /></el-icon>
               </div>
             </el-divider>
-            <!-- <el-row justify="left" gutter="6" style="margin-bottom: 0px">
-              <el-col span="8" :offset="20">
-                <el-button type="primary" text @click="goPublishingPage">
-                  修改
-                </el-button>
-              </el-col>
-              <el-col span="8">
-                <el-button type="primary" text @click="goPublishingPage">
-                  撤销
-                </el-button>
-              </el-col>
-            </el-row> -->
 
             <div class="infinite-list-wrapper">
               <ul
