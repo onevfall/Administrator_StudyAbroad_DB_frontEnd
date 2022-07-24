@@ -262,7 +262,7 @@ export default {
     },
     getParams() {
       this.news_id = this.$route.query.news_id;
-      console.log("又回来了");
+    
       console.log(this.$route.query.news_id);
     },
     load() {
@@ -305,7 +305,7 @@ export default {
   },
   watch: {
     $route(to, from) {
-      console.log("2022");
+    
       this.getParams();
       if (to.path == "/news_collation" && this.news_id != -1) {
         console.log(to.path);
@@ -349,10 +349,8 @@ export default {
         axios
           .get("newsflash/all")
           .then((res) => {
-            console.log("test");
-            console.log(res);
-
-            console.log(res.data);
+           
+            console.log("以下是从后端获得的数据")
             console.log(res.data.data);
             console.log(res.data.data.newsflashs);
             this.news_relevant = res.data.data.newsflashs;
