@@ -48,22 +48,10 @@
           >
             <div class="cardTitle3">相关搜索结果</div>
             <el-divider>
-              <div class="el-divider__text is-center">
+              <div class="el-divider__text is-center" style="background-color:whitesmoke">
                 <el-icon><star-filled /></el-icon>
               </div>
             </el-divider>
-            <!-- <el-row justify="left" gutter="6" style="margin-bottom: 0px">
-              <el-col span="8" :offset="20">
-                <el-button type="primary" text @click="goPublishingPage">
-                  修改
-                </el-button>
-              </el-col>
-              <el-col span="8">
-                <el-button type="primary" text @click="goPublishingPage">
-                  撤销
-                </el-button>
-              </el-col>
-            </el-row> -->
 
             <div class="infinite-list-wrapper">
               <ul
@@ -274,7 +262,7 @@ export default {
     },
     getParams() {
       this.news_id = this.$route.query.news_id;
-      console.log("又回来了");
+    
       console.log(this.$route.query.news_id);
     },
     load() {
@@ -317,7 +305,7 @@ export default {
   },
   watch: {
     $route(to, from) {
-      console.log("2022");
+    
       this.getParams();
       if (to.path == "/news_collation" && this.news_id != -1) {
         console.log(to.path);
@@ -361,10 +349,8 @@ export default {
         axios
           .get("newsflash/all")
           .then((res) => {
-            console.log("test");
-            console.log(res);
-
-            console.log(res.data);
+           
+            console.log("以下是从后端获得的数据")
             console.log(res.data.data);
             console.log(res.data.data.newsflashs);
             this.news_relevant = res.data.data.newsflashs;
