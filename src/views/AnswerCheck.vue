@@ -20,8 +20,18 @@
           </el-row>
           <el-row style="margin-top:50px">
             <el-col :span="3"></el-col>
+            <el-col :span="4" style="text-align:left">问题标题：</el-col>
+            <el-col :span="10" style="text-align:left">{{ answer_info.QuestionTitle }}</el-col>
+          </el-row>
+          <el-row style="margin-top:50px">
+            <el-col :span="3"></el-col>
             <el-col :span="4" style="text-align:left">回答内容：</el-col>
-            <el-col :span="10" style="text-align:left">{{ answer_info.AnswerContent }}</el-col>
+            <el-col :span="10" style="text-align:left"><p v-html="answer_info.AnswerContent"></p></el-col>
+          </el-row>
+          <el-row style="margin-top:50px">
+            <el-col :span="3"></el-col>
+            <el-col :span="4" style="text-align:left">回答时间</el-col>
+            <el-col :span="10" style="text-align:left">{{ answer_info.AnswerDate }}</el-col>
           </el-row>
           <el-row style="margin-top:50px">
             <el-col :span="3"></el-col>
@@ -51,6 +61,7 @@
 <script>
 import { ElMessage } from 'element-plus'
 import axios from "axios";
+import deocde from "../utils/base64"
 export default ({
   name: "AnswerCheck",
   data() {
@@ -118,6 +129,12 @@ export default ({
       .then((res) => {
         console.log(res.data.data);
         this.answer_info=res.data.data;
+        this.answer_info.AnswerDate=this.answer_info.AnswerDate.replace("T"," ");
+        const xhrFile = new XMLHttpRequest();
+        xhrFile.open("GET", this.answer_info.AnswerContent, true);
+        xhrFile.send();
+        xhrFile.onload = () => {
+        this.answer_info.AnswerContent = xhrFile.response;}
       })
       .catch((err) => {
         console.log(err);
