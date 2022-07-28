@@ -1,5 +1,5 @@
 <!--
-描述：具体回答审核
+描述：具体学历审核
 作者：王若晗
 -->
 
@@ -9,29 +9,51 @@
       <el-card class="box-card">
         <template #header>
           <div class="card-header">
-            <span>审核回答</span>
+            <span>审核学历</span>
           </div>
         </template>
         <div class="card-content">
           <el-row style="margin-top:20px">
             <el-col :span="3"></el-col>
-            <el-col :span="4" style="text-align:left">回答ID：</el-col>
-            <el-col :span="4" style="text-align:left">{{ answer_info.AnswerId }}</el-col>
+            <el-col :span="4" style="text-align:left">认证信息ID：</el-col>
+            <el-col :span="4" style="text-align:left">{{ qualification_info.IdentityId }}</el-col>
           </el-row>
           <el-row style="margin-top:50px">
             <el-col :span="3"></el-col>
-            <el-col :span="4" style="text-align:left">问题标题：</el-col>
-            <el-col :span="10" style="text-align:left">{{ answer_info.QuestionTitle }}</el-col>
+            <el-col :span="4" style="text-align:left">用户名称：</el-col>
+            <el-col :span="10" style="text-align:left">{{ qualification_info.UserName }}</el-col>
           </el-row>
           <el-row style="margin-top:50px">
             <el-col :span="3"></el-col>
-            <el-col :span="4" style="text-align:left">回答内容：</el-col>
-            <el-col :span="10" style="text-align:left"><p v-html="answer_info.AnswerContent"></p></el-col>
+            <el-col :span="4" style="text-align:left">学校：</el-col>
+            <el-col :span="10" style="text-align:left">{{ qualification_info.UniversityChName }} {{ qualification_info.UniversityEnName }}</el-col>
           </el-row>
           <el-row style="margin-top:50px">
             <el-col :span="3"></el-col>
-            <el-col :span="4" style="text-align:left">回答时间</el-col>
-            <el-col :span="10" style="text-align:left">{{ answer_info.AnswerDate }}</el-col>
+            <el-col :span="4" style="text-align:left">学历：</el-col>
+            <el-col :span="10" style="text-align:left">{{ qualification_info.Identity }}</el-col>
+          </el-row>
+          <el-row style="margin-top:50px">
+            <el-col :span="3"></el-col>
+            <el-col :span="4" style="text-align:left">专业：</el-col>
+            <el-col :span="10" style="text-align:left">{{ qualification_info.Major }}</el-col>
+          </el-row>
+          <el-row style="margin-top:50px">
+            <el-col :span="3"></el-col>
+            <el-col :span="4" style="text-align:left">就读时间：</el-col>
+            <el-col :span="10" style="text-align:left">{{ qualification_info.EnrollmentTime }}</el-col>
+          </el-row>
+          <el-row style="margin-top:50px">
+            <el-col :span="3"></el-col>
+            <el-col :span="4" style="text-align:left">提交时间：</el-col>
+            <el-col :span="10" style="text-align:left">{{ qualification_info.SummitDate }}</el-col>
+          </el-row>
+          <el-row style="margin-top:50px">
+            <el-col :span="3"></el-col>
+            <el-col :span="4" style="text-align:left">认证图片：</el-col>
+            <el-col :span="10" style="text-align:left">
+                <img :src="qualification_info.IdentityImage" style="width:400px"/>
+            </el-col>
           </el-row>
           <el-row style="margin-top:50px">
             <el-col :span="3"></el-col>
@@ -62,13 +84,13 @@
 import { ElMessage } from 'element-plus'
 import axios from "axios";
 export default ({
-  name: "AnswerCheck",
+  name: "QualificationCheck",
   data() {
     return {
         ReviewResult:null,
         ReviewReason:null,
-        answer_id:2,
-        answer_info:[],
+        qualification_id:10,
+        qualification_info:[],
         administrator_id:99,
     };
   },
@@ -79,30 +101,26 @@ export default ({
         ElMessage.error('请选择是否审核通过');
       }
       else{
-        axios.post("check/submit_answer", {
-          answer_id:this.answer_id,
+        axios.post("check/submit_qualification", {
+          identity_id:this.qualification_id,
           administrator_id:this.administrator_id,
           review_result:this.ReviewResult,
           review_reason:this.ReviewReason,
         })
         .then((res) => {
-          console.log(this.answer_id);
-          console.log(this.administrator_id);
-          console.log(this.ReviewResult);
-          console.log(this.ReviewReason);
           console.log(res);
           var response = res.data;
           console.log(response.status);
-          console.log(this.answer_info);
+          console.log(this.qualification_info);
           if (response.status == true) {
             //若审核成功
             ElMessage({
-              message: "ID为"+this.answer_id+ "的回答审核成功！",
+              message: "ID为"+this.qualification_id+ "的学历信息审核成功！",
               type: "success",
               showClose: true,
               duration: 2000,
             });
-            this.$router.replace({name:"answer_check_center"});
+            this.$router.replace({name:"qualification_check_center"});
           }
           else{
             //若审核失败
@@ -117,23 +135,18 @@ export default ({
     }
   },
   created(){
-    this.answer_id=this.$route.query.answer_id;
+    this.qualification_id=this.$route.query.qualification_id;
     axios({
-      url: "check/single_answer",
+      url: "check/single_qualification",
       method: "get",
       params: {
-        answer_id:this.answer_id,
+        identity_id:this.qualification_id,
       },
       })
       .then((res) => {
-        console.log(res.data.data);
-        this.answer_info=res.data.data;
-        this.answer_info.AnswerDate=this.answer_info.AnswerDate.replace("T"," ");
-        const xhrFile = new XMLHttpRequest();
-        xhrFile.open("GET", this.answer_info.AnswerContent, true);
-        xhrFile.send();
-        xhrFile.onload = () => {
-        this.answer_info.AnswerContent = xhrFile.response;}
+        console.log(res);
+        this.qualification_info=res.data.data;
+        this.qualification_info.SummitDate=this.qualification_info.SummitDate.replace("T"," ");
       })
       .catch((err) => {
         console.log(err);

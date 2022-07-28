@@ -56,7 +56,6 @@
 <script>
 import { ElMessage } from 'element-plus'
 import axios from "axios";
-import decode from "../utils/base64"
 export default ({
   name: "QuestionCheck",
   data() {

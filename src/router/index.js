@@ -10,6 +10,8 @@ import AnswerCheck from '../views/AnswerCheck.vue'
 import BlogCheckCenter from '../views/BlogCheckCenter.vue'
 import BlogCheck from '../views/BlogCheck.vue'
 import ModifyUniversityInfo from '../views/ModifyUniversityInfo.vue'
+import QualificationCheckCenter from '../views/QualificationCheckCenter.vue'
+import QualificationCheck from '../views/QualificationCheck.vue'
 import { ElMessage } from 'element-plus'
 const routes = [
   {
@@ -98,6 +100,22 @@ const routes = [
     component:ModifyUniversityInfo,
     meta:{
       title:'修改高校信息'
+    }
+  },
+  {
+    path:'/qualification_check_center',
+    name:'qualification_check_center',
+    component:QualificationCheckCenter,
+    meta:{
+      title:'认证审核中心'
+    }
+  },
+  {
+    path:'/qualification_check',
+    name:'qualification_check',
+    component:QualificationCheck,
+    meta:{
+      title:'认证审核'
     }
   },
 ]

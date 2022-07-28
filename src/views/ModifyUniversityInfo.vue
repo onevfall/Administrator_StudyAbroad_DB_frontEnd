@@ -156,7 +156,7 @@
               高校院系：
             </el-col>
             <el-col :span="10" style="text-align:left">
-              <div v-for="college in university_college">
+              <div :v-for="college in university_college">
                 {{college}}
               </div>
             </el-col>
