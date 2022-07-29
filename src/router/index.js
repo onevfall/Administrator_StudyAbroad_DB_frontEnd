@@ -10,6 +10,19 @@ import AnswerCheck from '../views/AnswerCheck.vue'
 import BlogCheckCenter from '../views/BlogCheckCenter.vue'
 import BlogCheck from '../views/BlogCheck.vue'
 import ModifyUniversityInfo from '../views/ModifyUniversityInfo.vue'
+
+
+import AnswerReportCenter from '../views/AnswerReportCenter.vue'
+import AnswerReport from '../views/AnswerReport.vue'
+
+import BlogReportCenter from '../views/BlogReportCenter.vue'
+import BlogReport from '../views/BlogReport.vue'
+import AnswerCommentReportCenter from '../views/AnswerCommentReportCenter.vue'
+import AnswerCommentReport from '../views/AnswerCommentReport.vue'
+import BlogCommentReportCenter from '../views/BlogCommentReportCenter.vue'
+import BlogCommentReport from '../views/BlogCommentReport.vue'
+
+
 import { ElMessage } from 'element-plus'
 const routes = [
   {
@@ -98,6 +111,73 @@ const routes = [
     component:ModifyUniversityInfo,
     meta:{
       title:'修改高校信息'
+    }
+  },
+  {
+    path:'/answer_report_center',
+    name:'answer_report_center',
+    component:AnswerReportCenter,
+    meta:{
+      title:'回答举报中心'
+    }
+  },
+  {
+    path:'/answer_report',
+    name:'answer_report',
+    component:AnswerReport,
+    meta:{
+      title:'回答举报'
+    }
+  },
+
+  {
+    path:'/blog_report_center',
+    name:'blog_report_center',
+    component:BlogReportCenter,
+    meta:{
+      title:'博客举报中心'
+    }
+  },
+  {
+    path:'/blog_report',
+    name:'blog_report',
+    component:BlogReport,
+    meta:{
+      title:'博客举报'
+    }
+  },
+
+  {
+    path:'/answer_comment_report_center',
+    name:'answer_comment_report_center',
+    component:AnswerCommentReportCenter,
+    meta:{
+      title:'回答评论举报中心'
+    }
+  },
+  {
+    path:'/answer_comment_report',
+    name:'answer_comment_report',
+    component:AnswerCommentReport,
+    meta:{
+      title:'回答评论举报'
+    }
+  },
+
+  {
+    path:'/blog_comment_report_center',
+    name:'blog_comment_report_center',
+    component:BlogCommentReportCenter,
+    meta:{
+      title:'博客评论举报中心'
+    }
+  },
+  {
+    path:'/blog_comment_report',
+    name:'blog_comment_report',
+    component:BlogCommentReport,
+    meta:{
+      title:'博客评论举报'
     }
   },
 ]
