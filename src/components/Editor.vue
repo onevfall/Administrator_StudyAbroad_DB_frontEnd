@@ -79,6 +79,10 @@ export default {
       };
       this.$emit("editorSubmit", args);
     },
+    getdefaultContent(news_content){
+      this.content=news_content;
+      console.log("我修改了内容啊");
+    }
   },
 };
 </script>
