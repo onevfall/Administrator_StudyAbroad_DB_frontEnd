@@ -1,7 +1,8 @@
 <!--
-描述：具体回答审核
-作者：王若晗
+描述：回答举报详情
+作者：张子涵
 -->
+
 
 <template>
   <el-container>
@@ -9,7 +10,7 @@
       <el-card class="box-card">
         <template #header>
           <div class="card-header">
-            <span>审核回答</span>
+            <span>回答举报</span>
           </div>
         </template>
         <div class="card-content">
@@ -22,17 +23,64 @@
             <el-col :span="3"></el-col>
             <el-col :span="4" style="text-align:left">问题标题：</el-col>
             <el-col :span="10" style="text-align:left">{{ answer_info.QuestionTitle }}</el-col>
+          </el-row>  
+
+          <el-row style="margin-top:50px">
+            <el-col :span="3"></el-col>
+            <el-col :span="4" style="text-align:left">被举报人：</el-col>
+            <el-col :span="10" style="text-align:left">
+              <div style="display:inline-block;vertical-align:middle">
+                  <el-avatar shape="circle" :size="50" :src=" answer_info.ReportedUserProfile "/>
+              </div>
+              <div style="display:inline-block;padding-left:5px;color:black">
+                {{ answer_info.ReportedUserName }}
+              </div>
+            </el-col>
+          </el-row> 
+
+          <el-row style="margin-top:50px">
+            <el-col :span="3"></el-col>
+            <el-col :span="4" style="text-align:left">问题内容：</el-col>
+            <el-col :span="10" style="text-align:left">{{ answer_info.Question }}</el-col>
+          </el-row> 
+
+          <el-row style="margin-top:50px">
+            <el-col :span="3"></el-col>
+            <el-col :span="4" style="text-align:left">发布时间:</el-col>
+            <el-col :span="10" style="text-align:left">{{ answer_info.QuestionDate }}</el-col>
           </el-row>
+
           <el-row style="margin-top:50px">
             <el-col :span="3"></el-col>
             <el-col :span="4" style="text-align:left">回答内容：</el-col>
             <el-col :span="10" style="text-align:left"><p v-html="answer_info.AnswerContent"></p></el-col>
           </el-row>
+
           <el-row style="margin-top:50px">
             <el-col :span="3"></el-col>
-            <el-col :span="4" style="text-align:left">回答时间</el-col>
-            <el-col :span="10" style="text-align:left">{{ answer_info.AnswerDate }}</el-col>
+            <el-col :span="4" style="text-align:left">举报人：</el-col>
+            <el-col :span="10" style="text-align:left">
+              <div style="display:inline-block;vertical-align:middle">
+                  <el-avatar shape="circle" :size="50" :src=" answer_info.UserProfile "/>
+              </div>
+              <div style="display:inline-block;padding-left:5px;color:black">
+                {{ answer_info.UserName }}
+              </div>
+            </el-col>
+          </el-row> 
+
+          <el-row style="margin-top:50px">
+            <el-col :span="3"></el-col>
+            <el-col :span="4" style="text-align:left">举报理由:</el-col>
+            <el-col :span="10" style="text-align:left">{{ answer_info.ReportReason }}</el-col>
           </el-row>
+
+          <el-row style="margin-top:50px">
+            <el-col :span="3"></el-col>
+            <el-col :span="4" style="text-align:left">举报时间:</el-col>
+            <el-col :span="10" style="text-align:left">{{ answer_info.ReportedDate }}</el-col>
+          </el-row>
+
           <el-row style="margin-top:50px">
             <el-col :span="3"></el-col>
             <el-col :span="4" style="text-align:left;margin-top:7px">是否审核通过：</el-col>
@@ -41,11 +89,7 @@
                 <el-radio v-model="ReviewResult" label=false size="large"><span style="font-size:20px;font-weight:900">否</span></el-radio>
             </el-col>
           </el-row>
-            <el-row style="margin-top:50px">
-            <el-col :span="3"></el-col>
-            <el-col :span="4" style="text-align:left">审核批注：</el-col>
-            <el-col :span="10" style="text-align:left"><el-input v-model="ReviewReason" placeholder="请输入审核批注" clearable/></el-col>
-          </el-row>
+
           <el-row style="margin-top:50px">
             <el-col :span="12"></el-col>
             <el-col :span="4" style="text-align:left">
@@ -63,12 +107,14 @@ import { ElMessage } from 'element-plus'
 import axios from "axios";
 import deocde from "../utils/base64"
 export default ({
-  name: "AnswerCheck",
+  name: "AnswerReport",
   data() {
     return {
         ReviewResult:null,
         ReviewReason:null,
-        answer_id:2,
+        report_id:0,
+        answer_id:0,
+        user_id:0,
         answer_info:[],
         administrator_id:99,
     };
@@ -80,17 +126,16 @@ export default ({
         ElMessage.error('请选择是否审核通过');
       }
       else{
-        axios.post("check/submit_answer", {
+        axios.put("check/answer", {
+          report_id:this.report_id,
           answer_id:this.answer_id,
           administrator_id:this.administrator_id,
-          review_result:this.ReviewResult,
-          review_reason:this.ReviewReason,
+          result:this.ReviewResult,
         })
         .then((res) => {
           console.log(this.answer_id);
           console.log(this.administrator_id);
           console.log(this.ReviewResult);
-          console.log(this.ReviewReason);
           console.log(res);
           var response = res.data;
           console.log(response.status);
@@ -98,12 +143,12 @@ export default ({
           if (response.status == true) {
             //若审核成功
             ElMessage({
-              message: "ID为"+this.answer_id+ "的回答审核成功！",
+              message: "ID为"+this.answer_id+ "的回答举报审核成功！",
               type: "success",
               showClose: true,
               duration: 2000,
             });
-            this.$router.replace({name:"answer_check_center"});
+            this.$router.replace({name:"answer_report_center"});
           }
           else{
             //若审核失败
@@ -118,12 +163,14 @@ export default ({
     }
   },
   created(){
+    this.report_id=this.$route.query.report_id;
     this.answer_id=this.$route.query.answer_id;
+    this.user_id=this.$route.query.user_id;
     axios({
-      url: "check/single_answer",
+      url: "check/answer",
       method: "get",
       params: {
-        answer_id:this.answer_id,
+        report_id:this.report_id,
       },
       })
       .then((res) => {
