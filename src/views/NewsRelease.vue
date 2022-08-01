@@ -9,78 +9,83 @@
   >
     <div class="title">发布留学快讯</div>
 
-   <div style="margin-left:15%;type:flex; justify:end">
-    <div>
-      <el-form-item label="快讯标题：" label-position="right" label-width="125px">
-       
-        <el-input v-model="messageTitle" 
-        class="inputControl"
-        :rows="1" 
-        type="textarea" 
-        placeholder="请输入快讯标题" 
-        />
-      </el-form-item>
-    </div>
-  
-      
-    <el-form-item label="快讯针对地区：" label-position="right"  label-width="125px">
-       
-        <el-input v-model="messageRegion" 
-        class="inputControl"
-        :rows="1" 
-        type="textarea" 
-        placeholder="请输入快讯针对地区" 
-        />
-      </el-form-item>
-       <el-form-item label="快讯tag：" label-position="right" label-width="125px">
-        
-        <el-input v-model="messageTag" 
-        class="inputControl"
-        :rows="1" 
-        type="textarea" 
-        placeholder="快讯tag" 
-        />
-      </el-form-item>
-      <el-form-item label="快讯内容：" label-position="right" label-width="125px">
-        <div class="content_input_field">
-      <editor ref="text_editor"  @editorSubmit="publishNews" />
-       </div>
-       </el-form-item>
-          <button
-            @click="callEditor"
-            class="mine_button"
-            v-loading.fullscreen.lock="fullscreenLoading"
-            element-loading-text="正在提交..."
-          >
-          <div class="svg-wrapper-1">
-              <div class="svg-wrapper">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  viewBox="0 0 24 24"
-                  width="24"
-                  height="24"
-                >
-                  <path fill="none" d="M0 0h24v24H0z"></path>
-                  <path
-                    fill="currentColor"
-                    d="M1.946 9.315c-.522-.174-.527-.455.01-.634l19.087-6.362c.529-.176.832.12.684.638l-5.454 19.086c-.15.529-.455.547-.679.045L12 14l6-8-8 6-8.054-2.685z"
-                  ></path>
-                </svg>
-              </div>
-            </div>
-            <span>发布</span>
-          </button>
-   </div>
-       
-      <!-- <el-button
-        type="primary"
-        @click="publishNews"
-        style="margin-bottom: 10%"
+    <div style="margin-left: 15%; type: flex; justify: end">
+      <div>
+        <el-form-item
+          label="快讯标题："
+          label-position="right"
+          label-width="125px"
+        >
+          <el-input
+            v-model="messageTitle"
+            class="inputControl"
+            :rows="1"
+            type="textarea"
+            placeholder="请输入快讯标题"
+          />
+        </el-form-item>
+      </div>
+
+      <el-form-item
+        label="快讯针对地区："
+        label-position="right"
+        label-width="125px"
       >
-        发布
-      </el-button> -->
+        <el-input
+          v-model="messageRegion"
+          class="inputControl"
+          :rows="1"
+          type="textarea"
+          placeholder="请输入快讯针对地区"
+        />
+      </el-form-item>
+      <el-form-item
+        label="快讯tag："
+        label-position="right"
+        label-width="125px"
+      >
+        <el-checkbox-group v-model="tagList">
+          <el-checkbox label="生活" />
+          <el-checkbox label="娱乐" />
+          <el-checkbox label="学习" />
+          <el-checkbox label="科研" />
+        </el-checkbox-group>
+      </el-form-item>
+      <el-form-item
+        label="快讯内容："
+        label-position="right"
+        label-width="125px"
+      >
+        <div class="content_input_field">
+          <editor ref="text_editor" @editorSubmit="publishNews" />
+        </div>
+      </el-form-item>
+      <button
+        @click="callEditor"
+        class="mine_button"
+        v-loading.fullscreen.lock="fullscreenLoading"
+        element-loading-text="正在提交..."
+      >
+        <div class="svg-wrapper-1">
+          <div class="svg-wrapper">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24"
+              width="24"
+              height="24"
+            >
+              <path fill="none" d="M0 0h24v24H0z"></path>
+              <path
+                fill="currentColor"
+                d="M1.946 9.315c-.522-.174-.527-.455.01-.634l19.087-6.362c.529-.176.832.12.684.638l-5.454 19.086c-.15.529-.455.547-.679.045L12 14l6-8-8 6-8.054-2.685z"
+              ></path>
+            </svg>
+          </div>
+        </div>
+        <span>发布</span>
+      </button>
     </div>
-  <!-- </div> -->
+  </div>
 </template>
 
 <script>
@@ -88,19 +93,30 @@ import Editor from "../components/Editor";
 import { ElMessage } from "element-plus";
 import axios from "axios";
 export default {
-
   components: {
     Editor,
   },
-  methods:{
+  // mounted: function () {
+     
+  //     this.$refs.text_editor.defaultContent(this.messageContent);
+  //     console.log(this.messageContent);
+  //     console.log(this.messageTitle);
+  //     console.log("以上打出了默认值");
+  //   },
+  methods: {
     callEditor() {
-      
-      
-      this.$refs.text_editor.submit();
-      
+      if (this.tagList.length == 0) {
+        ElMessage({
+          message: "请选择至少一个关键词",
+          type: "warning",
+          showClose: true,
+          duration: 2000,
+        });
+      } else {
+        this.$refs.text_editor.submit();
+      }
     },
-    publishNews(args)
-    {
+    publishNews(args) {
       this.fullscreenLoading = true;
       //处理summary
       var summary = "";
@@ -117,62 +133,114 @@ export default {
       } else {
         summary = args.text_content.slice(0, 15);
       }
+      var tag = "";
+      for (let i = 0; i < this.tagList.length; ++i) {
+        tag += this.tagList[i] + "-";
+      }
+      tag = tag.slice(0, tag.length - 1);
       var image_url = "";
       if (args.image_array.length != 0) {
         image_url = args.image_array[0]; //选第一张图片
       }
+      if(this.newsId!=0){
+        axios({
+        url: "newsflash" + "?newsflash_id=" + this.newsId,
 
-     axios.post("newsflash/release", {
-          title:this.messageTitle,
-        tag:this.messageTag,
-        region:this.messageRegion,
-       summary: summary,
-        content:args.base64_content,
-        image_url:image_url,
+        method: "delete",
+      })
+        .then((res) => {
+          console.log(id);
+          console.log(res);
+        })
+        .catch((errMsg) => {
+          console.log(errMsg);
+        });
+        console.log("删除快讯的id是");console.log(this.newsId);
+      }
+      axios
+        .post("newsflash/release", {
+          title: this.messageTitle,
+          tag: tag,
+          region: this.messageRegion,
+          summary: summary,
+          content: args.base64_content,
+          image_url: image_url,
         })
         .then((res) => {
           console.log("下面应该是后端返回值");
           console.log(res);
-          console.log("上面应该是后端返回值")
-          // if (res.data.status == true) 
-          {
+          console.log("上面应该是后端返回值");
+          if (res.data.status == true) {
             this.fullscreenLoading = false;
             ElMessage({
               type: "success",
-              message: "提交成功，正在等待审核",
+              message: "发布成功！",
               duration: 2000,
               showClose: true,
             });
             this.$router.back();
+          } else {
+            this.fullscreenLoading = false;
 
+            ElMessage({
+              type: "warning",
+              message: "发布失败，请输入合法字段",
+              duration: 2000,
+              showClose: true,
+            });
           }
         })
         .catch((errMsg) => {
           this.fullscreenLoading = false;
           ElMessage({
-              type: "warning",
-              message: "提交失败，请检查网络连接",
-              duration: 2000,
-              showClose: true,
-            });
+            type: "warning",
+            message: "发布失败，请检查网络连接",
+            duration: 2000,
+            showClose: true,
+          });
           console.log(errMsg);
-       });
-
+        });
     },
   },
   data() {
     return {
       messageTitle: "",
       messageContent: "",
-      messageRegion:"",
-      messageTag:"",
+      messageRegion: "",
+      // messageTag:"",
+      tagList: [],
+      newsId:0,
+      news_info:"",
     };
   },
-  create()
+  created() 
   {
-    
+    console.log("初始化该页面的信息");
+    this.newsId = this.$route.query.news_id;
+    axios({
+      url: "newsflash/single" + "?newsflash_id=" + this.newsId,
+
+      method: "get",
+    })
+      .then((res) => {
+        console.log(res);
+        console.log(res.data);
+        console.log(res.data.data);
+
+        this.news_info = res.data.data;
+        console.log(this.news_info);
+        console.log(this.news_info.NewsFlashTitle);
+        this.messageTitle=this.news_info.NewsFlashTitle;
+        this.messageContent=this.news_info.NewsFlashContent;
+        this.messageRegion=this.news_info.NewsFlashRegion;
+        this.$refs.text_editor.getdefaultContent(this.messageContent);
+      })
+      .catch((errMsg) => {
+        console.log(errMsg);
+      });
+      
+   
   },
-  
 };
 </script>
 
@@ -200,14 +268,13 @@ export default {
 
 .inputControl {
   width: 70%;
- 
 }
 
-.content_input_field{
-  margin-right:30%
+.content_input_field {
+  margin-right: 30%;
 }
 .mine_button {
-  margin-left: 45%;
+  margin-left: 40%;
   margin-top: 2vh;
   font-family: inherit;
   font-size: 16px;
