@@ -15,7 +15,7 @@
         <el-row class="search">
           <el-col :span="8"></el-col>
           <el-col :span="5">
-            <el-input v-model="search_word" placeholder="请输入高校id" style="background:#e4e4e4">请输入高校id</el-input>
+            <el-input v-model="search_word" placeholder="请输入高校名称" style="background:#e4e4e4">请输入高校名称</el-input>
           </el-col>
           <el-col :span="3">
             <el-button type="primary" round @click="getUniversityInfo()">查询高校</el-button>
@@ -210,6 +210,7 @@ export default {
     return {
       search_info: 0,
       search_word: "",
+
       university_id: "",
       university_chname: "",
       university_enname: "",
@@ -230,12 +231,14 @@ export default {
   },
   methods: {
     getUniversityInfo() {
-      axios.get("university",{
+      console.log(this.search_word);
+      axios.get("university/chname", {
         params: {
-          university_id: this.search_word,
+          chname: this.search_word,
         }
       })
       .then((res) => {
+        console.log("搜索结果")
         console.log(res);
         if(!res.data.status) {
           this.search_info = -1;
@@ -243,19 +246,36 @@ export default {
         else {
           this.search_info = 1;
           var source_data = res.data.data;
-          this.university_id = source_data.university_id;
-          this.university_chname = source_data.university_chname;
-          this.university_enname = source_data.university_enname;
-          this.university_badge = source_data.university_badge;
-          this.university_abbreviation = source_data.university_abbreviation;
-          this.university_country = source_data.university_country;
-          this.university_region = source_data.university_region;
-          this.university_location = source_data.university_location;
-          this.university_email = source_data.university_email;
-          this.university_website = source_data.university_website;
-          this.university_student_num = source_data.university_student_num;
-          this.university_teacher_num = source_data.university_teacher_num;
-          this.university_college = source_data.university_college;
+          console.log(source_data.university_id);
+          axios.get("university/get_rank", {
+            params: {
+              university_id: res.data.data.university_id,
+            }
+          })
+          .then((res) => {
+            console.log(res);
+            if(res.data.status) {
+              this.QS_rank = res.data.data.rank[0].UniversityQsRank;
+              this.THE_rank = res.data.data.rank[0].UniversityTheRank;
+              this.USNEWS_rank = res.data.data.rank[0].UniversityUsnewsRank;
+              this.university_id = source_data.university_id;
+              this.university_chname = source_data.university_chname;
+              this.university_enname = source_data.university_enname;
+              this.university_badge = source_data.university_badge;
+              this.university_abbreviation = source_data.university_abbreviation;
+              this.university_country = source_data.university_country;
+              this.university_region = source_data.university_region;
+              this.university_location = source_data.university_location;
+              this.university_email = source_data.university_email;
+              this.university_website = source_data.university_website;
+              this.university_student_num = source_data.university_student_num;
+              this.university_teacher_num = source_data.university_teacher_num;
+              this.university_college = source_data.university_college;
+            }
+          })
+          .catch((err) => {
+            console.log(err);
+          })
         }
       })
       .catch((err) => {
@@ -263,29 +283,10 @@ export default {
         this.$alert('输入有误','警告', {
           confirmButtonText: '确定',
           callback: action => {
-            this.search_word = ""
+            this.search_word = "";
           }
         })
       });
-      axios.get("university/get_rank", {
-        params: {
-          university_id: this.university_id,
-          // rank_year: 2022,
-        }
-      })
-      .then((res) => {
-        console.log(res);
-        if(res.data.status) {
-          var source_data = res.data.data.rank[0];
-          console.log(source_data);
-          this.QS_rank = source_data.UniversityQsRank;
-          this.THE_rank = source_data.UniversityTheRank;
-          this.USNEWS_rank = source_data.UniversityUsnewsRank;
-        }
-      })
-      .catch((err) => {
-        console.log(err);
-      })
     },
     updateUniversityInfo() {
       axios({

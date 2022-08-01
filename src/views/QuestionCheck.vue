@@ -26,7 +26,7 @@
           <el-row style="margin-top:50px">
             <el-col :span="3"></el-col>
             <el-col :span="4" style="text-align:left">问题内容：</el-col>
-            <el-col :span="10" style="text-align:left">{{ question_info.QuestionContent }}</el-col>
+            <el-col :span="10" style="text-align:left"><p v-html="question_info.QuestionContent"></p></el-col>
           </el-row>
           <el-row style="margin-top:50px">
             <el-col :span="3"></el-col>
@@ -56,6 +56,7 @@
 <script>
 import { ElMessage } from 'element-plus'
 import axios from "axios";
+import decode from "../utils/base64"
 export default ({
   name: "QuestionCheck",
   data() {
@@ -123,6 +124,13 @@ export default ({
       .then((res) => {
         console.log(res.data.data);
         this.question_info=res.data.data;
+        const xhrFile = new XMLHttpRequest();
+        xhrFile.open("GET", this.question_info.QuestionContent, true);
+        xhrFile.send();
+
+        xhrFile.onload = () => {
+        //res.data.data.blog_content=xhrFile.response;
+        this.question_info.QuestionContent = xhrFile.response;}
       })
       .catch((err) => {
         console.log(err);

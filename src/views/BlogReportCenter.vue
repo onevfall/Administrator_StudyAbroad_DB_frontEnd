@@ -1,6 +1,6 @@
 <!--
-描述：回答审核中心
-作者：王若晗
+描述：博客举报中心
+作者：张子涵
 -->
 
 <template>
@@ -9,7 +9,7 @@
       <el-card class="box-card">
         <template #header>
           <div class="card-header">
-            <span>审核回答</span>
+            <span>博客举报</span>
           </div>
         </template>
         <el-scrollbar height="370px">
@@ -17,25 +17,29 @@
             <el-tab-pane label="未审核" name="first">
               <div class="check-content">
                 <el-row>
-                  <el-col :span="12" style="text-align:left;padding-left:18%">回答</el-col>
-                  <el-col :span="8" >回答用户</el-col>
+                  <el-col :span="6" style="text-align:left;padding-left:8%">博客</el-col>
+                  <el-col :span="8" >举报理由</el-col>
+                  <el-col :span="6" >举报用户</el-col>
                   <el-col :span="4" >操作</el-col>
                 </el-row>
               </div>
-              <div class="check-content" v-for="ans in this.answer_tocheck_info" :key="ans">
+              <div class="check-content" v-for="ans in this.blog_tocheck_info" :key="ans">
                 <el-row>
-                  <el-col :span="12" style="text-align:left">
-                    <div style="font-size:20px;color:black">{{ ans.AnswerSummary }}</div>
-                    <div style="margin-top:10px">{{ ans.AnswerDate }}</div>
+                  <el-col :span="6" style="text-align:left">
+                    <div style="font-size:20px;color:black">{{ ans.BlogSummary }}</div>
+                    <div style="margin-top:10px">{{ ans.ReportDate }}</div>
                   </el-col>
-                  <el-col :span="8" style="padding-top:1%">
+                  <el-col :span="8" >
+                    <div>{{ans.ReportReason}}</div>
+                  </el-col>
+                  <el-col :span="6" style="padding-top:1%">
                     <div style="display:inline-block;vertical-align:middle">
                       <el-avatar shape="circle" :size="50" :src=" ans.UserProfile "/>
                     </div>
                     <div style="display:inline-block;padding-left:5px;color:black">{{ ans.UserName }}</div>
                   </el-col>
                   <el-col :span="4" style="color:#2297FA;padding-top:2%" >
-                    <el-button type="primary" @click="goCheck(ans.AnswerId)" id="check-text" style="width:100px">
+                    <el-button type="primary" @click="goReportCheck(ans.ReportId,ans.BlogId)" id="check-text" style="width:100px">
                       <el-icon><Edit /></el-icon>去处理
                     </el-button>
                   </el-col>
@@ -45,29 +49,35 @@
             <el-tab-pane label="已审核" name="second">
               <div class="check-content">
                 <el-row>
-                  <el-col :span="10" style="text-align:left;padding-left:18%">回答</el-col>
-                  <el-col :span="6" style="padding-left:2%">回答用户</el-col>
+                  <el-col :span="6" style="text-align:left;padding-left:8%">博客</el-col>
+                  <el-col :span="8" >举报理由</el-col>
+                  <el-col :span="6" >举报用户</el-col>
                   <el-col :span="4" >审核结果</el-col>
-                  <el-col :span="4" style="padding-left:2%" >审核批注</el-col>
+                  
                 </el-row>
               </div>
-              <div class="check-content" v-for="ans in this.answer_checked_info" :key="ans">
+              <div class="check-content" v-for="ans in this.blog_checked_info" :key="ans">
                 <el-row>
-                  <el-col :span="10" style="text-align:left">
-                    <div style="font-size:20px;color:black">{{ ans.AnswerSummary }}</div>
-                    <div style="">原问题：{{ ans.QuestionTitle }}</div>
+                  <el-col :span="6" style="text-align:left">
+                    <div style="font-size:20px;color:black">{{ ans.BlogSummary }}</div>
+                    <div style="margin-top:10px">{{ ans.ReportDate }}</div>
                   </el-col>
-                  <el-col :span="6">
+                  <el-col :span="8" >
+                    <div>{{ans.ReportReason}}</div>
+                  </el-col>
+                  <!--
+                  -->
+                  <el-col :span="6" style="padding-top:1%">
                     <div style="display:inline-block;vertical-align:middle">
-                      <el-avatar shape="circle" :size="40" :src="ans.UserProfile"/>
+                      <el-avatar shape="circle" :size="50" :src=" ans.UserProfile "/>
                     </div>
                     <div style="display:inline-block;padding-left:5px;color:black">{{ ans.UserName }}</div>
-                  </el-col>                  <el-col :span="4">
-                    <div v-if="ans.ReviewResult=='通过'" style="color:#93CB74;font-size:18px;margin-top:5px;">{{ ans.ReviewResult }}</div>
-                    <div v-if="ans.ReviewResult=='不通过'" style="color:#CE2E3E;font-size:18px;margin-top:5px;">{{ ans.ReviewResult }}</div>
+                  </el-col>
+                  <el-col :span="4">
+                    <div v-if="ans.ReportAnswerResult==true" style="color:#93CB74;font-size:18px;margin-top:5px;">通过</div>
+                    <div v-if="ans.ReportAnswerResult==false" style="color:#CE2E3E;font-size:18px;margin-top:5px;">不通过</div>
                     <div style="font-size:13px;margin-top:10px">{{ ans.ReviewDate }}</div>
                   </el-col>
-                  <el-col :span="4" style="margin-top:5px;padding-left:2%">{{ ans.ReviewReason }}</el-col>
                 </el-row>
               </div>
             </el-tab-pane>
@@ -81,45 +91,47 @@
 <script>
 import axios from "axios";
 export default ({
-  name: "AnswerCheckCenter",
+  name: "BlogReportCenter",
   data() {
     return {
       admin_id:99,
-      answer_tocheck_info:[],
-      answer_checked_info:[],
+      blog_tocheck_info:[],
+      blog_checked_info:[],
       activeName:"first",
     };
   },
   methods:{
-    goCheck:function(ans_id){
+    goReportCheck:function(rep_id,blo_id){
       this.$router.push({
-        name:"answer_check",
-        query: { answer_id: ans_id }
+        name:"blog_report",
+        query: { 
+            report_id: rep_id,
+            blog_id:blo_id,
+         }
       });
     }
   },
   created(){
     axios({
-      url: "check/all_answers",
+      url: "/check/blog_report/solved",
       method: "get",
-      params: {
-        admin_id:this.admin_id,
-      },
       })
       .then((res) => {
         console.log(res.data.data);
-        for(var i=0;i<res.data.data.answer_list.length;i++)
-        {
-          res.data.data.answer_list[i].AnswerDate=res.data.data.answer_list[i].AnswerDate.replace("T"," ");
-          if(res.data.data.answer_list[i].ReviewDate==null)
-            this.answer_tocheck_info.push(res.data.data.answer_list[i]);
-          else
-          {
-            res.data.data.answer_list[i].ReviewDate=res.data.data.answer_list[i].ReviewDate.replace("T"," ");
-            this.answer_checked_info.push(res.data.data.answer_list[i]);
-          }
-        }
-        console.log(this.answer.checked_info);
+        this.blog_checked_info=res.data.data.blog_report;
+        //console.log(this.blog.checked_info);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+      axios({
+      url: "/check/blog_report/unsolved",
+      method: "get",
+      })
+      .then((res) => {
+        console.log(res.data.data);
+        this.blog_tocheck_info=res.data.data.blog_report;
+        //console.log(this.blog.checked_info);
       })
       .catch((err) => {
         console.log(err);
