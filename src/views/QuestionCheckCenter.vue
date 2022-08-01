@@ -12,7 +12,6 @@
     </el-main>
   </el-container>
 </template>
-
 <script>
 import axios from "axios";
 import CheckCard from "../components/CheckCard.vue";

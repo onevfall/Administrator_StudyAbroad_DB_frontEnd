@@ -10,6 +10,7 @@
                   :checked_info="this.blog_checked_info"
                   :essence="this.essence">
       </check-card>
+
     </el-main>
   </el-container>
 </template>

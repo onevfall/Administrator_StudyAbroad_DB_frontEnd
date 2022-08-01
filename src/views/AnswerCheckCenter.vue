@@ -10,6 +10,7 @@
                   :checked_info="this.answer_checked_info"
                   :essence="this.essence">
       </check-card>
+
     </el-main>
   </el-container>
 </template>
@@ -28,6 +29,7 @@ export default ({
       answer_tocheck_info:[],
       answer_checked_info:[],
       essence:"回答",
+
     };
   },
   created(){
@@ -46,6 +48,7 @@ export default ({
           res.data.data.answer_list[i].PostTitle=res.data.data.answer_list[i].AnswerSummary;
           res.data.data.answer_list[i].PostId=res.data.data.answer_list[i].AnswerId;
           res.data.data.answer_list[i].PostSupplement="原问题："+res.data.data.answer_list[i].QuestionTitle;
+
           if(res.data.data.answer_list[i].ReviewDate==null)
             this.answer_tocheck_info.push(res.data.data.answer_list[i]);
           else
@@ -67,4 +70,5 @@ export default ({
   .el-main{
     padding:50px 30px 30px 50px;
   }
+
 </style>
