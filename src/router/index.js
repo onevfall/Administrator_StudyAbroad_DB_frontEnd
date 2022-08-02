@@ -11,6 +11,8 @@ import BlogCheckCenter from '../views/BlogCheckCenter.vue'
 import BlogCheck from '../views/BlogCheck.vue'
 import ModifyUniversityInfo from '../views/ModifyUniversityInfo.vue'
 
+import QualificationCheckCenter from '../views/QualificationCheckCenter.vue'
+import QualificationCheck from '../views/QualificationCheck.vue'
 
 import AnswerReportCenter from '../views/AnswerReportCenter.vue'
 import AnswerReport from '../views/AnswerReport.vue'
@@ -21,7 +23,6 @@ import AnswerCommentReportCenter from '../views/AnswerCommentReportCenter.vue'
 import AnswerCommentReport from '../views/AnswerCommentReport.vue'
 import BlogCommentReportCenter from '../views/BlogCommentReportCenter.vue'
 import BlogCommentReport from '../views/BlogCommentReport.vue'
-
 
 import { ElMessage } from 'element-plus'
 const routes = [
@@ -114,6 +115,20 @@ const routes = [
     }
   },
   {
+    path:'/qualification_check_center',
+    name:'qualification_check_center',
+    component:QualificationCheckCenter,
+    meta:{
+      title:'认证审核中心'
+    }
+  },
+  {
+    path:'/qualification_check',
+    name:'qualification_check',
+    component:QualificationCheck,
+    meta:{
+      title:'认证审核'
+
     path:'/answer_report_center',
     name:'answer_report_center',
     component:AnswerReportCenter,
@@ -178,6 +193,7 @@ const routes = [
     component:BlogCommentReport,
     meta:{
       title:'博客评论举报'
+
     }
   },
 ]
