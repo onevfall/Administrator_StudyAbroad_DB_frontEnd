@@ -12,11 +12,7 @@
         <el-header style="height: 220px">
           <el-container>
             <el-main style="width: 60%">
-              <el-card
-                shadow:hover
-                class="card1"
-                
-              >
+              <el-card shadow:hover class="card1">
                 <div class="cardTitle1">发布留学快讯</div>
                 <el-button type="primary" round @click="goPublishingPage">
                   去发布页面
@@ -31,9 +27,9 @@
               >
                 <div class="cardTitle2">查询留学快讯</div>
                 <el-form-item label="查找快讯">
-                  <input v-model="message" placeholder="请输入快讯关键字" />
+                  <input v-model="newsKeyword" placeholder="请输入快讯关键字" />
                 </el-form-item>
-                <el-button type="primary" round @click="refreshNews"
+                <el-button type="primary" round @click="searchNews"
                   >查询</el-button
                 >
               </el-card></el-main
@@ -48,7 +44,10 @@
           >
             <div class="cardTitle3">相关搜索结果</div>
             <el-divider>
-              <div class="el-divider__text is-center" style="background-color:whitesmoke">
+              <div
+                class="el-divider__text is-center"
+                style="background-color: whitesmoke"
+              >
                 <el-icon><star-filled /></el-icon>
               </div>
             </el-divider>
@@ -81,8 +80,6 @@
                         <el-card style="height: 183px; background: aliceblue">
                           <template #header>
                             <div class="card-header2">
-                              
-
                               <span style="width: 40%">
                                 {{ news.NewsFlashTitle }}
 
@@ -163,8 +160,6 @@
                       <el-card style="height: 183px; background: aliceblue">
                         <template #header>
                           <div class="card-header2">
-                            
-
                             <span style="width: 40%">
                               {{ news.NewsFlashTitle }}
 
@@ -196,7 +191,7 @@
                       </el-button>
                       <el-button
                         type="primary"
-                        @click="reviseNews"
+                        @click="reviseNews(news.NewsFlashId)"
                         style="margin-left: 0%; margin-top: 20%"
                       >
                         修改
@@ -239,31 +234,42 @@ export default {
         .catch((errMsg) => {
           console.log(errMsg);
         });
+        console.log("删除快讯的id是");console.log(id);
       this.$router.push({
         path: "news_collation",
         query: {
           news_id: -1,
+          news_keyword: id,
+        },
+      });
+      
+    },
+    reviseNews(id) {
+      // alert("将修改这条快讯");
+      this.$router.push({
+        path: "news_release",
+        query: {
+          news_id: id,
         },
       });
     },
-    reviseNews() {
-      alert("将修改这条快讯");
-    },
-    refreshNews() {
-      console.log("开始跳");
-      console.log(this.message);
+    searchNews() {
+      console.log(this.newsKeyword);
       this.$router.push({
         path: "news_collation",
         query: {
-          news_id: this.message,
+
+          news_id: 0,
+          news_keyword: this.newsKeyword,
         },
       });
-      console.log("路由已修改");
     },
     getParams() {
-      this.news_id = this.$route.query.news_id;
-    
+      console.log("获取参数中");
+      this.newsKeyword = this.$route.query.news_keyword;
+      this.newsId=this.$route.query.news_id;
       console.log(this.$route.query.news_id);
+      console.log(this.$route.query.news_keyword);
     },
     load() {
       this.loading = true;
@@ -282,8 +288,8 @@ export default {
       news_info: "",
       news_info_list: [],
       news_relevant: [],
-      news_id: "",
-      message: "",
+      newsId: 0,
+      newsKeyword: "",
     };
   },
   created() {
@@ -305,19 +311,20 @@ export default {
   },
   watch: {
     $route(to, from) {
-    
+      console.log("进入watch");
+      if(to.path == "/news_collation"){
       this.getParams();
-      if (to.path == "/news_collation" && this.news_id != -1) {
+      if (to.path == "/news_collation" && this.newsId != -1) {
         console.log(to.path);
 
         //在此处向服务器请求数据，给所需变量重新赋值
         axios({
-          url: "newsflash/search" + "?keyword=" + this.news_id,
+          url: "newsflash/search" + "?keyword=" + this.newsKeyword,
 
           method: "get",
         })
           .then((res) => {
-            console.log(this.news_id);
+            console.log(this.newsKeyword);
             console.log(res);
             console.log(res.data);
             console.log(res.data.data);
@@ -330,7 +337,7 @@ export default {
             console.log(errMsg);
           });
         axios({
-          url: "newsflash/single" + "?newsflash_id=" + this.news_id,
+          url: "newsflash/single" + "?newsflash_id=" + this.newsKeyword,
 
           method: "get",
         })
@@ -345,7 +352,8 @@ export default {
           .catch((errMsg) => {
             console.log(errMsg);
           });
-      } else if (to.path == "/news_collation" &&this.news_id == -1) {
+      } else if (to.path == "/news_collation" &&this.newsId == -1) {
+        this.newsId=0;
         axios
           .get("newsflash/all")
           .then((res) => {
@@ -359,8 +367,10 @@ export default {
           .catch((errMsg) => {
             console.log(errMsg);
           });
+          
       }
-    },
+    }
+    }
   },
 };
 </script>
@@ -460,7 +470,7 @@ export default {
   justify-content: center;
   height: auto;
   background: white;
-  
+
   margin-bottom: 3%;
   margin-left: -4.5%;
 }

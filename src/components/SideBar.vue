@@ -13,10 +13,10 @@
     </el-menu-item>
     <el-sub-menu index="3">
       <template #title>审核</template>
-      <el-menu-item index="3-1" @click="goQuestionCheckCenter">审核问题</el-menu-item>
+      <el-menu-item index="3-1" @click="goQuestionCheckCenter">审核提问</el-menu-item>
         <el-menu-item index="3-2" @click="goBlogCheckCenter">审核动态</el-menu-item>
         <el-menu-item index="3-3" @click="goAnswerCheckCenter">审核回答</el-menu-item>
-        <el-menu-item index="3-4">审核学历</el-menu-item>
+        <el-menu-item index="3-4" @click="goQualificationCheckCenter">审核学历</el-menu-item>
     </el-sub-menu>
     <el-sub-menu index="4">
       <template #title>举报处理</template>
@@ -63,6 +63,11 @@ export default {
     goBlogCheckCenter() {
       router.push({
         name: "blog_check_center",
+      });
+    },
+    goQualificationCheckCenter() {
+      router.push({
+        name: "qualification_check_center",
       });
     },
     goModifyUniversityInfo() {
