@@ -1,5 +1,5 @@
 <!--
-描述：博客评论举报中心
+描述：动态评论举报中心
 作者：张子涵
 -->
 
@@ -9,7 +9,7 @@
       <el-card class="box-card">
         <template #header>
           <div class="card-header">
-            <span>博客评论举报</span>
+            <span>动态评论举报</span>
           </div>
         </template>
         <el-scrollbar height="370px">
@@ -17,7 +17,7 @@
             <el-tab-pane label="未审核" name="first">
               <div class="check-content">
                 <el-row>
-                  <el-col :span="6" style="text-align:left;padding-left:8%">博客评论</el-col>
+                  <el-col :span="6" style="text-align:left;padding-left:8%">动态评论</el-col>
                   <el-col :span="8" >举报理由</el-col>
                   <el-col :span="6" >举报用户</el-col>
                   <el-col :span="4" >操作</el-col>
@@ -49,7 +49,7 @@
             <el-tab-pane label="已审核" name="second">
               <div class="check-content">
                 <el-row>
-                  <el-col :span="6" style="text-align:left;padding-left:8%">博客评论</el-col>
+                  <el-col :span="6" style="text-align:left;padding-left:8%">动态评论</el-col>
                   <el-col :span="8" >举报理由</el-col>
                   <el-col :span="6" >举报用户</el-col>
                   <el-col :span="4" >审核结果</el-col>

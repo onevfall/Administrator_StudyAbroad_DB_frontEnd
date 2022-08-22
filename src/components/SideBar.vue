@@ -21,9 +21,9 @@
     <el-sub-menu index="4">
       <template #title>举报处理</template>
         <el-menu-item index="4-1" @click="goAnswerReportCenter">回答举报</el-menu-item>
-        <el-menu-item index="4-2" @click="goBlogReportCenter">博客举报</el-menu-item>
+        <el-menu-item index="4-2" @click="goBlogReportCenter">动态举报</el-menu-item>
         <el-menu-item index="4-3" @click="goAnswerCommentReportCenter">回答评论举报</el-menu-item>
-        <el-menu-item index="4-4" @click="goBlogCommentReportCenter">博客评论举报</el-menu-item>
+        <el-menu-item index="4-4" @click="goBlogCommentReportCenter">动态评论举报</el-menu-item>
     </el-sub-menu>
     <el-sub-menu index="5">
       <template #title>高校管理</template>

@@ -1,5 +1,5 @@
 <!--
-描述：博客举报详情
+描述：动态举报详情
 作者：张子涵
 -->
 
@@ -10,13 +10,13 @@
       <el-card class="box-card">
         <template #header>
           <div class="card-header">
-            <span>博客举报</span>
+            <span>动态举报</span>
           </div>
         </template>
         <div class="card-content">
           <el-row style="margin-top:20px">
             <el-col :span="3"></el-col>
-            <el-col :span="4" style="text-align:left">博客ID：</el-col>
+            <el-col :span="4" style="text-align:left">动态ID：</el-col>
             <el-col :span="4" style="text-align:left">{{ blog_info.BlogId }}</el-col>
           </el-row>
           <el-row style="margin-top:50px">
@@ -34,7 +34,7 @@
 
           <el-row style="margin-top:50px">
             <el-col :span="3"></el-col>
-            <el-col :span="4" style="text-align:left">博客内容：</el-col>
+            <el-col :span="4" style="text-align:left">动态内容：</el-col>
             <el-col :span="10" style="text-align:left"><p v-html="blog_info.BlogContent"></p></el-col>
           </el-row>  
 
@@ -47,7 +47,7 @@
 
           <el-row style="margin-top:50px">
             <el-col :span="3"></el-col>
-            <el-col :span="4" style="text-align:left">博客或回复内容：</el-col>
+            <el-col :span="4" style="text-align:left">动态或回复内容：</el-col>
             <el-col :span="10" style="text-align:left"><p v-html="blog_info.RepliedBlogContent"></p></el-col>
           </el-row>
 
@@ -137,7 +137,7 @@ export default ({
           if (response.status == true) {
             //若审核成功
             ElMessage({
-              message: "ID为"+this.blog_id+ "的博客举报审核成功！",
+              message: "ID为"+this.blog_id+ "的动态举报审核成功！",
               type: "success",
               showClose: true,
               duration: 2000,

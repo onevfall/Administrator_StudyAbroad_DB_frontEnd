@@ -127,8 +127,10 @@ const routes = [
     name:'qualification_check',
     component:QualificationCheck,
     meta:{
-      title:'认证审核'
-
+      title:'认证审核',
+    }
+  },
+  {
     path:'/answer_report_center',
     name:'answer_report_center',
     component:AnswerReportCenter,
