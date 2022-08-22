@@ -152,7 +152,7 @@ const routes = [
     name:'blog_report_center',
     component:BlogReportCenter,
     meta:{
-      title:'博客举报中心'
+      title:'动态举报中心'
     }
   },
   {
@@ -160,7 +160,7 @@ const routes = [
     name:'blog_report',
     component:BlogReport,
     meta:{
-      title:'博客举报'
+      title:'动态举报'
     }
   },
 
@@ -186,7 +186,7 @@ const routes = [
     name:'blog_comment_report_center',
     component:BlogCommentReportCenter,
     meta:{
-      title:'博客评论举报中心'
+      title:'动态评论举报中心'
     }
   },
   {
@@ -194,7 +194,7 @@ const routes = [
     name:'blog_comment_report',
     component:BlogCommentReport,
     meta:{
-      title:'博客评论举报'
+      title:'动态评论举报'
 
     }
   },
