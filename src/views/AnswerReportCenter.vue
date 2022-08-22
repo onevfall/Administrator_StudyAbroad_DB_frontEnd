@@ -90,15 +90,18 @@
 
 <script>
 import axios from "axios";
+import { ElMessage } from "element-plus";
 export default ({
   name: "AnswerReportCenter",
   data() {
     return {
-      admin_id:99,
       answer_tocheck_info:[],
       answer_checked_info:[],
       activeName:"first",
     };
+  },
+  components:{
+    ElMessage
   },
   methods:{
     goReportCheck:function(rep_id,ans_id,use_id,ans){
@@ -113,6 +116,19 @@ export default ({
     }
   },
   created(){
+    if (!this.$store.state.is_login) {
+      ElMessage({
+        message: "请先登录",
+        type: "warning",
+        showClose: true,
+        duration: 2000,
+      });
+      /**之后此处需记录当前页面路径，以便于登陆完成后跳转 */
+      this.$router.push({
+        path: "/login",
+        query: { redirect: this.$route.fullPath },
+      });
+    }
     axios({
       url: "/check/answer_report/solved",
       method: "get",
