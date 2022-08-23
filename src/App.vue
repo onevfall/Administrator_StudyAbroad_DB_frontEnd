@@ -24,7 +24,7 @@ export default ({
     }
   },
    mounted(){
-    this.$router.replace('/information')
+    this.$router.replace('/login')
   }
 })
 </script>

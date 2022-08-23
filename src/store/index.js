@@ -3,13 +3,13 @@ import { createStore } from 'vuex'
 export default createStore({
   state: {
     admin_info: {
-      AdministratorCreatetime:"",
-      AdministratorEmail:"",
-      AdministratorGender:"",
-      AdministratorId:-1,
-      AdministratorName:"",
-      AdministratorPhone:"",
-      AdministratorProfile:"",
+      administrator_createtime:"",
+      administrator_email:"",
+      administrator_gender:"",
+      administrator_id:-1,
+      administrator_name:"",
+      administrator_phone:"",
+      administrator_profile:"",
     },
     is_login: false,
   },
@@ -19,7 +19,7 @@ export default createStore({
     loginIn(state,admin_info){
       state.is_login=true;
       state.admin_info=admin_info;
-      state.admin_info.AdministratorGender = (admin_info.AdministratorGender == 'f' ? '女' : '男');
+      state.admin_info.administrator_gender = (admin_info.administrator_gender == 'f' ? '女' : '男');
     },
     //登出
     loginOut(state){

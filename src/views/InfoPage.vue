@@ -85,8 +85,12 @@
 <script>
 import axios from "axios";
 import store from "@/store";
+import { ElMessage } from 'element-plus'
 export default {
   name: "InfoPage",
+  components:{
+    ElMessage
+  },
   data() {
     return {
       admin_id: -1,
@@ -107,7 +111,7 @@ export default {
       this.isUpdating[key] = false;
       console.log(this.phone);
       axios.post("administrator",{
-        admin_id: 0,
+        admin_id: this.admin_id,
         admin_name: this.name,
         admin_gender: this.gender == "女" ? 'f' : 'm',
         admin_phone: this.phone,
@@ -121,39 +125,27 @@ export default {
       })
     },
   },
-  components: {
-      
-  },
   created() {
-    // if(this.$store.state.is_login)
-    // {
-
-    // }
-    axios({
-      url: "administrator",
-      method: "get",
-      params: {
-        admin_id: 0,
-      },
-    })
-    .then((res) => {
-      console.log(res);
-      if (res.data.status) {
-        var source_data = res.data.data;
-        console.log(source_data)
-        store.commit("loginIn", source_data);
-        this.admin_id = source_data.AdministratorId;
-        this.name = source_data.AdministratorName;
-        this.profile = source_data.AdministratorProfile;
-        this.gender = (source_data.AdministratorGender == 'f' ? '女' : '男');
-        this.phone = source_data.AdministratorPhone;
-        this.email = source_data.AdministratorEmail;
-        this.create_time = source_data.AdministratorCreatetime;
-      }
-    })
-    .catch((err) => {
-      console.log(err);
-    });
+    if (!this.$store.state.is_login) {
+      ElMessage({
+        message: "请先登录",
+        type: "warning",
+        showClose: true,
+        duration: 2000,
+      });
+      /**之后此处需记录当前页面路径，以便于登陆完成后跳转 */
+      this.$router.push({
+        path: "/login",
+        query: { redirect: this.$route.fullPath },
+      });
+    }
+    this.admin_id = this.$store.state.admin_info.administrator_id
+    this.name = this.$store.state.admin_info.administrator_name
+    this.profile = this.$store.state.admin_info.administrator_profile
+    this.gender = this.$store.state.admin_info.administrator_gender
+    this.phone= this.$store.state.admin_info.administrator_phone
+    this.email= this.$store.state.admin_info.administrator_email
+    this.create_time= this.$store.state.admin_info.administrator_createtime.replace("T"," ")
   }
 };
 </script>
