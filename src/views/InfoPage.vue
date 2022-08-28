@@ -119,6 +119,14 @@ export default {
       })
       .then((res) => {
         console.log(res);
+        var response = res.data;
+        // 若修改成功
+        if (response.status) {
+          ElMessage.success("修改成功！");
+        }
+        else {
+          ElMessage.error("修改失败！请稍后再试");
+        }
       })
       .catch((err) => {
         console.log(err)
