@@ -136,6 +136,7 @@ export default ({
   },
   created(){
     this.qualification_id=this.$route.query.qualification_id;
+    this.administrator_id=this.$store.state.admin_info.administrator_id;
     axios({
       url: "check/single_qualification",
       method: "get",
