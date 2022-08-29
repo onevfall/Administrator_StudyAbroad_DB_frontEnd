@@ -113,6 +113,7 @@ export default ({
   },
   created(){
     this.question_id=this.$route.query.question_id;
+    this.administrator_id=this.$store.state.admin_info.administrator_id;
     console.log(this.question_id);
     axios({
       url: "check/single_question",

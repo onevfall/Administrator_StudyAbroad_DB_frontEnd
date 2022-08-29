@@ -120,6 +120,7 @@ export default ({
   },
   created(){
     this.blog_id=this.$route.query.blog_id;
+    this.administrator_id=this.$store.state.admin_info.administrator_id;
     axios({
       url: "check/single_blog",
       method: "get",

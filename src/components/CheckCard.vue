@@ -12,7 +12,7 @@
     <el-scrollbar height="370px">
       <el-tabs v-model="activeName" class="tabs" @tab-click="handleClick">
         <el-tab-pane label="未审核" name="first">
-          <div class="check-content">
+          <div class="check-title">
             <el-row>
               <el-col :span="12" style="text-align:left;padding-left:18%">{{ this.essence }}</el-col>
               <el-col :span="8" style="padding-right:4%">用户</el-col>
@@ -40,7 +40,7 @@
           </div>
         </el-tab-pane>
         <el-tab-pane label="已审核" name="second">
-          <div class="check-content">
+          <div class="check-title">
             <el-row>
               <el-col :span="10" style="text-align:left;padding-left:18%">{{ this.essence }}</el-col>
               <el-col :span="6">用户</el-col>
@@ -132,6 +132,12 @@ export default {
     padding-left:12%;
     padding-top:30px;
   }
+
+  .check-title{
+    padding-top:10px;
+    padding-bottom:20px;
+    border-bottom:solid 0.3px #afd898;
+  }
   
   .check-content{
     font-size:16px;
@@ -139,6 +145,14 @@ export default {
     padding-bottom:20px;
     border-bottom:solid 0.3px #afd898;
     color:grey;
+    box-sizing:content-box;
+    padding-left:10px;
+    padding-right:10px;
+  }
+
+  .check-content:hover{
+    border:solid 2px #409EFF;
+    border-radius:10px;
   }
   
   #check-text{

@@ -70,7 +70,7 @@ export default ({
         ReviewReason:null,
         answer_id:2,
         answer_info:[],
-        administrator_id:99,
+        administrator_id:1,
     };
   },
   methods:{
@@ -119,6 +119,7 @@ export default ({
   },
   created(){
     this.answer_id=this.$route.query.answer_id;
+    this.administrator_id=this.$store.state.admin_info.administrator_id;
     axios({
       url: "check/single_answer",
       method: "get",
