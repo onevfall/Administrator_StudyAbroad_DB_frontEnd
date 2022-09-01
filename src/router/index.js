@@ -10,6 +10,10 @@ import AnswerCheck from '../views/AnswerCheck.vue'
 import BlogCheckCenter from '../views/BlogCheckCenter.vue'
 import BlogCheck from '../views/BlogCheck.vue'
 import ModifyUniversityInfo from '../views/ModifyUniversityInfo.vue'
+import SchoolManageCenter from '../views/SchoolManageCenter.vue'
+import SchoolDetail from '../views/SchoolDetail.vue'
+import InstitutionManageCenter from '../views/InstitutionManageCenter.vue'
+
 
 import QualificationCheckCenter from '../views/QualificationCheckCenter.vue'
 import QualificationCheck from '../views/QualificationCheck.vue'
@@ -115,6 +119,30 @@ const routes = [
     }
   },
   {
+    path:'/manage_school_info',
+    name:'manage_school_info',
+    component:SchoolManageCenter,
+    meta:{
+      title:'管理高校信息中心'
+    }
+  },
+  {
+    path: '/modify_school_detail',//路径暂且做测试
+    name: 'modify_school_detail',
+    component: SchoolDetail,
+    meta: {
+      title: '学校修改详情'
+    }
+  },
+  {
+    path:'/institution_manage_center',
+    name:'institution_manage_center',
+    component:InstitutionManageCenter,
+    meta:{
+      title:'管理机构信息中心'
+    }
+  },
+  {
     path:'/qualification_check_center',
     name:'qualification_check_center',
     component:QualificationCheckCenter,
@@ -195,7 +223,6 @@ const routes = [
     component:BlogCommentReport,
     meta:{
       title:'动态评论举报'
-
     }
   },
 ]

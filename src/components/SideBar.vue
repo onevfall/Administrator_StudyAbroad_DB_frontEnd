@@ -28,9 +28,12 @@
     <el-sub-menu index="5">
       <template #title>高校管理</template>
       <el-menu-item index="5-1" @click="goModifyUniversityInfo">修改高校信息</el-menu-item>
-      <el-menu-item index="5-2">修改排名信息</el-menu-item>
+      <el-menu-item index="5-2" @click="goManageSchool">管理高校信息</el-menu-item>
     </el-sub-menu>
-    <el-menu-item index="6" @click="goNewsCollation">
+    <el-menu-item index="6" @click="goManageInstitution">
+      <span>机构信息管理</span>
+    </el-menu-item>
+    <el-menu-item index="7" @click="goNewsCollation">
       <span>留学快讯管理</span>
     </el-menu-item>
   </el-menu>
@@ -48,6 +51,11 @@ export default {
     goNewsCollation() {
       router.push({
         name: "news_collation",
+      });
+    },
+    goManageInstitution() {
+      router.push({
+        name: "institution_manage_center",
       });
     },
     goQuestionCheckCenter() {
@@ -73,6 +81,11 @@ export default {
     goModifyUniversityInfo() {
       router.push({
         name: "modify_university_info",
+      })
+    },
+    goManageSchool(){
+      router.push({
+        name: "manage_school_info",
       })
     },    
     goAnswerReportCenter() {
