@@ -175,7 +175,7 @@ export default {
         console.log("已获取到数据");
         this.all_num = res.data.data.num;
         this.page_num = Math.ceil(res.data.data.num / this.PAGESIZE); //向上取整
-
+        this.all_school_list = res.data.data.university_list;
         // 进行当页数据检索
         axios({
           url:
@@ -189,7 +189,7 @@ export default {
         })
           .then((res) => {
             this.school_list = res.data.data.university_list;
-            this.all_school_list = res.data.data.university_list;
+            
             this.isLoading = false;
           })
           .catch((errMsg) => {
