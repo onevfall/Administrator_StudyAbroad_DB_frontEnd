@@ -128,10 +128,10 @@ export default {
           duration: 2000,
         });
         return;
-      } else if (args.text_content.length < 15) {
+      } else if (args.text_content.length < 300) {
         summary = args.text_content;
       } else {
-        summary = args.text_content.slice(0, 15);
+        summary = args.text_content.slice(0, 300);
       }
       var tag = "";
       for (let i = 0; i < this.tagList.length; ++i) {
@@ -141,21 +141,6 @@ export default {
       var image_url = "";
       if (args.image_array.length != 0) {
         image_url = args.image_array[0]; //选第一张图片
-      }
-      if(this.newsId!=0){
-        axios({
-        url: "newsflash" + "?newsflash_id=" + this.newsId,
-
-        method: "delete",
-      })
-        .then((res) => {
-          console.log(id);
-          console.log(res);
-        })
-        .catch((errMsg) => {
-          console.log(errMsg);
-        });
-        console.log("删除快讯的id是");console.log(this.newsId);
       }
       axios
         .post("newsflash/release", {
