@@ -34,6 +34,18 @@
             >搜索</el-button
           >
         </span>
+
+        <span style="margin-left: 30px; vertical-align: bottom">
+          <!-- 搜索键 -->
+          <el-button
+            type="warning"
+            size="large"
+            color="#626aef"
+            @click="goAddSchool"
+            >添加高校<el-icon size="large" style="margin-left: 5px"
+              ><CirclePlus /></el-icon
+          ></el-button>
+        </span>
       </div>
     </el-card>
 
@@ -103,6 +115,11 @@ export default {
         },
       });
     },
+    goAddSchool() {
+      this.$router.push({
+        path: "/add_school",
+      });
+    },
     filter() {
       this.isLoading = true;
       var x = ""; //需要拼接的判断
@@ -151,7 +168,7 @@ export default {
     }
     this.isLoading = true;
     axios({
-      url: "university/num" + "?rank_year=2022" + "&tag=QS_rank",
+      url: "university/num" + "?rank_year=2022",
       method: "get",
     })
       .then((res) => {
@@ -166,7 +183,8 @@ export default {
             "?rank_year=2022" +
             "&" +
             "page_size=" +
-            this.PAGESIZE,
+            this.PAGESIZE +
+            "&tag=QS_rank",
           method: "get",
         })
           .then((res) => {

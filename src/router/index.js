@@ -13,7 +13,7 @@ import ModifyUniversityInfo from '../views/ModifyUniversityInfo.vue'
 import SchoolManageCenter from '../views/SchoolManageCenter.vue'
 import SchoolDetail from '../views/SchoolDetail.vue'
 import InstitutionManageCenter from '../views/InstitutionManageCenter.vue'
-
+import AddSchool from "../views/AddSchool.vue"
 
 import QualificationCheckCenter from '../views/QualificationCheckCenter.vue'
 import QualificationCheck from '../views/QualificationCheck.vue'
@@ -135,8 +135,24 @@ const routes = [
     }
   },
   {
+    path: '/add_school',//路径暂且做测试
+    name: 'add_school',
+    component: AddSchool,
+    meta: {
+      title: '添加学校'
+    }
+  },
+  {
     path:'/institution_manage_center',
     name:'institution_manage_center',
+    component:InstitutionManageCenter,
+    meta:{
+      title:'管理机构信息中心'
+    }
+  },
+  {
+    path:'/modify_institution_detail',
+    name:'modify_institution_detail',
     component:InstitutionManageCenter,
     meta:{
       title:'管理机构信息中心'
