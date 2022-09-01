@@ -14,7 +14,7 @@ import SchoolManageCenter from '../views/SchoolManageCenter.vue'
 import SchoolDetail from '../views/SchoolDetail.vue'
 import InstitutionManageCenter from '../views/InstitutionManageCenter.vue'
 import AddSchool from "../views/AddSchool.vue"
-
+import ModifyInstitutionDetail from "../views/ModifyInstitutionDetail.vue"
 import QualificationCheckCenter from '../views/QualificationCheckCenter.vue'
 import QualificationCheck from '../views/QualificationCheck.vue'
 
@@ -153,7 +153,7 @@ const routes = [
   {
     path:'/modify_institution_detail',
     name:'modify_institution_detail',
-    component:InstitutionManageCenter,
+    component:ModifyInstitutionDetail,
     meta:{
       title:'管理机构信息中心'
     }
