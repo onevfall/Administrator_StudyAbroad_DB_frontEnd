@@ -135,6 +135,11 @@ export default ({
       .then((res) => {
         console.log(res.data.data);
         this.blog_checked_info=res.data.data.blog_report;
+        for(var i=0;i<this.blog_checked_info.length;i++)
+        {
+          this.blog_checked_info[i].ReportDate=this.blog_checked_info[i].ReportDate.replace("T"," ");
+          
+        }
         //console.log(this.blog.checked_info);
       })
       .catch((err) => {
@@ -147,6 +152,11 @@ export default ({
       .then((res) => {
         console.log(res.data.data);
         this.blog_tocheck_info=res.data.data.blog_report;
+        for(var i=0;i<this.blog_tocheck_info.length;i++)
+        {
+          this.blog_tocheck_info[i].ReportDate=this.blog_tocheck_info[i].ReportDate.replace("T"," ");
+          
+        }
         //console.log(this.blog.checked_info);
       })
       .catch((err) => {
