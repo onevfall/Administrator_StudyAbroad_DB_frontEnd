@@ -56,7 +56,7 @@
         label-position="right"
         label-width="125px"
       >
-        <div class="content_input_field">
+        <div class="content_input_field" v-loading="oss_loading">
           <editor ref="text_editor" @editorSubmit="publishNews" />
         </div>
       </el-form-item>
@@ -97,7 +97,7 @@ export default {
     Editor,
   },
   // mounted: function () {
-     
+
   //     this.$refs.text_editor.defaultContent(this.messageContent);
   //     console.log(this.messageContent);
   //     console.log(this.messageTitle);
@@ -194,17 +194,16 @@ export default {
       messageRegion: "",
       // messageTag:"",
       tagList: [],
-      newsId:0,
-      news_info:"",
+      newsId: 0,
+      news_info: "",
+      oss_loading:true
     };
   },
-  created() 
-  {
+  created() {
     console.log("初始化该页面的信息");
     this.newsId = this.$route.query.news_id;
     axios({
       url: "newsflash/single" + "?newsflash_id=" + this.newsId,
-
       method: "get",
     })
       .then((res) => {
@@ -215,16 +214,27 @@ export default {
         this.news_info = res.data.data;
         console.log(this.news_info);
         console.log(this.news_info.NewsFlashTitle);
-        this.messageTitle=this.news_info.NewsFlashTitle;
-        this.messageContent=this.news_info.NewsFlashContent;
-        this.messageRegion=this.news_info.NewsFlashRegion;
-        this.$refs.text_editor.getdefaultContent(this.messageContent);
+        this.messageTitle = this.news_info.NewsFlashTitle;
+        this.messageContent = this.news_info.NewsFlashContent;
+        this.messageRegion = this.news_info.NewsFlashRegion;
+        
+        const xhrFile = new XMLHttpRequest();
+          console.log('开始解析oss');
+          xhrFile.open("GET", this.messageContent, true);
+          xhrFile.send();
+          xhrFile.onload = () => {
+            //res.data.data.blog_content=xhrFile.response;
+            this.messageContent = xhrFile.response;
+
+            console.log('oss解析完成');
+            this.$refs.text_editor.getdefaultContent(this.messageContent);
+            this.oss_loading=false;
+          };
+          
       })
       .catch((errMsg) => {
         console.log(errMsg);
       });
-      
-   
   },
 };
 </script>
