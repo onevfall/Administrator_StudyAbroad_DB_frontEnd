@@ -135,7 +135,11 @@ export default ({
       .then((res) => {
         console.log(res.data.data);
         this.answercomment_checked_info=res.data.data.answercomment_report;
-        //console.log(this.answercomment.checked_info);
+        for(var i=0;i<this.answercomment_checked_info.length;i++)
+        {
+          this.answercomment_checked_info[i].ReportDate=this.answercomment_checked_info[i].ReportDate.replace("T"," ");
+          
+        }
       })
       .catch((err) => {
         console.log(err);
@@ -147,6 +151,11 @@ export default ({
       .then((res) => {
         console.log(res.data.data);
         this.answercomment_tocheck_info=res.data.data.answercomment_report;
+        for(var i=0;i<this.answercomment_tocheck_info.length;i++)
+        {
+          this.answercomment_tocheck_info[i].ReportDate=this.answercomment_tocheck_info[i].ReportDate.replace("T"," ");
+          
+        }
         //console.log(this.answercomment.checked_info);
       })
       .catch((err) => {
