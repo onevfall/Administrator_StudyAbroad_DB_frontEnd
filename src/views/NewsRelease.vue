@@ -202,6 +202,10 @@ export default {
   created() {
     console.log("初始化该页面的信息");
     this.newsId = this.$route.query.news_id;
+    if(this.newsId==undefined){
+      this.oss_loading=false;
+      return;
+    }
     axios({
       url: "newsflash/single" + "?newsflash_id=" + this.newsId,
       method: "get",
@@ -219,7 +223,6 @@ export default {
           xhrFile.onload = () => {
             //res.data.data.blog_content=xhrFile.response;
             this.messageContent = xhrFile.response;
-
             console.log('oss解析完成');
             this.$refs.text_editor.getdefaultContent(this.messageContent);
             this.oss_loading=false;
@@ -227,7 +230,6 @@ export default {
           
       })
       .catch((errMsg) => {
-        this.oss_loading=false;
         console.log(errMsg);
       });
   },
