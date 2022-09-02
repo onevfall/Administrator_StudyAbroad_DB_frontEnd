@@ -207,13 +207,7 @@ export default {
       method: "get",
     })
       .then((res) => {
-        console.log(res);
-        console.log(res.data);
-        console.log(res.data.data);
-
         this.news_info = res.data.data;
-        console.log(this.news_info);
-        console.log(this.news_info.NewsFlashTitle);
         this.messageTitle = this.news_info.NewsFlashTitle;
         this.messageContent = this.news_info.NewsFlashContent;
         this.messageRegion = this.news_info.NewsFlashRegion;
@@ -233,6 +227,7 @@ export default {
           
       })
       .catch((errMsg) => {
+        this.oss_loading=false;
         console.log(errMsg);
       });
   },
