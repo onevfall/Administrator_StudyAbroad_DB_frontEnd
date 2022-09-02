@@ -12,6 +12,7 @@ import BlogCheck from '../views/BlogCheck.vue'
 import ModifyUniversityInfo from '../views/ModifyUniversityInfo.vue'
 import SchoolManageCenter from '../views/SchoolManageCenter.vue'
 import SchoolDetail from '../views/SchoolDetail.vue'
+import ModifyUniversityDetail from '../views/ModifyUniversityDetail.vue'
 import InstitutionManageCenter from '../views/InstitutionManageCenter.vue'
 import AddSchool from "../views/AddSchool.vue"
 import ModifyInstitutionDetail from "../views/ModifyInstitutionDetail.vue"
@@ -129,7 +130,7 @@ const routes = [
   {
     path: '/modify_school_detail',//路径暂且做测试
     name: 'modify_school_detail',
-    component: SchoolDetail,
+    component: ModifyUniversityDetail,
     meta: {
       title: '学校修改详情'
     }
