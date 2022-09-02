@@ -136,6 +136,11 @@ export default ({
       .then((res) => {
         console.log(res.data.data);
         this.answer_checked_info=res.data.data.answer_report;
+        for(var i=0;i<this.answer_checked_info.length;i++)
+        {
+          this.answer_checked_info[i].ReportDate=this.answer_checked_info[i].ReportDate.replace("T"," ");
+          
+        }
         //console.log(this.answer.checked_info);
       })
       .catch((err) => {
@@ -148,6 +153,11 @@ export default ({
       .then((res) => {
         console.log(res.data.data);
         this.answer_tocheck_info=res.data.data.answer_report;
+        for(var i=0;i<this.answer_tocheck_info.length;i++)
+        {
+          this.answer_tocheck_info[i].ReportDate=this.answer_tocheck_info[i].ReportDate.replace("T"," ");
+          
+        }
         //console.log(this.answer.checked_info);
       })
       .catch((err) => {
