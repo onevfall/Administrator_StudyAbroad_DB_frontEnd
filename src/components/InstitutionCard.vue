@@ -25,7 +25,7 @@
         </div>
 
         <!-- 右侧点击去看看 -->
-\
+
         <div class="myButton">
           <div>
           <el-button type="warning" size="large" color="#626aef" @click="modifyInstitution"
@@ -49,8 +49,8 @@
       <span style="font-size:18px">你确认要删除该机构信息吗? 此操作不可逆!</span>
       <template #footer>
         <span class="dialog-footer">
-          <el-button @click="delete_dialog_visible = false">取消</el-button>
-          <el-button type="primary" @click="deleteSchool">确认</el-button>
+          <el-button @click="handleClose">取消</el-button>
+          <el-button type="primary" @click="deleteInstitution">确认</el-button>
         </span>
       </template>
     </el-dialog>
@@ -58,6 +58,8 @@
 </template>
 
 <script>
+import axios from "axios";
+import { ElMessage } from "element-plus";
 export default {
   props: [
     'institution',
@@ -81,6 +83,25 @@ export default {
       })
     },
     deleteInstitution(){
+      axios.delete(
+        '/institution', {	
+      params: {	// 请求参数拼接在url上
+        institution_id: this.institution.institution_id,
+      }
+    })
+      .then((res) => {
+        this.delete_dialog_visible = false;
+        console.log(res);
+        if (res.data.status == true){
+          ElMessage.success("删除成功!");
+          this.$emit("deletesuccess",true);
+        }else {
+          ElMessage.error("删除失败!");
+        }
+      })
+      .catch((errMsg) => {
+        console.log(errMsg);
+      });
       
     }
   },

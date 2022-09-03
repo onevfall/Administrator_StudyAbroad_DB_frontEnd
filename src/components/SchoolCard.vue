@@ -81,7 +81,7 @@
       <span style="font-size:18px">你确认要删除该大学信息吗? 此操作不可逆!</span>
       <template #footer>
         <span class="dialog-footer">
-          <el-button @click="delete_dialog_visible = false">取消</el-button>
+          <el-button @click="handleClose">取消</el-button>
           <el-button type="primary" @click="deleteSchool">确认</el-button>
         </span>
       </template>
@@ -90,11 +90,14 @@
 </template>
 
 <script>
+import { ElMessage } from 'element-plus'
+import axios from "axios";
 export default {
   props: ["school"],
   data() {
     return {
       delete_dialog_visible: false,
+
     };
   },
   methods: {
@@ -111,27 +114,25 @@ export default {
       this.delete_dialog_visible = false;
     },
     deleteSchool(){
-    //   console.log("1111");
-    //   axios.delete(
-    //     '/identity', {	
-    //   params: {	// 请求参数拼接在url上
-    //     identity_id: this.certif_infor.identity_id,
-    //   }
-    // })
-    //   .then((res) => {
-    //     this.delete_dialog_visible = false;
-    //     console.log(res);
-    //     if (res.data.status == true){
-    //       ElMessage.success("删除成功!");
-    //       this.$emit("deletecheck",true);
-    //       this.need_refresh = !this.need_refresh;
-    //     }else {
-    //       ElMessage.error("删除失败!");
-    //     }
-    //   })
-    //   .catch((errMsg) => {
-    //     console.log(errMsg);
-    //   });
+      axios.delete(
+        '/university', {	
+      params: {	// 请求参数拼接在url上
+        university_id: this.school.university_id,
+      }
+    })
+      .then((res) => {
+        this.delete_dialog_visible = false;
+        console.log(res);
+        if (res.data.status == true){
+          ElMessage.success("删除成功!");
+          this.$emit("deletesuccess",true);
+        }else {
+          ElMessage.error("删除失败!");
+        }
+      })
+      .catch((errMsg) => {
+        console.log(errMsg);
+      });
     }
   },
 };
