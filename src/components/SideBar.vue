@@ -25,11 +25,10 @@
         <el-menu-item index="4-3" @click="goAnswerCommentReportCenter">回答评论举报</el-menu-item>
         <el-menu-item index="4-4" @click="goBlogCommentReportCenter">动态评论举报</el-menu-item>
     </el-sub-menu>
-    <el-sub-menu index="5">
-      <template #title>高校管理</template>
-      <el-menu-item index="5-1" @click="goModifyUniversityInfo">修改高校信息</el-menu-item>
-      <el-menu-item index="5-2" @click="goManageSchool">管理高校信息</el-menu-item>
-    </el-sub-menu>
+
+    <el-menu-item index="5" @click="goManageSchool">
+      <span>高校信息管理</span>
+    </el-menu-item>
     <el-menu-item index="6" @click="goManageInstitution">
       <span>机构信息管理</span>
     </el-menu-item>
