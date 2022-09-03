@@ -242,16 +242,16 @@ export default {
     submit_university_info: function () {
       axios
         .post("institution", {
-            institution_name: this.institution_name,
-            institution_phone: this.institution_phone,
-            institution_qualify: this.institution_qualify,
-            institution_instroduction: this.institution_instroduction,
-            institution_profile: this.institution_profile,
-            institution_city: this.institution_city,
-            institution_location: this.institution_location,
-            institution_email: this.institution_email,
-            institution_lessons_characteristic: this.institution_lessons_characteristic,
-            institution_lessons: this.institution_lessons,
+            name: this.institution_name,
+            phone: this.institution_phone,
+            qualify: this.institution_qualify,
+            instroduction: this.institution_instroduction,
+            profile: this.institution_profile,
+            city: this.institution_city,
+            location: this.institution_location,
+            email: this.institution_email,
+            lessons_characteristic: this.institution_lessons_characteristic,
+            lessons: this.institution_lessons,
             target_country: this.target_country,
             })
       
