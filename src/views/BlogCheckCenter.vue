@@ -5,7 +5,8 @@
 
 <template>
   <el-container>
-    <el-main>
+    <el-main v-loading.fullscreen.lock="isLoading"
+             element-loading-text="正在加载">
       <check-card :tocheck_info="this.blog_tocheck_info"
                   :checked_info="this.blog_checked_info"
                   :essence="this.essence">
@@ -30,6 +31,7 @@ export default ({
       blog_tocheck_info:[],
       blog_checked_info:[],
       essence:"动态",
+      isLoading:false,
     };
   },
   created(){
@@ -46,6 +48,7 @@ export default ({
         query: { redirect: this.$route.fullPath },
       });
     }
+    this.isLoading=true;
     axios({
       url: "check/all_blogs",
       method: "get",
@@ -68,6 +71,7 @@ export default ({
             this.blog_checked_info.push(res.data.data.blog_list[i]);
           }
         }
+        this.isLoading=false;
         console.log(blog_tocheck_info);
       })
       .catch((err) => {
