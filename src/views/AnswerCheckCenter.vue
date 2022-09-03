@@ -5,7 +5,8 @@
 
 <template>
   <el-container>
-    <el-main>
+    <el-main v-loading.fullscreen.lock="isLoading"
+             element-loading-text="正在加载">
       <check-card :tocheck_info="this.answer_tocheck_info"
                   :checked_info="this.answer_checked_info"
                   :essence="this.essence">
@@ -30,7 +31,7 @@ export default ({
       answer_tocheck_info:[],
       answer_checked_info:[],
       essence:"回答",
-
+      isLoading:false,
     };
   },
   created(){
@@ -47,6 +48,7 @@ export default ({
         query: { redirect: this.$route.fullPath },
       });
     }
+    this.isLoading=true;
     axios({
       url: "check/all_answers",
       method: "get",
@@ -71,6 +73,7 @@ export default ({
             this.answer_checked_info.push(res.data.data.answer_list[i]);
           }
         }
+        this.isLoading=false;
         console.log(this.answer.checked_info);
       })
       .catch((err) => {

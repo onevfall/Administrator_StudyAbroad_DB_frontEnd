@@ -5,7 +5,8 @@
 
 <template>
   <el-container>
-    <el-main>
+    <el-main v-loading.fullscreen.lock="isLoading"
+             element-loading-text="正在加载">
       <el-card class="box-card">
         <template #header>
           <div class="card-header">
@@ -92,6 +93,7 @@ export default ({
         qualification_id:10,
         qualification_info:[],
         administrator_id:99,
+        isLoading:false,
     };
   },
   methods:{
@@ -137,6 +139,7 @@ export default ({
   created(){
     this.qualification_id=this.$route.query.qualification_id;
     this.administrator_id=this.$store.state.admin_info.administrator_id;
+    this.isLoading=true;
     axios({
       url: "check/single_qualification",
       method: "get",
@@ -148,6 +151,7 @@ export default ({
         console.log(res);
         this.qualification_info=res.data.data;
         this.qualification_info.SummitDate=this.qualification_info.SummitDate.replace("T"," ");
+        this.isLoading=false;
       })
       .catch((err) => {
         console.log(err);

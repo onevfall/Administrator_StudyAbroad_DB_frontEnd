@@ -56,7 +56,7 @@
         label-position="right"
         label-width="125px"
       >
-        <div class="content_input_field">
+        <div class="content_input_field" v-loading="oss_loading">
           <editor ref="text_editor" @editorSubmit="publishNews" />
         </div>
       </el-form-item>
@@ -97,7 +97,7 @@ export default {
     Editor,
   },
   // mounted: function () {
-     
+
   //     this.$refs.text_editor.defaultContent(this.messageContent);
   //     console.log(this.messageContent);
   //     console.log(this.messageTitle);
@@ -128,10 +128,10 @@ export default {
           duration: 2000,
         });
         return;
-      } else if (args.text_content.length < 15) {
+      } else if (args.text_content.length < 300) {
         summary = args.text_content;
       } else {
-        summary = args.text_content.slice(0, 15);
+        summary = args.text_content.slice(0, 300);
       }
       var tag = "";
       for (let i = 0; i < this.tagList.length; ++i) {
@@ -141,21 +141,6 @@ export default {
       var image_url = "";
       if (args.image_array.length != 0) {
         image_url = args.image_array[0]; //选第一张图片
-      }
-      if(this.newsId!=0){
-        axios({
-        url: "newsflash" + "?newsflash_id=" + this.newsId,
-
-        method: "delete",
-      })
-        .then((res) => {
-          console.log(id);
-          console.log(res);
-        })
-        .catch((errMsg) => {
-          console.log(errMsg);
-        });
-        console.log("删除快讯的id是");console.log(this.newsId);
       }
       axios
         .post("newsflash/release", {
@@ -167,9 +152,6 @@ export default {
           image_url: image_url,
         })
         .then((res) => {
-          console.log("下面应该是后端返回值");
-          console.log(res);
-          console.log("上面应该是后端返回值");
           if (res.data.status == true) {
             this.fullscreenLoading = false;
             ElMessage({
@@ -209,37 +191,48 @@ export default {
       messageRegion: "",
       // messageTag:"",
       tagList: [],
-      newsId:0,
-      news_info:"",
+      newsId: 0,
+      news_info: "",
+      oss_loading: true,
     };
   },
-  created() 
-  {
-    console.log("初始化该页面的信息");
+  created() {
     this.newsId = this.$route.query.news_id;
+    if (this.newsId == -1) {
+      this.oss_loading = false;
+      return;
+    }
     axios({
       url: "newsflash/single" + "?newsflash_id=" + this.newsId,
-
       method: "get",
     })
       .then((res) => {
-        console.log(res);
-        console.log(res.data);
-        console.log(res.data.data);
-
         this.news_info = res.data.data;
-        console.log(this.news_info);
-        console.log(this.news_info.NewsFlashTitle);
-        this.messageTitle=this.news_info.NewsFlashTitle;
-        this.messageContent=this.news_info.NewsFlashContent;
-        this.messageRegion=this.news_info.NewsFlashRegion;
-        this.$refs.text_editor.getdefaultContent(this.messageContent);
+        this.messageTitle = this.news_info.NewsFlashTitle;
+        this.messageContent = this.news_info.NewsFlashContent;
+        this.messageRegion = this.news_info.NewsFlashRegion;
+
+        const xhrFile = new XMLHttpRequest();
+        console.log("开始解析oss");
+        xhrFile.open("GET", this.messageContent, true);
+        xhrFile.send();
+        xhrFile.onload = () => {
+          //res.data.data.blog_content=xhrFile.response;
+          this.messageContent = xhrFile.response;
+          console.log("oss解析完成");
+          this.$refs.text_editor.getdefaultContent(this.messageContent);
+          this.oss_loading = false;
+          axios
+            .delete("newsflash?newsflash_id=" + this.newsId)
+            .then((res) => {})
+            .catch((err) => {
+              console.log(err);
+            });
+        };
       })
       .catch((errMsg) => {
         console.log(errMsg);
       });
-      
-   
   },
 };
 </script>

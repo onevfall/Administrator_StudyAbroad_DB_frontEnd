@@ -41,7 +41,7 @@
             type="warning"
             size="large"
             color="#626aef"
-            @click="goAddSchool"
+            @click="goAddInstitution"
             >添加机构<el-icon size="large" style="margin-left: 5px"
               ><CirclePlus /></el-icon
           ></el-button>
@@ -56,7 +56,10 @@
     <hr />
     <div class="downBox">
       <div v-for="(institution, index) in institution_list" :key="index">
-        <institution-card :institution="institution"></institution-card>
+        <institution-card
+          :institution="institution"
+          @deletesuccess="reloadPage"
+        ></institution-card>
         <br />
       </div>
     </div>
@@ -137,6 +140,34 @@ export default {
           console.log("机构列表信息失败");
         });
     },
+    reloadPage(res) {
+      if(res){
+      this.isLoading = true;
+      axios({
+        url: "institution/num",
+        method: "get",
+      }).then((res) => {
+        console.log("已获取到数据");
+        this.all_num = res.data.data.num;
+        this.page_num = Math.ceil(res.data.data.num / this.PAGESIZE); //向上取整
+        this.all_institution_list = res.data.data.institution_list;
+        // 进行当页数据检索
+        axios({
+          url: "institution/list?" + "page_size=" + this.PAGESIZE,
+          method: "get",
+        })
+          .then((res) => {
+            this.institution_list = res.data.data.institution_list;
+            this.isLoading = false;
+            this.cur_page = 1;
+          })
+          .catch((errMsg) => {
+            console.log(errMsg);
+            console.log("第二层初始化大失败");
+          });
+      });
+    }
+  }
   },
   created() {
     if (!this.$store.state.is_login) {

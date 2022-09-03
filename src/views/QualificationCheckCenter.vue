@@ -5,7 +5,8 @@
 
 <template>
   <el-container>
-    <el-main>
+    <el-main v-loading.fullscreen.lock="isLoading"
+             element-loading-text="正在加载">
       <check-card :tocheck_info="this.qualification_tocheck_info"
                   :checked_info="this.qualification_checked_info"
                   :essence="this.essence">
@@ -29,6 +30,7 @@ export default ({
       qualification_tocheck_info:[],
       qualification_checked_info:[],
       essence:"学历",
+      isLoading:false
     };
   },
   created(){
@@ -45,6 +47,7 @@ export default ({
         query: { redirect: this.$route.fullPath },
       });
     }
+    this.isLoading=true;
     axios({
       url: "check/all_qualifications",
       method: "get",
@@ -70,6 +73,7 @@ export default ({
           }
           console.log(this.qualification_checked_info);
         }
+        this.isLoading=false;
       })
       .catch((err) => {
         console.log(err);
@@ -77,3 +81,9 @@ export default ({
   }
 })
 </script>
+
+<style scoped>
+  .el-main{
+    padding:50px 30px 30px 50px;
+  }
+</style>

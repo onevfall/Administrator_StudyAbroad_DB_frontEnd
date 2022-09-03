@@ -4,7 +4,8 @@
 -->
 <template>
   <el-container>
-    <el-main>
+    <el-main  v-loading.fullscreen.lock="isLoading"
+              element-loading-text="正在加载">
       <check-card :tocheck_info="this.question_tocheck_info"
                   :checked_info="this.question_checked_info"
                   :essence="this.essence">
@@ -27,10 +28,10 @@ export default ({
       question_tocheck_info:[],
       question_checked_info:[],
       essence:"提问",
+      isLoading:false,
     };
   },
   created(){
-
     if (!this.$store.state.is_login) {
       ElMessage({
         message: "请先登录",
@@ -44,6 +45,7 @@ export default ({
         query: { redirect: this.$route.fullPath },
       });
     }
+    this.isLoading=true;
     axios({
       url: "check/all_questions",
       method: "get",
@@ -71,6 +73,7 @@ export default ({
               this.question_tocheck_info.push(res.data.data.question_list[i]);
             }
         }
+        this.isLoading=false;
       })
       .catch((err) => {
         console.log(err);

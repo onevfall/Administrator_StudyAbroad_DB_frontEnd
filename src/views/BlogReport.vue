@@ -6,7 +6,8 @@
 
 <template>
   <el-container>
-    <el-main>
+    <el-main v-loading.fullscreen.lock="isLoading"
+             element-loading-text="正在加载">
       <el-card class="box-card">
         <template #header>
           <div class="card-header">
@@ -80,8 +81,17 @@
             <el-col :span="3"></el-col>
             <el-col :span="4" style="text-align:left;margin-top:7px">是否审核通过：</el-col>
             <el-col :span="8" style="text-align:left;">
-                <el-radio v-model="ReviewResult" label=true size="large"><span style="font-size:20px;font-weight:900">是</span></el-radio>
-                <el-radio v-model="ReviewResult" label=false size="large"><span style="font-size:20px;font-weight:900">否</span></el-radio>
+                <el-radio v-model="this.ReviewResult" :label=true size="large"><span style="font-size:20px;font-weight:900">是</span></el-radio>
+                <el-radio v-model="this.ReviewResult" :label=false size="large"><span style="font-size:20px;font-weight:900">否</span></el-radio>
+            </el-col>
+          </el-row>
+
+          <el-row style="margin-top:50px" v-if="this.ReviewResult">
+            <el-col :span="3"></el-col>
+            <el-col :span="4" style="text-align:left;margin-top:7px">是否封禁该用户：</el-col>
+            <el-col :span="8" style="text-align:left;">
+                <el-radio v-model="BanResult" :label=true size="large"><span style="font-size:20px;font-weight:900">是</span></el-radio>
+                <el-radio v-model="BanResult" :label=false size="large"><span style="font-size:20px;font-weight:900">否</span></el-radio>
             </el-col>
           </el-row>
 
@@ -107,10 +117,12 @@ export default ({
     return {
         ReviewResult:null,
         ReviewReason:null,
+        BanResult:null,
         report_id:0,
         blog_id:0,
         blog_info:[],
         administrator_id:99,
+        isLoading:false,
     };
   },
   methods:{
@@ -125,6 +137,7 @@ export default ({
           blog_id:this.blog_id,
           administrator_id:this.administrator_id,
           result:this.ReviewResult,
+          ifBanned:this.BanResult,
         })
         .then((res) => {
           console.log(this.blog_id);
@@ -159,6 +172,7 @@ export default ({
   created(){
     this.report_id=this.$route.query.report_id;
     this.blog_id=this.$route.query.blog_id;
+    this.isLoading=true;
     axios({
       url: "check/blog",
       method: "get",
@@ -187,6 +201,7 @@ export default ({
         xhrFile2.send();
         xhrFile2.onload = () => {
         this.blog_info.BlogContent = xhrFile2.response;}
+        this.isLoading=false;
 
       })
       .catch((err) => {
