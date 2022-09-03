@@ -6,6 +6,8 @@
         class="box-card" 
         shadow="hover"
         style="height:auto"
+        v-loading.fullscreen.lock="isLoading"
+        element-loading-text="正在搜索"
       >
         <!-- <template #header> -->
           <div class="card-header">
@@ -441,11 +443,13 @@ export default {
       QS_rank: 0,
       THE_rank: 0,
       USNEWS_rank: 0,
+      isLoading:false,
     };
   },
   methods: {
     getUniversityInfo() {
       console.log(this.search_word);
+      this.isLoading=true;
       axios.get("university/chname", {
         params: {
           chname: this.search_word,
@@ -456,6 +460,7 @@ export default {
         console.log(res);
         if(!res.data.status) {
           this.search_info = -1;
+          this.isLoading=false;
         }
         else {
           this.search_info = 1;
@@ -493,10 +498,12 @@ export default {
             console.log("test");
             console.log(err);
           })
+          this.isLoading=false;
         }
       })
       .catch((err) => {
         console.log(err);
+        this.isLoading=false;
         this.$alert('输入有误','警告', {
           confirmButtonText: '确定',
           callback: action => {
@@ -564,7 +571,6 @@ export default {
         query: { redirect: this.$route.fullPath },
       });
     }
-
   },
 };
 </script>
