@@ -6,7 +6,8 @@
 
 <template>
   <el-container>
-    <el-main>
+    <el-main v-loading.fullscreen.lock="isLoading"
+             element-loading-text="正在加载">
       <el-card class="box-card">
         <template #header>
           <div class="card-header">
@@ -112,6 +113,7 @@ export default ({
         answercomment_id:0,
         answercomment_info:[],
         administrator_id:99,
+        isLoading:false,
     };
   },
   methods:{
@@ -160,6 +162,7 @@ export default ({
   created(){
     this.report_id=this.$route.query.report_id;
     this.answercomment_id=this.$route.query.answercomment_id;
+    this.isLoading=true;
     axios({
       url: "check/answercomment",
       method: "get",
@@ -181,6 +184,7 @@ export default ({
         xhrFile.send();
         xhrFile.onload = () => {
         this.answercomment_info.RepliedBlogContent = xhrFile.response;}
+        this.isLoading=false;
       })
       .catch((err) => {
         console.log(err);

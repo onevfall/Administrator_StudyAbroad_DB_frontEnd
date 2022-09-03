@@ -5,7 +5,8 @@
 
 <template>
   <el-container>
-    <el-main>
+    <el-main v-loading.fullscreen.lock="isLoading"
+             element-loading-text="正在加载">
       <el-card class="box-card">
         <template #header>
           <div class="card-header">
@@ -98,6 +99,7 @@ export default ({
       answercomment_tocheck_info:[],
       answercomment_checked_info:[],
       activeName:"first",
+      isLoading:false,
     };
   },
   components:{
@@ -128,6 +130,7 @@ export default ({
         query: { redirect: this.$route.fullPath },
       });
     }
+    this.isLoading=true;
     axios({
       url: "/check/answercomment_report/solved",
       method: "get",
@@ -157,6 +160,7 @@ export default ({
           
         }
         //console.log(this.answercomment.checked_info);
+        this.isLoading=false;
       })
       .catch((err) => {
         console.log(err);
