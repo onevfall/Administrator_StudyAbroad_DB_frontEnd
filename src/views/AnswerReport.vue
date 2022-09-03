@@ -42,7 +42,7 @@
           <el-row style="margin-top:50px">
             <el-col :span="3"></el-col>
             <el-col :span="4" style="text-align:left">问题内容：</el-col>
-            <el-col :span="10" style="text-align:left">{{ answer_info.Question }}</el-col>
+            <el-col :span="10" style="text-align:left"><p v-html="answer_info.Question"></p></el-col>
           </el-row> 
 
           <el-row style="margin-top:50px">
@@ -196,6 +196,11 @@ export default ({
         xhrFile.send();
         xhrFile.onload = () => {
         this.answer_info.AnswerContent = xhrFile.response;}
+        const xhrFile1 = new XMLHttpRequest();
+        xhrFile1.open("GET", this.answer_info.Question, true);
+        xhrFile1.send();
+        xhrFile1.onload = () => {
+        this.answer_info.Question = xhrFile1.response;}
         this.isLoading=false;
       })
       .catch((err) => {
