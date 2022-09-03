@@ -115,6 +115,42 @@
         <div class="card-content">
           <el-row style="margin-top: 50px">
             <el-col :span="3"></el-col>
+            <el-col :span="5" style="text-align: left">高校QS排名：</el-col>
+            <el-col :span="10" style="text-align: left"
+              ><el-input
+                v-model="university_qs_rank"
+                placeholder="请输入高校QS排名"
+                clearable
+            /></el-col>
+          </el-row>
+        </div>
+        <div class="card-content">
+          <el-row style="margin-top: 50px">
+            <el-col :span="3"></el-col>
+            <el-col :span="5" style="text-align: left">高校The排名：</el-col>
+            <el-col :span="10" style="text-align: left"
+              ><el-input
+                v-model="university_the_rank"
+                placeholder="请输入高校The排名"
+                clearable
+            /></el-col>
+          </el-row>
+        </div>
+        <div class="card-content">
+          <el-row style="margin-top: 50px">
+            <el-col :span="3"></el-col>
+            <el-col :span="5" style="text-align: left">高校Usnews排名：</el-col>
+            <el-col :span="10" style="text-align: left"
+              ><el-input
+                v-model="university_usnews_rank"
+                placeholder="请输入高校Usnews排名"
+                clearable
+            /></el-col>
+          </el-row>
+        </div>
+        <div class="card-content">
+          <el-row style="margin-top: 50px">
+            <el-col :span="3"></el-col>
             <el-col :span="5" style="text-align: left">高校联系方式：</el-col>
             <el-col :span="10" style="text-align: left"
               ><el-input
@@ -228,11 +264,11 @@ export default {
       university_student_num: 0,
       university_teacher_num: 0,
       university_college: null,
-      university_QS_rank: null,
-      university_THE_rank: null,
-      university_USNEWS_rank: null,
       university_introduction: null,
       university_tuition: null,
+      university_qs_rank:null,
+      university_the_rank:null,
+      university_usnews_rank:null,
       isLoading: false,
     };
   },
@@ -272,6 +308,9 @@ export default {
           university_abbreviation:this.university_abbreviation,
           university_teacher_num:this.university_teacher_num,
           university_tuition:this.university_tuition,
+          qs_rank:this.university_qs_rank,
+          the_rank:this.university_the_rank,
+          usnews_rank:this.university_usnews_rank
         })
         .then((res) => {
           console.log(res);
@@ -285,7 +324,7 @@ export default {
               showClose: true,
               duration: 2000,
             });
-            //this.$router.replace({name:"answer_check_center"});
+            this.$router.replace({name:"manage_school_info"});
           }
           else{
             //若审核失败

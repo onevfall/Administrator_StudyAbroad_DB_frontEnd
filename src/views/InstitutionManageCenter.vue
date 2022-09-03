@@ -41,7 +41,7 @@
             type="warning"
             size="large"
             color="#626aef"
-            @click="goAddSchool"
+            @click="goAddInstitution"
             >添加机构<el-icon size="large" style="margin-left: 5px"
               ><CirclePlus /></el-icon
           ></el-button>
