@@ -6,7 +6,8 @@
 
 <template>
   <el-container>
-    <el-main>
+    <el-main v-loading.fullscreen.lock="isLoading"
+             element-loading-text="正在加载">
       <el-card class="box-card">
         <template #header>
           <div class="card-header">
@@ -121,6 +122,7 @@ export default ({
         blog_id:0,
         blog_info:[],
         administrator_id:99,
+        isLoading:false,
     };
   },
   methods:{
@@ -170,6 +172,7 @@ export default ({
   created(){
     this.report_id=this.$route.query.report_id;
     this.blog_id=this.$route.query.blog_id;
+    this.isLoading=true;
     axios({
       url: "check/blog",
       method: "get",
@@ -198,6 +201,7 @@ export default ({
         xhrFile2.send();
         xhrFile2.onload = () => {
         this.blog_info.BlogContent = xhrFile2.response;}
+        this.isLoading=false;
 
       })
       .catch((err) => {

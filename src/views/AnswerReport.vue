@@ -6,7 +6,8 @@
 
 <template>
   <el-container>
-    <el-main>
+    <el-main v-loading.fullscreen.lock="isLoading"
+             element-loading-text="正在加载">
       <el-card class="box-card">
         <template #header>
           <div class="card-header">
@@ -127,6 +128,7 @@ export default ({
         user_id:0,
         answer_info:[],
         administrator_id:99,
+        isLoading:false,
     };
   },
   methods:{
@@ -177,6 +179,7 @@ export default ({
     this.report_id=this.$route.query.report_id;
     this.answer_id=this.$route.query.answer_id;
     this.user_id=this.$route.query.user_id;
+    this.isLoading=true;
     axios({
       url: "check/answer",
       method: "get",
@@ -193,6 +196,7 @@ export default ({
         xhrFile.send();
         xhrFile.onload = () => {
         this.answer_info.AnswerContent = xhrFile.response;}
+        this.isLoading=false;
       })
       .catch((err) => {
         console.log(err);

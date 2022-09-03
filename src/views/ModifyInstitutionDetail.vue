@@ -416,41 +416,68 @@
           机构针对院校所处国家：
         </el-col>
         <el-col :span="col3" style="text-align: left;margin-top: 3px;">
+<<<<<<< HEAD
           {{ this.target }}
+=======
+          {{ this.targets }}
+>>>>>>> upstream
         </el-col>
         <el-col :span="col4">
           <el-button
             text="primary"
             type="primary"
             @click="
+<<<<<<< HEAD
               infoName['target'] = true;
               modified.target = this.target;
+=======
+              infoName['targets'] = true;
+              modified.targets = this.targets;
+>>>>>>> upstream
             "
             >修改</el-button
           >
           <el-dialog
             title="修改机构针对国家"
+<<<<<<< HEAD
             v-model="infoName['target']"
+=======
+            v-model="infoName['targets']"
+>>>>>>> upstream
             class="change_dialog"
           >
             <el-form :model="form">
               <el-form-item label="新的机构针对国家">
+<<<<<<< HEAD
                 <el-input v-model="modified.target" autosize type="textarea" autocomplete="off" ></el-input>
+=======
+                <el-input v-model="modified.targets" autosize type="textarea" autocomplete="off" ></el-input>
+>>>>>>> upstream
               </el-form-item>
             </el-form>
             <div slot="footer" class="modify-name-footer">
               <el-button
                 @click="
+<<<<<<< HEAD
                   updateInstitutionInfo('target', false);
                   modified.target= '';
+=======
+                  updateInstitutionInfo('targets', false);
+                  modified.targets= '';
+>>>>>>> upstream
                 "
                 >取 消</el-button
               >
               <el-button
                 type="primary"
                 @click="
+<<<<<<< HEAD
                   updateInstitutionInfo('target', true);
                   this.target = modified.target;
+=======
+                  updateInstitutionInfo('targets', true);
+                  this.targets = modified.targets;
+>>>>>>> upstream
                 "
                 >确 定</el-button
               >
@@ -480,7 +507,11 @@ export default {
       email: "",
       lessons_characteristic: "",
       lessons: "",
+<<<<<<< HEAD
       target: "",
+=======
+      targets: "",
+>>>>>>> upstream
 
       col1: 3,
       col2: 4,
@@ -499,7 +530,11 @@ export default {
         email: false,
         lessons_characteristic: false,
         lessons: false,
+<<<<<<< HEAD
         target: false,
+=======
+        targets: false,
+>>>>>>> upstream
       },
 
       modified: {
@@ -512,7 +547,11 @@ export default {
         email: "",
         lessons_characteristic: "",
         lessons: "",
+<<<<<<< HEAD
         target: "",
+=======
+        targets: "",
+>>>>>>> upstream
       },
     };
   },
@@ -536,7 +575,11 @@ export default {
         this.lessons_characteristic =
           this.institution_info.institution_lessons_characteristic;
         this.lessons = this.institution_info.institution_lessons;
+<<<<<<< HEAD
         this.target = this.institution_info.institution_target;
+=======
+        this.targets = this.institution_info.institution_target;
+>>>>>>> upstream
         //   console.log(this.institution_info.institution_name)
 
         //   this.QS_rank = this.university_info.rank[this.university_info.rank.length-1].UniversityQsRank

@@ -3,10 +3,10 @@
 作者：张子涵
 -->
 
-
 <template>
   <el-container>
-    <el-main>
+    <el-main v-loading.fullscreen.lock="isLoading"
+             element-loading-text="正在加载">
       <el-card class="box-card">
         <template #header>
           <div class="card-header">
@@ -179,6 +179,7 @@ export default {
       blogcomment_id: 0,
       blogcomment_info: [],
       administrator_id: 99,
+      isLoading:false,
     };
   },
   methods: {
@@ -225,9 +226,10 @@ export default {
       }
     },
   },
-  created() {
-    this.report_id = this.$route.query.report_id;
-    this.blogcomment_id = this.$route.query.blogcomment_id;
+  created(){
+    this.report_id=this.$route.query.report_id;
+    this.blogcomment_id=this.$route.query.blogcomment_id;
+    this.isLoading=true;
     axios({
       url: "check/blogcomment",
       method: "get",
@@ -252,8 +254,8 @@ export default {
         xhrFile.open("GET", this.blogcomment_info.RepliedBlogContent, true);
         xhrFile.send();
         xhrFile.onload = () => {
-          this.blogcomment_info.RepliedBlogContent = xhrFile.response;
-        };
+        this.blogcomment_info.RepliedBlogContent = xhrFile.response;}
+        this.isLoading=false;
       })
       .catch((err) => {
         console.log(err);
