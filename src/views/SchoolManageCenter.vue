@@ -62,7 +62,10 @@
     </div>
     <div class="downBox">
       <div v-for="(school, index) in school_list" :key="index">
-        <school-card :school="school"></school-card>
+        <school-card
+          :school="school"
+          @deletesuccess="refreshPage"
+        ></school-card>
         <br />
       </div>
     </div>
@@ -151,6 +154,40 @@ export default {
           console.log("大失败");
         });
     },
+    refreshPage(res) {
+      if (res) {
+        this.isLoading = true;
+        axios({
+          url: "university/num" + "?rank_year=2022",
+          method: "get",
+        }).then((res) => {
+          console.log("已获取到数据");
+          this.all_num = res.data.data.num;
+          this.page_num = Math.ceil(res.data.data.num / this.PAGESIZE); //向上取整
+          this.all_school_list = res.data.data.university_list;
+          // 进行当页数据检索
+          axios({
+            url:
+              "university/rank" +
+              "?rank_year=2022" +
+              "&" +
+              "page_size=" +
+              this.PAGESIZE +
+              "&tag=QS_rank",
+            method: "get",
+          })
+            .then((res) => {
+              this.school_list = res.data.data.university_list;
+              this.isLoading = false;
+              this.cur_page = 1;
+            })
+            .catch((errMsg) => {
+              console.log(errMsg);
+              console.log("第二层初始化大失败");
+            });
+        });
+      }
+    },
   },
   created() {
     if (!this.$store.state.is_login) {
@@ -189,7 +226,7 @@ export default {
         })
           .then((res) => {
             this.school_list = res.data.data.university_list;
-            
+
             this.isLoading = false;
           })
           .catch((errMsg) => {
