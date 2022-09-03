@@ -86,8 +86,17 @@
             <el-col :span="3"></el-col>
             <el-col :span="4" style="text-align:left;margin-top:7px">是否审核通过：</el-col>
             <el-col :span="8" style="text-align:left;">
-                <el-radio v-model="ReviewResult" label=true size="large"><span style="font-size:20px;font-weight:900">是</span></el-radio>
-                <el-radio v-model="ReviewResult" label=false size="large"><span style="font-size:20px;font-weight:900">否</span></el-radio>
+                <el-radio v-model="this.ReviewResult" :label=true size="large"><span style="font-size:20px;font-weight:900">是</span></el-radio>
+                <el-radio v-model="this.ReviewResult" :label=false size="large"><span style="font-size:20px;font-weight:900">否</span></el-radio>
+            </el-col>
+          </el-row>
+
+          <el-row style="margin-top:50px" v-if="this.ReviewResult">
+            <el-col :span="3"></el-col>
+            <el-col :span="4" style="text-align:left;margin-top:7px">是否封禁该用户：</el-col>
+            <el-col :span="8" style="text-align:left;">
+                <el-radio v-model="BanResult" :label=true size="large"><span style="font-size:20px;font-weight:900">是</span></el-radio>
+                <el-radio v-model="BanResult" :label=false size="large"><span style="font-size:20px;font-weight:900">否</span></el-radio>
             </el-col>
           </el-row>
 
@@ -113,6 +122,7 @@ export default ({
     return {
         ReviewResult:null,
         ReviewReason:null,
+        BanResult:null,
         report_id:0,
         answer_id:0,
         user_id:0,
@@ -133,6 +143,7 @@ export default ({
           answer_id:this.answer_id,
           administrator_id:this.administrator_id,
           result:this.ReviewResult,
+          ifBanned:this.BanResult,
         })
         .then((res) => {
           console.log(this.answer_id);
