@@ -188,10 +188,11 @@ export default ({
         this.answercomment_info=res.data.data;
         this.answercomment_info.ReportedDate=this.answercomment_info.ReportedDate.replace("T"," ");
         this.answercomment_info.AnswerCommentDate=this.answercomment_info.AnswerCommentDate.replace("T"," ");
-        if(this.answercomment_info.RepliedBlogContent==null){
-          this.answercomment_info.RepliedBlogContent=this.answercomment_info.RepliedComment;
-          this.answercomment_info.RepliedBlogDate=this.answercomment_info.RepliedCommentDate;
+        if(this.answercomment_info.RepliedAnswerContent==null){
+          this.answercomment_info.RepliedAnswerContent=this.answercomment_info.RepliedComment;
+          this.answercomment_info.RepliedAnswerDate=this.answercomment_info.RepliedCommentDate;
         }
+        console.log(this.answercomment_info.RepliedBlogContent)
         const xhrFile = new XMLHttpRequest();
         xhrFile.open("GET", this.answercomment_info.RepliedBlogContent, true);
         xhrFile.send();

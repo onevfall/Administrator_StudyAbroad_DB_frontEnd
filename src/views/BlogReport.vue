@@ -48,12 +48,6 @@
 
           <el-row style="margin-top:50px">
             <el-col :span="3"></el-col>
-            <el-col :span="4" style="text-align:left">动态或回复内容：</el-col>
-            <el-col :span="10" style="text-align:left"><p v-html="blog_info.RepliedBlogContent"></p></el-col>
-          </el-row>
-
-          <el-row style="margin-top:50px">
-            <el-col :span="3"></el-col>
             <el-col :span="4" style="text-align:left">举报人：</el-col>
             <el-col :span="10" style="text-align:left">
               <div style="display:inline-block;vertical-align:middle">
