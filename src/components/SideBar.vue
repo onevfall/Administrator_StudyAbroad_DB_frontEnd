@@ -25,7 +25,6 @@
         <el-menu-item index="4-3" @click="goAnswerCommentReportCenter">回答评论举报</el-menu-item>
         <el-menu-item index="4-4" @click="goBlogCommentReportCenter">动态评论举报</el-menu-item>
     </el-sub-menu>
-
     <el-menu-item index="5" @click="goManageSchool">
       <span>高校信息管理</span>
     </el-menu-item>
