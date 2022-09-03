@@ -9,7 +9,9 @@
       <el-card class="box-card">
         <template #header>
           <div class="card-header">
-            <span>审核回答</span>
+            <el-row>
+            <el-col :span="10">审核回答</el-col>
+          </el-row>
           </div>
         </template>
         <div class="card-content">
@@ -156,7 +158,7 @@ export default ({
     font-family:SimSun;
     font-size:40px;
     font-weight:900;
-    padding-left:15%;
+    /* padding-left:15%; */
     padding-top:30px;
   }
   .card-content{
