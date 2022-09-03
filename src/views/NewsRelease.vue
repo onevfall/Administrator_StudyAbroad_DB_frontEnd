@@ -152,9 +152,6 @@ export default {
           image_url: image_url,
         })
         .then((res) => {
-          console.log("下面应该是后端返回值");
-          console.log(res);
-          console.log("上面应该是后端返回值");
           if (res.data.status == true) {
             this.fullscreenLoading = false;
             ElMessage({
@@ -196,14 +193,13 @@ export default {
       tagList: [],
       newsId: 0,
       news_info: "",
-      oss_loading:true
+      oss_loading: true,
     };
   },
   created() {
-    console.log("初始化该页面的信息");
     this.newsId = this.$route.query.news_id;
-    if(this.newsId==undefined){
-      this.oss_loading=false;
+    if (this.newsId == -1) {
+      this.oss_loading = false;
       return;
     }
     axios({
@@ -215,19 +211,24 @@ export default {
         this.messageTitle = this.news_info.NewsFlashTitle;
         this.messageContent = this.news_info.NewsFlashContent;
         this.messageRegion = this.news_info.NewsFlashRegion;
-        
+
         const xhrFile = new XMLHttpRequest();
-          console.log('开始解析oss');
-          xhrFile.open("GET", this.messageContent, true);
-          xhrFile.send();
-          xhrFile.onload = () => {
-            //res.data.data.blog_content=xhrFile.response;
-            this.messageContent = xhrFile.response;
-            console.log('oss解析完成');
-            this.$refs.text_editor.getdefaultContent(this.messageContent);
-            this.oss_loading=false;
-          };
-          
+        console.log("开始解析oss");
+        xhrFile.open("GET", this.messageContent, true);
+        xhrFile.send();
+        xhrFile.onload = () => {
+          //res.data.data.blog_content=xhrFile.response;
+          this.messageContent = xhrFile.response;
+          console.log("oss解析完成");
+          this.$refs.text_editor.getdefaultContent(this.messageContent);
+          this.oss_loading = false;
+          axios
+            .delete("newsflash?newsflash_id=" + this.newsId)
+            .then((res) => {})
+            .catch((err) => {
+              console.log(err);
+            });
+        };
       })
       .catch((errMsg) => {
         console.log(errMsg);
