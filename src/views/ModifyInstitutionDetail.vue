@@ -416,41 +416,41 @@
           机构针对院校所处国家：
         </el-col>
         <el-col :span="col3" style="text-align: left;margin-top: 3px;">
-          {{ this.targets }}
+          {{ this.target }}
         </el-col>
         <el-col :span="col4">
           <el-button
             text="primary"
             type="primary"
             @click="
-              infoName['targets'] = true;
-              modified.targets = this.targets;
+              infoName['target'] = true;
+              modified.target = this.target;
             "
             >修改</el-button
           >
           <el-dialog
             title="修改机构针对国家"
-            v-model="infoName['targets']"
+            v-model="infoName['target']"
             class="change_dialog"
           >
             <el-form :model="form">
               <el-form-item label="新的机构针对国家">
-                <el-input v-model="modified.targets" autosize type="textarea" autocomplete="off" ></el-input>
+                <el-input v-model="modified.target" autosize type="textarea" autocomplete="off" ></el-input>
               </el-form-item>
             </el-form>
             <div slot="footer" class="modify-name-footer">
               <el-button
                 @click="
-                  updateInstitutionInfo('targets', false);
-                  modified.targets= '';
+                  updateInstitutionInfo('target', false);
+                  modified.target= '';
                 "
                 >取 消</el-button
               >
               <el-button
                 type="primary"
                 @click="
-                  updateInstitutionInfo('targets', true);
-                  this.targets = modified.targets;
+                  updateInstitutionInfo('target', true);
+                  this.target = modified.target;
                 "
                 >确 定</el-button
               >
@@ -480,7 +480,7 @@ export default {
       email: "",
       lessons_characteristic: "",
       lessons: "",
-      targets: "",
+      target: "",
 
       col1: 3,
       col2: 4,
@@ -499,7 +499,7 @@ export default {
         email: false,
         lessons_characteristic: false,
         lessons: false,
-        targets: false,
+        target: false,
       },
 
       modified: {
@@ -512,7 +512,7 @@ export default {
         email: "",
         lessons_characteristic: "",
         lessons: "",
-        targets: "",
+        target: "",
       },
     };
   },
@@ -536,7 +536,7 @@ export default {
         this.lessons_characteristic =
           this.institution_info.institution_lessons_characteristic;
         this.lessons = this.institution_info.institution_lessons;
-        this.targets = this.institution_info.institution_target;
+        this.target = this.institution_info.institution_target;
         //   console.log(this.institution_info.institution_name)
 
         //   this.QS_rank = this.university_info.rank[this.university_info.rank.length-1].UniversityQsRank
