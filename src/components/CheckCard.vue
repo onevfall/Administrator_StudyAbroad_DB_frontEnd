@@ -22,17 +22,17 @@
           <div class="check-content" v-for="i in this.tocheck_info" :key="i">
             <el-row>
               <el-col :span="12" style="text-align:left">
-                <div style="font-size:20px;color:black">{{ i.PostTitle }}</div>
-                <div style="margin-top:10px">{{ i.PostDate }}</div>
+                <div style="font-size:20px;color:black">{{ i.postTitle }}</div>
+                <div style="margin-top:10px">{{ i.postDate }}</div>
               </el-col>
               <el-col :span="8" style="text-align:left;padding-top:1%;padding-left:2%">
                 <div style="display:inline-block;vertical-align:middle">
-                  <el-avatar shape="circle" :size="50" :src=" i.UserProfile "/>
+                  <el-avatar shape="circle" :size="50" :src=" i.userProfile "/>
                 </div>
-                <div style="display:inline-block;padding-left:5px;color:black">{{ i.UserName }}</div>
+                <div style="display:inline-block;padding-left:5px;color:black">{{ i.userName }}</div>
               </el-col>
               <el-col :span="4" style="color:#2297FA;padding-top:2%" >
-                <el-button type="primary" @click="goCheck(i.PostId)" id="check-text" style="width:100px">
+                <el-button type="primary" @click="goCheck(i.postId)" id="check-text" style="width:100px">
                   <el-icon><Edit /></el-icon>去处理
                 </el-button>
               </el-col>
@@ -51,21 +51,21 @@
           <div class="check-content" v-for="i in this.checked_info" :key="i">
             <el-row>
               <el-col :span="10" style="text-align:left">
-                <div style="font-size:20px;color:black">{{ i.PostTitle }}</div>
-                <div style="margin-top:10px">{{ i.PostSupplement }}</div>
+                <div style="font-size:20px;color:black">{{ i.postTitle }}</div>
+                <div style="margin-top:10px">{{ i.postSupplement }}</div>
               </el-col>
               <el-col :span="6" style="text-align:left;">
                 <div style="display:inline-block;vertical-align:middle">
-                  <el-avatar shape="circle" :size="40" :src="i.UserProfile"/>
+                  <el-avatar shape="circle" :size="40" :src="i.userProfile"/>
                 </div>
-                <div style="display:inline-block;padding-left:5px;color:black">{{ i.UserName }}</div>
+                <div style="display:inline-block;padding-left:5px;color:black">{{ i.userName }}</div>
               </el-col>
               <el-col :span="4">
-                <div v-if="i.ReviewResult=='通过'" style="color:#93CB74;font-size:18px;margin-top:5px;">{{ i.ReviewResult }}</div>
-                <div v-if="i.ReviewResult=='不通过'" style="color:#CE2E3E;font-size:18px;margin-top:5px;">{{ i.ReviewResult }}</div>
-                <div style="font-size:13px;margin-top:10px">{{ i.ReviewDate }}</div>
+                <div v-if="i.reviewResult=='通过'" style="color:#93CB74;font-size:18px;margin-top:5px;">{{ i.reviewResult }}</div>
+                <div v-if="i.reviewResult=='不通过'" style="color:#CE2E3E;font-size:18px;margin-top:5px;">{{ i.reviewResult }}</div>
+                <div style="font-size:13px;margin-top:10px">{{ i.reviewDate }}</div>
               </el-col>
-              <el-col :span="4" style="margin-top:5px;padding-left:2%">{{ i.ReviewReason }}</el-col>
+              <el-col :span="4" style="margin-top:5px;padding-left:2%">{{ i.reviewReason }}</el-col>
             </el-row>
           </div>
         </el-tab-pane>
