@@ -65,7 +65,7 @@ export default {
           
           */
       axios
-        .post("login/administrator", {
+        .post("login/admin", {
           id: this.admin_id,
           password: this.admin_password,
         })

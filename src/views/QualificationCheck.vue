@@ -103,7 +103,7 @@ export default ({
         ElMessage.error('请选择是否审核通过');
       }
       else{
-        axios.post("check/submit_qualification", {
+        axios.post("admin/check/submit_qualification", {
           identity_id:this.qualification_id,
           administrator_id:this.administrator_id,
           review_result:this.ReviewResult,
@@ -141,7 +141,7 @@ export default ({
     this.administrator_id=this.$store.state.admin_info.administrator_id;
     this.isLoading=true;
     axios({
-      url: "check/single_qualification",
+      url: "admin/check/single_qualification",
       method: "get",
       params: {
         identity_id:this.qualification_id,

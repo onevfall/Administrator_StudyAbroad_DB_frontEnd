@@ -138,7 +138,9 @@ export default ({
         ElMessage.error('请选择是否审核通过');
       }
       else{
-        axios.put("check/answer", {
+        console.log(this.ReviewResult)
+        console.log(this.BanResult)
+        axios.put("admin/check/answer", {
           report_id:this.report_id,
           answer_id:this.answer_id,
           administrator_id:this.administrator_id,
@@ -181,7 +183,7 @@ export default ({
     this.user_id=this.$route.query.user_id;
     this.isLoading=true;
     axios({
-      url: "check/answer",
+      url: "admin/check/answer",
       method: "get",
       params: {
         report_id:this.report_id,

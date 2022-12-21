@@ -241,7 +241,7 @@ export default {
 
     submit_university_info: function () {
       axios
-        .post("institution", {
+        .post("college/institution", {
             name: this.institution_name,
             phone: this.institution_phone,
             qualify: this.institution_qualify,

@@ -189,7 +189,7 @@ export default {
       } else {
         console.log(this.BanResult)
         axios
-          .put("check/blogcomment", {
+          .put("admin/check/blogcomment", {
             report_id: this.report_id,
             blogcomment_id: this.blogcomment_id,
             administrator_id: this.administrator_id,
@@ -231,7 +231,7 @@ export default {
     this.blogcomment_id=this.$route.query.blogcomment_id;
     this.isLoading=true;
     axios({
-      url: "check/blogcomment",
+      url: "admin/check/blogcomment",
       method: "get",
       params: {
         report_id: this.report_id,

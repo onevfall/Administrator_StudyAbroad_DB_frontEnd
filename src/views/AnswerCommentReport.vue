@@ -135,7 +135,7 @@ export default ({
         ElMessage.error('请选择是否审核通过');
       }
       else{
-        axios.put("check/answercomment", {
+        axios.put("admin/check/answercomment", {
           report_id:this.report_id,
           answercomment_id:this.answercomment_id,
           administrator_id:this.administrator_id,
@@ -177,7 +177,7 @@ export default ({
     this.answercomment_id=this.$route.query.answercomment_id;
     this.isLoading=true;
     axios({
-      url: "check/answercomment",
+      url: "admin/check/answercomment",
       method: "get",
       params: {
         report_id:this.report_id,

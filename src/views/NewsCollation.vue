@@ -197,7 +197,7 @@ export default {
       this.isLoading = true;
       this.newsKeyword = "";
       let get_news_list = axios
-        .get("newsflash/all?page=1&page_size=" + this.PAGESIZE)
+        .get("/admin/newsflash/all?page=0&page_size=" + this.PAGESIZE)
         .then((res) => {
           console.log(res);
           this.news_info_list = [].concat(res.data.data.newsflashs);
@@ -206,7 +206,7 @@ export default {
           console.log(err);
         });
       let get_news_num = axios
-        .get("newsflash/num")
+        .get("admin/newsflash/num")
         .then((res) => {
           this.news_num_total = res.data.data.num;
         })
@@ -225,7 +225,7 @@ export default {
     curChange(res) {
       this.isLoading = true;
       axios
-        .get("newsflash/all?page=" + res + "&page_size=" + this.PAGESIZE)
+        .get("admin/newsflash/all?page=" + res + "&page_size=" + this.PAGESIZE)
         .then((res) => {
           this.news_info_list = [].concat(res.data.data.newsflashs);
           this.isLoading = false;
@@ -250,7 +250,7 @@ export default {
       this.dialogVisible = true;
     },
     deleteNews() {
-      axios.delete('newsflash?newsflash_id='+this.newsId).then(res=>{
+      axios.delete('admin/newsflash?newsflash_id='+this.newsId).then(res=>{
         this.dialogVisible = false;
         this.backToAllNews();
         ElMessage({
@@ -286,7 +286,7 @@ export default {
       }
       this.isLoading = true;
       axios
-        .get("newsflash/search" + "?keyword=" + this.newsKeyword)
+        .get("admin/newsflash/search" + "?keyword=" + this.newsKeyword)
         .then((res) => {
           if (res.data.data.newsflashs.length == 0) {
             ElMessage({
@@ -327,7 +327,7 @@ export default {
     }
     //在此处向服务器请求数据，初始化所需变量
     let get_news_list = axios
-      .get("newsflash/all?page=1&page_size=" + this.PAGESIZE)
+      .get("admin/newsflash/all?page=1&page_size=" + this.PAGESIZE)
       .then((res) => {
         console.log(res);
         this.news_info_list = [].concat(res.data.data.newsflashs);
@@ -336,7 +336,7 @@ export default {
         console.log(err);
       });
     let get_news_num = axios
-      .get("newsflash/num")
+      .get("admin/newsflash/num")
       .then((res) => {
         this.news_num_total = res.data.data.num;
       })

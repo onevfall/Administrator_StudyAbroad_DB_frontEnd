@@ -518,7 +518,7 @@ export default {
   },
   created() {
     axios
-      .get("institution", {
+      .get("college/institution", {
         params: {
           institution_id: this.$route.query.institution_id,
         },
@@ -555,7 +555,7 @@ export default {
         formData.append("id", this.institution_info.institution_id);
         formData.append(key, this.modified[key]);
         axios
-          .post("institution/change", formData)
+          .post("college/institution/change", formData)
           .then((res) => {
             console.log(res);
             // 修改成功or失败
