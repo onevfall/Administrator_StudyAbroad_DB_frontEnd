@@ -83,10 +83,10 @@
                 <el-aside width="200px">
                   <el-image
                     style="width: 198px; height: 183px"
-                    :src="news.NewsFlashImage"
+                    :src="news.newsFlashImage"
                     :fit="fit"
                     class="imgBorder"
-                    v-if="news.NewsFlashImage != null"
+                    v-if="news.newsFlashImage != null"
                   />
                   <el-image
                     style="width: 198px; height: 183px"
@@ -101,37 +101,37 @@
                     <template #header>
                       <div class="card-header2">
                         <span style="width: 40%">
-                          {{ news.NewsFlashTitle }}
+                          {{ news.newsFlashTitle }}
 
                           <br />
                         </span>
                         <el-tag class="ml-2" type="primary" size="small">
-                          {{ news.NewsFlashDate.replace("T", " ") }}
+                          {{ news.newsFlashDate }}
                         </el-tag>
                         <el-tag class="ml-2" type="success" size="small">
-                          {{ news.NewsFlashRegion }}
+                          {{ news.newsFlashRegion }}
                         </el-tag>
                         <el-tag class="ml-2" type="warning" size="small">{{
-                          news.NewsFlashTag
+                          news.newsFlashTag
                         }}</el-tag>
                       </div>
                     </template>
                     <div class="content_main">
-                      {{ news.NewsFlashSummary }}
+                      {{ news.newsFlashSummary }}
                     </div>
                   </el-card>
                 </el-main>
                 <el-aside width="10%" class="mainColor">
                   <el-button
                     type="danger"
-                    @click="callDeleteDialog(news.NewsFlashId)"
+                    @click="callDeleteDialog(news.newsFlashId)"
                     style="margin-top: 40%"
                   >
                     删除
                   </el-button>
                   <el-button
                     type="primary"
-                    @click="reviseNews(news.NewsFlashId)"
+                    @click="reviseNews(news.newsFlashId)"
                     style="margin-left: 0%; margin-top: 20%"
                   >
                     修改

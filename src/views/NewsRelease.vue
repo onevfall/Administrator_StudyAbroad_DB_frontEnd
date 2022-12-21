@@ -152,6 +152,7 @@ export default {
           image_url: image_url,
         })
         .then((res) => {
+          console.log(res)
           if (res.data.status == true) {
             this.fullscreenLoading = false;
             ElMessage({
@@ -208,9 +209,9 @@ export default {
     })
       .then((res) => {
         this.news_info = res.data.data;
-        this.messageTitle = this.news_info.NewsFlashTitle;
-        this.messageContent = this.news_info.NewsFlashContent;
-        this.messageRegion = this.news_info.NewsFlashRegion;
+        this.messageTitle = this.news_info.newsFlashTitle;
+        this.messageContent = this.news_info.newsFlashContent;
+        this.messageRegion = this.news_info.newsFlashRegion;
 
         const xhrFile = new XMLHttpRequest();
         console.log("开始解析oss");

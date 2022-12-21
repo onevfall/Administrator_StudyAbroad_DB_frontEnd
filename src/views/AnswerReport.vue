@@ -204,6 +204,7 @@ export default ({
         xhrFile1.onload = () => {
         this.answer_info.Question = xhrFile1.response;}
         this.isLoading=false;
+        console.log(this.answer_info)
       })
       .catch((err) => {
         console.log(err);

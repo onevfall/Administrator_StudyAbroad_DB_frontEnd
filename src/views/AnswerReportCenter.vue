@@ -27,20 +27,20 @@
               <div class="check-content" v-for="ans in this.answer_tocheck_info" :key="ans">
                 <el-row>
                   <el-col :span="6" style="text-align:left">
-                    <div style="font-size:20px;color:black">{{ ans.AnswerSummary }}</div>
-                    <div style="margin-top:10px">{{ ans.ReportDate }}</div>
+                    <div style="font-size:20px;color:black">{{ ans.answerSummary }}</div>
+                    <div style="margin-top:10px">{{ ans.reportDate }}</div>
                   </el-col>
                   <el-col :span="8" >
-                    <div>{{ans.ReportReason}}</div>
+                    <div>{{ans.reportReason}}</div>
                   </el-col>
                   <el-col :span="6" style="padding-top:1%">
                     <div style="display:inline-block;vertical-align:middle">
-                      <el-avatar shape="circle" :size="50" :src=" ans.UserProfile "/>
+                      <el-avatar shape="circle" :size="50" :src=" ans.userProfile "/>
                     </div>
-                    <div style="display:inline-block;padding-left:5px;color:black">{{ ans.UserName }}</div>
+                    <div style="display:inline-block;padding-left:5px;color:black">{{ ans.userName }}</div>
                   </el-col>
                   <el-col :span="4" style="color:#2297FA;padding-top:2%" >
-                    <el-button type="primary" @click="goReportCheck(ans.ReportId,ans.AnswerId,ans.UserId,ans)" id="check-text" style="width:100px">
+                    <el-button type="primary" @click="goReportCheck(ans.reportId,ans.answerId,ans.userId,ans)" id="check-text" style="width:100px">
                       <el-icon><Edit /></el-icon>去处理
                     </el-button>
                   </el-col>
@@ -60,24 +60,24 @@
               <div class="check-content" v-for="ans in this.answer_checked_info" :key="ans">
                 <el-row>
                   <el-col :span="6" style="text-align:left">
-                    <div style="font-size:20px;color:black">{{ ans.AnswerSummary }}</div>
-                    <div style="margin-top:10px">{{ ans.ReportDate }}</div>
+                    <div style="font-size:20px;color:black">{{ ans.answerSummary }}</div>
+                    <div style="margin-top:10px">{{ ans.reportDate }}</div>
                   </el-col>
                   <el-col :span="8" >
-                    <div>{{ans.ReportReason}}</div>
+                    <div>{{ans.reportReason}}</div>
                   </el-col>
                   <!--
                   -->
                   <el-col :span="6" style="padding-top:1%">
                     <div style="display:inline-block;vertical-align:middle">
-                      <el-avatar shape="circle" :size="50" :src=" ans.UserProfile "/>
+                      <el-avatar shape="circle" :size="50" :src=" ans.userProfile "/>
                     </div>
-                    <div style="display:inline-block;padding-left:5px;color:black">{{ ans.UserName }}</div>
+                    <div style="display:inline-block;padding-left:5px;color:black">{{ ans.userName }}</div>
                   </el-col>
                   <el-col :span="4">
-                    <div v-if="ans.ReportAnswerResult==true" style="color:#93CB74;font-size:18px;margin-top:5px;">通过</div>
-                    <div v-if="ans.ReportAnswerResult==false" style="color:#CE2E3E;font-size:18px;margin-top:5px;">不通过</div>
-                    <div style="font-size:13px;margin-top:10px">{{ ans.ReviewDate }}</div>
+                    <div v-if="ans.reportAnswerResult==true" style="color:#93CB74;font-size:18px;margin-top:5px;">通过</div>
+                    <div v-if="ans.reportAnswerResult==false" style="color:#CE2E3E;font-size:18px;margin-top:5px;">不通过</div>
+                    <div style="font-size:13px;margin-top:10px">{{ ans.reviewDate }}</div>
                   </el-col>
                 </el-row>
               </div>
@@ -139,11 +139,11 @@ export default ({
       .then((res) => {
         console.log(res.data.data);
         this.answer_checked_info=res.data.data.answer_report;
-        for(var i=0;i<this.answer_checked_info.length;i++)
-        {
-          this.answer_checked_info[i].ReportDate=this.answer_checked_info[i].ReportDate.replace("T"," ");
+        // for(var i=0;i<this.answer_checked_info.length;i++)
+        // {
+        //   this.answer_checked_info[i].ReportDate=this.answer_checked_info[i].reportDate;
           
-        }
+        // }
         //console.log(this.answer.checked_info);
         this.isLoading=false;
       })
@@ -157,11 +157,11 @@ export default ({
       .then((res) => {
         console.log(res.data.data);
         this.answer_tocheck_info=res.data.data.answer_report;
-        for(var i=0;i<this.answer_tocheck_info.length;i++)
-        {
-          this.answer_tocheck_info[i].ReportDate=this.answer_tocheck_info[i].ReportDate.replace("T"," ");
+        // for(var i=0;i<this.answer_tocheck_info.length;i++)
+        // {
+        //   this.answer_tocheck_info[i].ReportDate=this.answer_tocheck_info[i].reportDate;
           
-        }
+        // }
         //console.log(this.answer.checked_info);
       })
       .catch((err) => {
