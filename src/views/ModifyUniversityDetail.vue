@@ -762,7 +762,7 @@ export default {
   },
   created() {
     axios
-      .get("university", {
+      .get("college/university", {
         params: {
           university_id: this.$route.query.school_id,
         },
@@ -788,7 +788,7 @@ export default {
         formData.append("chname", this.modified["chname"]);
         formData.append("enname", this.modified["enname"]);
         axios
-          .post("university/change", formData)
+          .post("college/university/change", formData)
           .then((res) => {
             // 修改成功or失败
             console.log(res.data);
@@ -816,7 +816,7 @@ export default {
         formData.append("id", this.university_info.university_id);
         formData.append(key, this.modified[key]);
         console.log(this.modified[key]);
-        axios.post("university/change", formData)
+        axios.post("college/university/change", formData)
         .then((res) => {
           console.log(res);
           // 修改成功or失败
@@ -841,7 +841,7 @@ export default {
         formData.append("id", this.university_info.university_id);
         formData.append(key, Number(this.modified[key]));
         console.log(key)
-        axios.post("university/change", formData)
+        axios.post("college/university/change", formData)
         .then((res) => {
           console.log(res);
           // 修改成功or失败

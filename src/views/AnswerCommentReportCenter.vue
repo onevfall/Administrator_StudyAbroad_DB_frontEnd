@@ -132,7 +132,7 @@ export default ({
     }
     this.isLoading=true;
     axios({
-      url: "/check/answercomment_report/solved",
+      url: "admin/check/answercomment_report/solved",
       method: "get",
       })
       .then((res) => {
@@ -140,7 +140,7 @@ export default ({
         this.answercomment_checked_info=res.data.data.answercomment_report;
         for(var i=0;i<this.answercomment_checked_info.length;i++)
         {
-          this.answercomment_checked_info[i].ReportDate=this.answercomment_checked_info[i].ReportDate.replace("T"," ");
+          this.answercomment_checked_info[i].ReportDate=this.answercomment_checked_info[i].reportDate.replace("T"," ");
           
         }
       })
@@ -148,7 +148,7 @@ export default ({
         console.log(err);
       });
       axios({
-      url: "/check/answercomment_report/unsolved",
+      url: "admin/check/answercomment_report/unsolved",
       method: "get",
       })
       .then((res) => {
@@ -156,7 +156,7 @@ export default ({
         this.answercomment_tocheck_info=res.data.data.answercomment_report;
         for(var i=0;i<this.answercomment_tocheck_info.length;i++)
         {
-          this.answercomment_tocheck_info[i].ReportDate=this.answercomment_tocheck_info[i].ReportDate.replace("T"," ");
+          this.answercomment_tocheck_info[i].ReportDate=this.answercomment_tocheck_info[i].reportDate.replace("T"," ");
           
         }
         //console.log(this.answercomment.checked_info);

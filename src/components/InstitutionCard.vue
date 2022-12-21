@@ -84,7 +84,7 @@ export default {
     },
     deleteInstitution(){
       axios.delete(
-        '/institution', {	
+        'college/institution', {	
       params: {	// 请求参数拼接在url上
         institution_id: this.institution.institution_id,
       }

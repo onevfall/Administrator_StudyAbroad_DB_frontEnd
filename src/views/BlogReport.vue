@@ -126,7 +126,7 @@ export default ({
         ElMessage.error('请选择是否审核通过');
       }
       else{
-        axios.put("check/blog", {
+        axios.put("admin/check/blog", {
           report_id:this.report_id,
           blog_id:this.blog_id,
           administrator_id:this.administrator_id,
@@ -168,7 +168,7 @@ export default ({
     this.blog_id=this.$route.query.blog_id;
     this.isLoading=true;
     axios({
-      url: "check/blog",
+      url: "admin/check/blog",
       method: "get",
       params: {
         report_id:this.report_id,

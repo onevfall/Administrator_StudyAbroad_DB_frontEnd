@@ -133,7 +133,7 @@ export default ({
     }
     this.isLoading=true;
     axios({
-      url: "/check/answer_report/solved",
+      url: "admin/check/answer_report/solved",
       method: "get",
       })
       .then((res) => {
@@ -151,7 +151,7 @@ export default ({
         console.log(err);
       });
       axios({
-      url: "/check/answer_report/unsolved",
+      url: "admin/check/answer_report/unsolved",
       method: "get",
       })
       .then((res) => {

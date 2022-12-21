@@ -293,7 +293,7 @@ export default {
       };
     },
     submit_university_info: function () {
-      axios.post("university", {
+      axios.post("college/university", {
           university_email:this.university_email,
           university_chname:this.university_chname,
           university_enname:this.university_enname,

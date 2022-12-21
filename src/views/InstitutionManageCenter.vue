@@ -123,7 +123,7 @@ export default {
       x = "page=" + this.cur_page + "&" + "page_size=" + this.PAGESIZE;
       axios({
         // 点击搜索时加载符合条件的数据
-        url: "institution/list?" + x,
+        url: "college/institution/list?" + x,
         method: "get",
       })
         .then((res) => {
@@ -144,7 +144,7 @@ export default {
       if(res){
       this.isLoading = true;
       axios({
-        url: "institution/num",
+        url: "college/institution/num",
         method: "get",
       }).then((res) => {
         console.log("已获取到数据");
@@ -153,7 +153,7 @@ export default {
         this.all_institution_list = res.data.data.institution_list;
         // 进行当页数据检索
         axios({
-          url: "institution/list?" + "page_size=" + this.PAGESIZE,
+          url: "college/institution/list?" + "page_size=" + this.PAGESIZE,
           method: "get",
         })
           .then((res) => {
@@ -185,7 +185,7 @@ export default {
     }
     this.isLoading = true;
     axios({
-      url: "institution/num",
+      url: "college/institution/num",
       method: "get",
     })
       .then((res) => {
@@ -195,7 +195,7 @@ export default {
         this.all_institution_list = res.data.data.institution_list;
         // 进行当页数据检索
         axios({
-          url: "institution/list?" + "page_size=" + this.PAGESIZE,
+          url: "college/institution/list?" + "page_size=" + this.PAGESIZE,
           method: "get",
         })
           .then((res) => {

@@ -143,7 +143,7 @@ export default {
         image_url = args.image_array[0]; //选第一张图片
       }
       axios
-        .post("newsflash/release", {
+        .post("admin/newsflash/release", {
           title: this.messageTitle,
           tag: tag,
           region: this.messageRegion,
@@ -203,7 +203,7 @@ export default {
       return;
     }
     axios({
-      url: "newsflash/single" + "?newsflash_id=" + this.newsId,
+      url: "admin/newsflash/single" + "?newsflash_id=" + this.newsId,
       method: "get",
     })
       .then((res) => {
@@ -223,7 +223,7 @@ export default {
           this.$refs.text_editor.getdefaultContent(this.messageContent);
           this.oss_loading = false;
           axios
-            .delete("newsflash?newsflash_id=" + this.newsId)
+            .delete("admin/newsflash?newsflash_id=" + this.newsId)
             .then((res) => {})
             .catch((err) => {
               console.log(err);

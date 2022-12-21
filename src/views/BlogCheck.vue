@@ -87,7 +87,7 @@ export default ({
         ElMessage.error('请选择是否审核通过');
       }
       else{
-        axios.post("check/submit_blog", {
+        axios.post("admin/check/submit_blog", {
           blog_id:this.blog_id,
           administrator_id:this.administrator_id,
           review_result:this.ReviewResult,
@@ -125,7 +125,7 @@ export default ({
     this.administrator_id=this.$store.state.admin_info.administrator_id;
     this.isLoading=true;
     axios({
-      url: "check/single_blog",
+      url: "admin/check/single_blog",
       method: "get",
       params: {
         blog_id:this.blog_id,

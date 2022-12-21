@@ -450,7 +450,7 @@ export default {
     getUniversityInfo() {
       console.log(this.search_word);
       this.isLoading=true;
-      axios.get("university/chname", {
+      axios.get("college/university/chname", {
         params: {
           chname: this.search_word,
         }
@@ -467,7 +467,7 @@ export default {
           var source_data = res.data.data;
           console.log("search_id = " + this.search_info)
           console.log(source_data.university_id);
-          axios.get("university/get_rank", {
+          axios.get("college/university/get_rank", {
             params: {
               university_id: res.data.data.university_id,
             }
@@ -519,7 +519,7 @@ export default {
         formData.append("id", this.university_id);
         formData.append("chname", this.modified["chname"]);
         formData.append("enname", this.modified["enname"]);
-        axios.post("university/change", formData)
+        axios.post("college/university/change", formData)
         .then((res) => {
           // 修改成功or失败
           console.log(res);
@@ -535,7 +535,7 @@ export default {
         var formData = new FormData();
         formData.append("id", this.university_id);
         formData.append(key, this.modified[key]);
-        axios.post("university/change", formData)
+        axios.post("college/university/change", formData)
         .then((res) => {
           console.log(res);
           // 修改成功or失败

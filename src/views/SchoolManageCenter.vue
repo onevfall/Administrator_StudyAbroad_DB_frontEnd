@@ -137,7 +137,7 @@ export default {
         "&tag=QS_rank";
       axios({
         // 点击搜索时加载符合条件的数据
-        url: "university/rank" + x,
+        url: "college/university/rank" + x,
         method: "get",
       })
         .then((res) => {
@@ -158,7 +158,7 @@ export default {
       if (res) {
         this.isLoading = true;
         axios({
-          url: "university/num" + "?rank_year=2022",
+          url: "college/university/num" + "?rank_year=2022",
           method: "get",
         }).then((res) => {
           console.log("已获取到数据");
@@ -168,7 +168,7 @@ export default {
           // 进行当页数据检索
           axios({
             url:
-              "university/rank" +
+              "college/university/rank" +
               "?rank_year=2022" +
               "&" +
               "page_size=" +
@@ -205,7 +205,7 @@ export default {
     }
     this.isLoading = true;
     axios({
-      url: "university/num" + "?rank_year=2022",
+      url: "college/university/num" + "?rank_year=2022",
       method: "get",
     })
       .then((res) => {
@@ -216,7 +216,7 @@ export default {
         // 进行当页数据检索
         axios({
           url:
-            "university/rank" +
+            "college/university/rank" +
             "?rank_year=2022" +
             "&" +
             "page_size=" +

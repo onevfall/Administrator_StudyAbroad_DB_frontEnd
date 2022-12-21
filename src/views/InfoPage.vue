@@ -110,7 +110,7 @@ export default {
     confirm: function(key) {
       this.isUpdating[key] = false;
       console.log(this.phone);
-      axios.post("administrator",{
+      axios.post("admin/administrator",{
         admin_id: this.admin_id,
         admin_name: this.name,
         admin_gender: this.gender == "女" ? 'f' : 'm',

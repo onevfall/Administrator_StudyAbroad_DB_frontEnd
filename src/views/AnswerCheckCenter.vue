@@ -50,7 +50,7 @@ export default ({
     }
     this.isLoading=true;
     axios({
-      url: "check/all_answers",
+      url: "admin/check/all_answers",
       method: "get",
       params: {
         admin_id:this.$store.state.admin_info.administrator_id,

@@ -49,7 +49,7 @@ export default ({
     }
     this.isLoading=true;
     axios({
-      url: "check/all_qualifications",
+      url: "admin/check/all_qualifications",
       method: "get",
       params: {
         admin_id:this.$store.state.admin_info.administrator_id,
