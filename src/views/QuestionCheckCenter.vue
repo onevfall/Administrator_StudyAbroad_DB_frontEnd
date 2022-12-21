@@ -57,19 +57,19 @@ export default ({
         console.log(res.data.data);
         for(var i=0;i<res.data.data.question_list.length;i++)
         {
-          res.data.data.question_list[i].QuestionDate=res.data.data.question_list[i].QuestionDate.replace("T"," ");
-          if(res.data.data.question_list[i].ReviewDate!=null)
+          res.data.data.question_list[i].questionDate=res.data.data.question_list[i].questionDate;
+          if(res.data.data.question_list[i].reviewDate!=null)
             {
-              res.data.data.question_list[i].ReviewDate=res.data.data.question_list[i].ReviewDate.replace("T"," ");
-              res.data.data.question_list[i].PostTitle=res.data.data.question_list[i].QuestionTitle;
-              res.data.data.question_list[i].PostSupplement=res.data.data.question_list[i].QuestionSummary;
+              res.data.data.question_list[i].reviewDate=res.data.data.question_list[i].reviewDate;
+              res.data.data.question_list[i].postTitle=res.data.data.question_list[i].questionTitle;
+              res.data.data.question_list[i].postSupplement=res.data.data.question_list[i].questionSummary;
               this.question_checked_info.push(res.data.data.question_list[i]);
             }
           else
             {
-              res.data.data.question_list[i].PostTitle=res.data.data.question_list[i].QuestionTitle;
-              res.data.data.question_list[i].PostId=res.data.data.question_list[i].QuestionId;
-              res.data.data.question_list[i].PostDate=res.data.data.question_list[i].QuestionDate;
+              res.data.data.question_list[i].postTitle=res.data.data.question_list[i].questionTitle;
+              res.data.data.question_list[i].postId=res.data.data.question_list[i].questionId;
+              res.data.data.question_list[i].postDate=res.data.data.question_list[i].questionDate;
               this.question_tocheck_info.push(res.data.data.question_list[i]);
             }
         }
