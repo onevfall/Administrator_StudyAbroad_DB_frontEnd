@@ -13,8 +13,8 @@
           高校名称：
         </el-col>
         <el-col :span="col3" style="text-align: left">
-          {{ this.university_info.university_chname }}（{{
-            this.university_info.university_enname
+          {{ this.university_info.universityChName }}（{{
+            this.university_info.universityEnName
           }}）
         </el-col>
         <el-col :span="col4">
@@ -23,8 +23,8 @@
             type="primary"
             @click="
               infoName['name'] = true;
-              modified.chname = this.university_info.university_chname;
-              modified.enname = this.university_info.university_enname;
+              modified.chname = this.university_info.universityChName;
+              modified.enname = this.university_info.universityEnName;
             "
             >修改</el-button
           >
@@ -38,14 +38,14 @@
                 <el-input
                   v-model="modified.chname"
                   autocomplete="off"
-                  :placeholder="this.university_info.university_chname"
+                  :placeholder="this.university_info.universityChName"
                 ></el-input>
               </el-form-item>
               <el-form-item label="英文名">
                 <el-input
                   v-model="modified.enname"
                   autocomplete="off"
-                  :placeholder="this.university_info.university_enname"
+                  :placeholder="this.university_info.universityEnName"
                 ></el-input>
               </el-form-item>
             </el-form>
@@ -64,7 +64,7 @@
         <el-col :span="col2" style="text-align: left;font-weight: bold"> 高校校徽： </el-col>
         <el-col :span="col3" style="text-align: left">
           <div>
-            <el-avatar shape="circle" :src="this.university_info.university_badge"></el-avatar>
+            <el-avatar shape="circle" :src="this.university_info.universityBadge"></el-avatar>
           </div>
         </el-col>
         <el-col :span="col4">
@@ -87,14 +87,14 @@
         <el-col :span="col1"></el-col>
         <el-col :span="col2" style="text-align: left;font-weight: bold;"> 高校简称： </el-col>
         <el-col :span="col3" style="text-align: left;margin-top: 2px;">
-          {{ this.university_info.university_abbreviation }}
+          {{ this.university_info.universityAbbreviation }}
         </el-col>
         <el-col :span="col4">
           <el-button
             text="primary"
             type="primary"
             @click="infoName['abbreviation'] = true;              
-            modified.abbreviation = this.university_info.university_abbreviation;"
+            modified.abbreviation = this.university_info.universityAbbreviation;"
             >修改</el-button
           >
           <el-dialog title="高校简称" v-model="infoName['abbreviation']">
@@ -114,7 +114,7 @@
                 type="primary"
                 @click="
                   updateUniversityInfo('abbreviation', true);
-                  this.university_info.university_abbreviation = modified.abbreviation;
+                  this.university_info.universityAbbreviation = modified.abbreviation;
                 "
                 >确 定</el-button
               >
@@ -127,14 +127,14 @@
         <el-col :span="col1"></el-col>
         <el-col :span="col2" style="text-align: left;font-weight: bold;"> 高校所在国家： </el-col>
         <el-col :span="col3" style="text-align: left">
-          {{ this.university_info.university_country }}
+          {{ this.university_info.universityCountry }}
         </el-col>
         <el-col :span="col4">
           <el-button
             text="primary"
             type="primary"
             @click="infoName['country'] = true;
-            modified.country = this.university_info.university_country"
+            modified.country = this.university_info.universityCountry"
             >修改</el-button
           >
           <el-dialog title="高校所在国家" v-model="infoName['country']">
@@ -154,7 +154,7 @@
                 type="primary"
                 @click="
                   updateUniversityInfo('country', true);
-                  this.university_info.university_country = modified.country;
+                  this.university_info.universityCountry = modified.country;
                 "
                 >确 定</el-button
               >
@@ -167,13 +167,13 @@
         <el-col :span="col1"></el-col>
         <el-col :span="col2" style="text-align: left;font-weight: bold;"> 高校所在地区： </el-col>
         <el-col :span="col3" style="text-align: left">
-          {{ this.university_info.university_region }}
+          {{ this.university_info.universityRegion }}
         </el-col>
         <el-col :span="col4">
           <el-button
             text="primary"
             type="primary"
-            @click="infoName['region'] = true;modified.region=this.university_info.university_region;"
+            @click="infoName['region'] = true;modified.region=this.university_info.universityRegion;"
             >修改</el-button
           >
           <el-dialog title="高校所在地区" v-model="infoName['region']">
@@ -193,7 +193,7 @@
                 type="primary"
                 @click="
                   updateUniversityInfo('region', true);
-                  this.university_info.university_region = modified.region;
+                  this.university_info.universityRegion = modified.region;
                 "
                 >确 定</el-button
               >
@@ -206,13 +206,13 @@
         <el-col :span="col1"></el-col>
         <el-col :span="col2" style="text-align: left;font-weight: bold;"> 高校详细地址： </el-col>
         <el-col :span="col3" style="text-align: left">
-          {{ this.university_info.university_location }}
+          {{ this.university_info.universityLocation }}
         </el-col>
         <el-col :span="col4">
           <el-button
             text="primary"
             type="primary"
-            @click="infoName['location'] = true;modified.location=this.university_info.university_location;"
+            @click="infoName['location'] = true;modified.location=this.university_info.universityLocation;"
             >修改</el-button
           >
           <el-dialog title="高校详细地址" v-model="infoName['location']">
@@ -232,7 +232,7 @@
                 type="primary"
                 @click="
                   updateUniversityInfo('location', true);
-                  this.university_info.university_location = modified.location;
+                  this.university_info.universityLocation = modified.location;
                 "
                 >确 定</el-button
               >
@@ -245,13 +245,13 @@
         <el-col :span="col1"></el-col>
         <el-col :span="col2" style="text-align: left;font-weight:bold;"> 高校邮箱： </el-col>
         <el-col :span="col3" style="text-align: left">
-          {{ this.university_info.university_email }}
+          {{ this.university_info.universityEmail }}
         </el-col>
         <el-col :span="col4">
           <el-button
             text="primary"
             type="primary"
-            @click="infoName['email'] = true;modified.email=this.university_info.university_email"
+            @click="infoName['email'] = true;modified.email=this.university_info.universityEmail"
             >修改</el-button
           >
           <el-dialog title="高校邮箱" v-model="infoName['email']">
@@ -271,7 +271,7 @@
                 type="primary"
                 @click="
                   updateUniversityInfo('email', true);
-                  this.university_info.university_email = modified.email;
+                  this.university_info.universityEmail = modified.email;
                 "
                 >确 定</el-button
               >
@@ -284,13 +284,13 @@
         <el-col :span="col1"></el-col>
         <el-col :span="col2" style="text-align: left;font-weight: bold;"> 高校官网： </el-col>
         <el-col :span="col3" style="text-align: left">
-          {{ this.university_info.university_website }}
+          {{ this.university_info.universityWebsite }}
         </el-col>
         <el-col :span="col4">
           <el-button
             text="primary"
             type="primary"
-            @click="infoName['website'] = true;modified.website=this.university_info.university_website "
+            @click="infoName['website'] = true;modified.website=this.university_info.universityWebsite "
             >修改</el-button
           >
           <el-dialog title="高校官网" v-model="infoName['website']">
@@ -310,7 +310,7 @@
                 type="primary"
                 @click="
                   updateUniversityInfo('website', true);
-                  this.university_info.university_website = modified.website;
+                  this.university_info.universityWebsite = modified.website;
                 "
                 >确 定</el-button
               >
@@ -323,13 +323,13 @@
         <el-col :span="col1"></el-col>
         <el-col :span="col2" style="text-align: left;font-weight: bold;"> 高校学生人数： </el-col>
         <el-col :span="col3" style="text-align: left">
-          {{ this.university_info.university_student_num }}
+          {{ this.university_info.universityStudentNum }}
         </el-col>
         <el-col :span="col4">
           <el-button
             text="primary"
             type="primary"
-            @click="infoName['student_num'] = true;modified.student_num = this.university_info.university_student_num"
+            @click="infoName['student_num'] = true;modified.student_num = this.university_info.universityStudentNum"
             >修改</el-button
           >
           <el-dialog title="高校学生人数" v-model="infoName['student_num']">
@@ -362,13 +362,13 @@
         <el-col :span="col1"></el-col>
         <el-col :span="col2" style="text-align: left;font-weight: bold;"> 高校教师人数： </el-col>
         <el-col :span="col3" style="text-align: left">
-          {{ this.university_info.university_teacher_num }}
+          {{ this.university_info.universityTeacherNum }}
         </el-col>
         <el-col :span="col4">
           <el-button
             text="primary"
             type="primary"
-            @click="infoName['teacher_num'] = true;modified.teacher_num = this.university_info.university_teacher_num"
+            @click="infoName['teacher_num'] = true;modified.teacher_num = this.university_info.universityTeacherNum"
             >修改</el-button
           >
           <el-dialog title="高校教师人数" v-model="infoName['teacher_num']">
@@ -401,7 +401,7 @@
         <el-col :span="col1"></el-col>
         <el-col :span="col2" style="text-align: left;font-weight: bold;"> 高校院系： </el-col>
         <el-col :span="col3" style="text-align: left">
-          <div v-for="college in this.university_info.university_college" style="margin-top:5px;">
+          <div v-for="college in this.university_info.universityCollege" style="margin-top:5px;">
             {{ college }}
           </div>
         </el-col>
@@ -535,13 +535,13 @@
           雅思成绩要求：
         </el-col>
         <el-col :span="col3" style="text-align: left;margin-top: 4px;">
-          {{ this.university_info.university_ielts_requirement}}
+          {{ this.university_info.universityIeltsRequirement}}
         </el-col>
         <el-col :span="col4">
           <el-button
             text="primary"
             type="primary"
-            @click="infoName['ielts_requirement'] = true; modified.ielts_requirement = this.university_info.university_ielts_requirement"
+            @click="infoName['ielts_requirement'] = true; modified.ielts_requirement = this.university_info.universityIeltsRequirement"
             >修改</el-button
           >
           <el-dialog title="高校雅思成绩要求" v-model="infoName['ielts_requirement']">
@@ -561,7 +561,7 @@
                 type="primary"
                 @click="
                   updateUniversityInfo('ielts_requirement', true);
-                  this.university_info.university_ielts_requirement = modified.ielts_requirement;
+                  this.university_info.universityIeltsRequirement = modified.ielts_requirement;
                 "
                 >确 定</el-button
               >
@@ -576,13 +576,13 @@
           托福成绩要求：
         </el-col>
         <el-col :span="col3" style="text-align: left;margin-top: 4px;">
-          {{ this.university_info.university_tofel_requirement}}
+          {{ this.university_info.universityTofelRequirement}}
         </el-col>
         <el-col :span="col4">
           <el-button
             text="primary"
             type="primary"
-            @click="infoName['tofel_requirement'] = true; modified.tofel_requirement = this.university_info.university_tofel_requirement"
+            @click="infoName['tofel_requirement'] = true; modified.tofel_requirement = this.university_info.universityTofelRequirement"
             >修改</el-button
           >
           <el-dialog title="高校托福成绩要求" v-model="infoName['tofel_requirement']">
@@ -617,13 +617,13 @@
           高校学费：
         </el-col>
         <el-col :span="col3" style="text-align: left;margin-top: 4px;">
-          {{ this.university_info.university_tuition}}
+          {{ this.university_info.universityTuition}}
         </el-col>
         <el-col :span="col4">
           <el-button
             text="primary"
             type="primary"
-            @click="infoName['tuition'] = true; modified.tuition = this.university_info.tuition"
+            @click="infoName['tuition'] = true; modified.tuition = this.university_info.universityTuition"
             >修改</el-button
           >
           <el-dialog title="高校学费" v-model="infoName['tuition']">
@@ -643,7 +643,7 @@
                 type="primary"
                 @click="
                   updateUniversityInfo('tuition', true);
-                  this.university_info.university_tuition = modified.tuition;
+                  this.university_info.universityTuition = modified.tuition;
                 "
                 >确 定</el-button
               >
@@ -658,13 +658,13 @@
           高校介绍：
         </el-col>
         <el-col :span="col3" style="text-align: left;margin-top: 4px;">
-          {{ this.university_info.university_introduction}}
+          {{ this.university_info.universityIntroduction}}
         </el-col>
         <el-col :span="col4">
           <el-button
             text="primary"
             type="primary"
-            @click="infoName['introduction'] = true; modified.introduction = this.university_info.university_introduction"
+            @click="infoName['introduction'] = true; modified.introduction = this.university_info.universityIntroduction"
             >修改</el-button
           >
           <el-dialog title="高校介绍" v-model="infoName['introduction']">
@@ -686,7 +686,7 @@
                 type="primary"
                 @click="
                   updateUniversityInfo('introduction', true);
-                  this.university_info.university_introduction = modified.introduction;
+                  this.university_info.universityIntroduction = modified.introduction;
                 "
                 >确 定</el-button
               >
@@ -762,17 +762,13 @@ export default {
   },
   created() {
     axios
-      .get("college/university", {
-        params: {
-          university_id: this.$route.query.school_id,
-        },
-      })
+      .get("college/"+this.$route.query.school_id)
       .then((res) => {
-        console.log(res.data.data);
-        this.university_info = res.data.data;
-        this.QS_rank = this.university_info.rank[this.university_info.rank.length-1].UniversityQsRank
-        this.THE_rank = this.university_info.rank[this.university_info.rank.length-1].UniversityTheRank
-        this.US_rank = this.university_info.rank[this.university_info.rank.length-1].UniversityUsnewsRank
+        console.log(res.data.obj);
+        this.university_info = res.data.obj;
+        this.QS_rank = this.university_info.rank[this.university_info.rank.length-1].universityQsRank
+        this.THE_rank = this.university_info.rank[this.university_info.rank.length-1].universityTheRank
+        this.US_rank = this.university_info.rank[this.university_info.rank.length-1].universityUsnewsRank
       })
       .catch((err) => {
         console.log(err);
@@ -784,7 +780,7 @@ export default {
       if (value) {
         console.log(this.modified);
         var formData = new FormData();
-        formData.append("id", this.university_info.university_id);
+        formData.append("id", this.university_info.universityId);
         formData.append("chname", this.modified["chname"]);
         formData.append("enname", this.modified["enname"]);
         axios

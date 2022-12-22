@@ -59,16 +59,16 @@ export default ({
         console.log(res.data.data);
         for(var i=0;i<res.data.data.qualification_list.length;i++)
         {
-          res.data.data.qualification_list[i].PostDate=res.data.data.qualification_list[i].SummitDate.replace("T"," ");
-          res.data.data.qualification_list[i].PostTitle=res.data.data.qualification_list[i].UniversityChName+" "
-                                                        +res.data.data.qualification_list[i].Identity+" "
-                                                        +res.data.data.qualification_list[i].Major;
-          res.data.data.qualification_list[i].PostId=res.data.data.qualification_list[i].IdentityId;
-          if(res.data.data.qualification_list[i].ReviewDate==null)
+          res.data.data.qualification_list[i].PostDate=res.data.data.qualification_list[i].summitDate.replace("T"," ");
+          res.data.data.qualification_list[i].PostTitle=res.data.data.qualification_list[i].universityChName+" "
+                                                        +res.data.data.qualification_list[i].identity+" "
+                                                        +res.data.data.qualification_list[i].major;
+          res.data.data.qualification_list[i].PostId=res.data.data.qualification_list[i].identityId;
+          if(res.data.data.qualification_list[i].reviewDate==null)
             this.qualification_tocheck_info.push(res.data.data.qualification_list[i]);
           else
           {
-            res.data.data.qualification_list[i].ReviewDate=res.data.data.qualification_list[i].ReviewDate.replace("T"," ");
+            res.data.data.qualification_list[i].ReviewDate=res.data.data.qualification_list[i].reviewDate;
             this.qualification_checked_info.push(res.data.data.qualification_list[i]);
           }
           console.log(this.qualification_checked_info);

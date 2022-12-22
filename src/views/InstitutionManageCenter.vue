@@ -19,9 +19,9 @@
         >
           <el-option
             v-for="item in all_institution_list"
-            :key="item.institution_id"
-            :label="item.institution_name"
-            :value="item.institution_id"
+            :key="item.institutionId"
+            :label="item.institutionName"
+            :value="item.institutionId"
           />
         </el-select>
         <span style="margin: 10px; vertical-align: bottom">
@@ -123,16 +123,16 @@ export default {
       x = "page=" + this.cur_page + "&" + "page_size=" + this.PAGESIZE;
       axios({
         // 点击搜索时加载符合条件的数据
-        url: "college/institution/list?" + x,
+        url: "/institution/list?" + x,
         method: "get",
       })
         .then((res) => {
           console.log(res);
-          console.log(res.data.data.institution_list);
+          console.log(res.data.obj.institution_list);
           console.log("机构搜索成功");
           console.log(this.country_value);
           console.log(this.rank_type_value);
-          this.institution_list = res.data.data.institution_list;
+          this.institution_list = res.data.obj;
           this.isLoading = false;
         })
         .catch((errMsg) => {
@@ -144,20 +144,20 @@ export default {
       if(res){
       this.isLoading = true;
       axios({
-        url: "college/institution/num",
+        url: "institution/num",
         method: "get",
       }).then((res) => {
         console.log("已获取到数据");
-        this.all_num = res.data.data.num;
-        this.page_num = Math.ceil(res.data.data.num / this.PAGESIZE); //向上取整
-        this.all_institution_list = res.data.data.institution_list;
+        this.all_num = res.data.obj.num;
+        this.page_num = Math.ceil(res.data.obj.num / this.PAGESIZE); //向上取整
+        this.all_institution_list = res.data.obj.institution_list;
         // 进行当页数据检索
         axios({
-          url: "college/institution/list?" + "page_size=" + this.PAGESIZE,
+          url: "institution/list?" + "page_size=" + this.PAGESIZE,
           method: "get",
         })
           .then((res) => {
-            this.institution_list = res.data.data.institution_list;
+            this.institution_list = res.data.obj;
             this.isLoading = false;
             this.cur_page = 1;
           })
@@ -185,21 +185,21 @@ export default {
     }
     this.isLoading = true;
     axios({
-      url: "college/institution/num",
+      url: "institution/num",
       method: "get",
     })
       .then((res) => {
         console.log("已获取到数据");
-        this.all_num = res.data.data.num;
-        this.page_num = Math.ceil(res.data.data.num / this.PAGESIZE); //向上取整
-        this.all_institution_list = res.data.data.institution_list;
+        this.all_num = res.data.obj.num;
+        this.page_num = Math.ceil(res.data.obj.num / this.PAGESIZE); //向上取整
+        this.all_institution_list = res.data.obj.institution_list;
         // 进行当页数据检索
         axios({
-          url: "college/institution/list?" + "page_size=" + this.PAGESIZE,
+          url: "institution/list?" + "page_size=" + this.PAGESIZE,
           method: "get",
         })
           .then((res) => {
-            this.institution_list = res.data.data.institution_list;
+            this.institution_list = res.data.obj;
             this.isLoading = false;
           })
           .catch((errMsg) => {

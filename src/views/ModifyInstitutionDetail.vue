@@ -518,25 +518,22 @@ export default {
   },
   created() {
     axios
-      .get("college/institution", {
-        params: {
-          institution_id: this.$route.query.institution_id,
-        },
-      })
+      .get("institution/" + this.$route.query.institution_id
+      )
       .then((res) => {
-        console.log(res.data.data);
-        this.institution_info = res.data.data;
-        this.name = this.institution_info.institution_name;
-        this.phone = this.institution_info.institution_phone;
-        this.introduction = this.institution_info.institution_introduction;
-        this.profile = this.institution_info.institution_profile;
-        this.city = this.institution_info.institution_city;
-        this.location = this.institution_info.institution_location;
-        this.email = this.institution_info.institution_email;
+        console.log(res.data.obj);
+        this.institution_info = res.data.obj;
+        this.name = this.institution_info.institutionName;
+        this.phone = this.institution_info.institutionPhone;
+        this.introduction = this.institution_info.institutionIntroduction;
+        this.profile = this.institution_info.institutionProfile;
+        this.city = this.institution_info.institutionCity;
+        this.location = this.institution_info.institutionLocation;
+        this.email = this.institution_info.institutionEmail;
         this.lessons_characteristic =
-          this.institution_info.institution_lessons_characteristic;
-        this.lessons = this.institution_info.institution_lessons;
-        this.target = this.institution_info.institution_target;
+          this.institution_info.institutionLessonsCharacteristic;
+        this.lessons = this.institution_info.institutionLessons;
+        this.target = this.institution_info.institutionTarget;
         //   console.log(this.institution_info.institution_name)
 
         //   this.QS_rank = this.university_info.rank[this.university_info.rank.length-1].UniversityQsRank
@@ -555,7 +552,7 @@ export default {
         formData.append("id", this.institution_info.institution_id);
         formData.append(key, this.modified[key]);
         axios
-          .post("college/institution/change", formData)
+          .post("/institution/change", formData)
           .then((res) => {
             console.log(res);
             // 修改成功or失败

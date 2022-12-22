@@ -17,43 +17,43 @@
           <el-row style="margin-top:20px">
             <el-col :span="3"></el-col>
             <el-col :span="4" style="text-align:left">认证信息ID：</el-col>
-            <el-col :span="4" style="text-align:left">{{ qualification_info.IdentityId }}</el-col>
+            <el-col :span="4" style="text-align:left">{{ qualification_info.identityId }}</el-col>
           </el-row>
           <el-row style="margin-top:50px">
             <el-col :span="3"></el-col>
             <el-col :span="4" style="text-align:left">用户名称：</el-col>
-            <el-col :span="10" style="text-align:left">{{ qualification_info.UserName }}</el-col>
+            <el-col :span="10" style="text-align:left">{{ qualification_info.userName }}</el-col>
           </el-row>
           <el-row style="margin-top:50px">
             <el-col :span="3"></el-col>
             <el-col :span="4" style="text-align:left">学校：</el-col>
-            <el-col :span="10" style="text-align:left">{{ qualification_info.UniversityChName }} {{ qualification_info.UniversityEnName }}</el-col>
+            <el-col :span="10" style="text-align:left">{{ qualification_info.universityChName }} {{ qualification_info.universityEnName }}</el-col>
           </el-row>
           <el-row style="margin-top:50px">
             <el-col :span="3"></el-col>
             <el-col :span="4" style="text-align:left">学历：</el-col>
-            <el-col :span="10" style="text-align:left">{{ qualification_info.Identity }}</el-col>
+            <el-col :span="10" style="text-align:left">{{ qualification_info.identity }}</el-col>
           </el-row>
           <el-row style="margin-top:50px">
             <el-col :span="3"></el-col>
             <el-col :span="4" style="text-align:left">专业：</el-col>
-            <el-col :span="10" style="text-align:left">{{ qualification_info.Major }}</el-col>
+            <el-col :span="10" style="text-align:left">{{ qualification_info.major }}</el-col>
           </el-row>
           <el-row style="margin-top:50px">
             <el-col :span="3"></el-col>
             <el-col :span="4" style="text-align:left">就读时间：</el-col>
-            <el-col :span="10" style="text-align:left">{{ qualification_info.EnrollmentTime }}</el-col>
+            <el-col :span="10" style="text-align:left">{{ qualification_info.enrollmentTime }}</el-col>
           </el-row>
           <el-row style="margin-top:50px">
             <el-col :span="3"></el-col>
             <el-col :span="4" style="text-align:left">提交时间：</el-col>
-            <el-col :span="10" style="text-align:left">{{ qualification_info.SummitDate }}</el-col>
+            <el-col :span="10" style="text-align:left">{{ qualification_info.summitDate }}</el-col>
           </el-row>
           <el-row style="margin-top:50px">
             <el-col :span="3"></el-col>
             <el-col :span="4" style="text-align:left">认证图片：</el-col>
             <el-col :span="10" style="text-align:left">
-                <img :src="qualification_info.IdentityImage" style="width:400px"/>
+                <img :src="qualification_info.identityImage" style="width:400px"/>
             </el-col>
           </el-row>
           <el-row style="margin-top:50px">
@@ -150,7 +150,7 @@ export default ({
       .then((res) => {
         console.log(res);
         this.qualification_info=res.data.data;
-        this.qualification_info.SummitDate=this.qualification_info.SummitDate.replace("T"," ");
+        this.qualification_info.summitDate=this.qualification_info.summitDate;
         this.isLoading=false;
       })
       .catch((err) => {

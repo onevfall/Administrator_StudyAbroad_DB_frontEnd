@@ -18,27 +18,27 @@
           <el-row style="margin-top:20px">
             <el-col :span="3"></el-col>
             <el-col :span="4" style="text-align:left">动态ID：</el-col>
-            <el-col :span="4" style="text-align:left">{{ blog_info.BlogId }}</el-col>
+            <el-col :span="4" style="text-align:left">{{ blog_info.blogId }}</el-col>
           </el-row>
           <el-row style="margin-top:50px">
             <el-col :span="3"></el-col>
             <el-col :span="4" style="text-align:left">用户名称：</el-col>
-            <el-col :span="10" style="text-align:left">{{ blog_info.BlogUserName }}</el-col>
+            <el-col :span="10" style="text-align:left">{{ blog_info.blogUserName }}</el-col>
           </el-row>
           <el-row style="margin-top:50px">
             <el-col :span="3"></el-col>
             <el-col :span="4" style="text-align:left">动态标签：</el-col>
-            <el-col :span="10" style="text-align:left">{{ blog_info.BlogTag }}</el-col>
+            <el-col :span="10" style="text-align:left">{{ blog_info.blogTag }}</el-col>
           </el-row>
           <el-row style="margin-top:50px">
             <el-col :span="3"></el-col>
             <el-col :span="4" style="text-align:left">动态内容：</el-col>
-            <el-col :span="10" style="text-align:left"><p v-html="blog_info.BlogContent"></p></el-col>
+            <el-col :span="10" style="text-align:left"><p v-html="blog_info.blogContent"></p></el-col>
           </el-row>
           <el-row style="margin-top:50px">
             <el-col :span="3"></el-col>
             <el-col :span="4" style="text-align:left">动态时间：</el-col>
-            <el-col :span="10" style="text-align:left">{{ blog_info.BlogDate }}</el-col>
+            <el-col :span="10" style="text-align:left">{{ blog_info.blogDate }}</el-col>
           </el-row>
           <el-row style="margin-top:50px">
             <el-col :span="3"></el-col>
@@ -134,12 +134,12 @@ export default ({
       .then((res) => {
         console.log(res.data.data);
         this.blog_info=res.data.data;
-        this.blog_info.BlogDate=this.blog_info.BlogDate.replace("T"," ");
+        this.blog_info.blogDate=this.blog_info.blogDate;
         const xhrFile = new XMLHttpRequest();
-        xhrFile.open("GET", this.blog_info.BlogContent, true);
+        xhrFile.open("GET", this.blog_info.blogContent, true);
         xhrFile.send();
         xhrFile.onload = () => {
-        this.blog_info.BlogContent = xhrFile.response;}
+        this.blog_info.blogContent = xhrFile.response;}
         this.isLoading=false;
       })
       .catch((err) => {

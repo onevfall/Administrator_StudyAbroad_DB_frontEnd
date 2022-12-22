@@ -197,7 +197,7 @@ export default {
       this.isLoading = true;
       this.newsKeyword = "";
       let get_news_list = axios
-        .get("/admin/newsflash/all?page=0&page_size=" + this.PAGESIZE)
+        .get("/admin/newsflash/all?page=1&page_size=" + this.PAGESIZE)
         .then((res) => {
           console.log(res);
           this.news_info_list = [].concat(res.data.data.newsflashs);
