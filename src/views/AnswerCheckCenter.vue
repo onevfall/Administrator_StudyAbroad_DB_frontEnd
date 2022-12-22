@@ -60,16 +60,16 @@ export default ({
         console.log(res.data.data);
         for(var i=0;i<res.data.data.answer_list.length;i++)
         {
-          res.data.data.answer_list[i].PostDate=res.data.data.answer_list[i].AnswerDate.replace("T"," ");
-          res.data.data.answer_list[i].PostTitle=res.data.data.answer_list[i].AnswerSummary;
-          res.data.data.answer_list[i].PostId=res.data.data.answer_list[i].AnswerId;
-          res.data.data.answer_list[i].PostSupplement="原问题："+res.data.data.answer_list[i].QuestionTitle;
+          res.data.data.answer_list[i].PostDate=res.data.data.answer_list[i].answerDate;
+          res.data.data.answer_list[i].PostTitle=res.data.data.answer_list[i].answerSummary;
+          res.data.data.answer_list[i].PostId=res.data.data.answer_list[i].answerId;
+          res.data.data.answer_list[i].PostSupplement="原问题："+res.data.data.answer_list[i].questionTitle;
 
-          if(res.data.data.answer_list[i].ReviewDate==null)
+          if(res.data.data.answer_list[i].reviewDate==null)
             this.answer_tocheck_info.push(res.data.data.answer_list[i]);
           else
           {
-            res.data.data.answer_list[i].ReviewDate=res.data.data.answer_list[i].ReviewDate.replace("T"," ");
+            res.data.data.answer_list[i].reviewDate=res.data.data.answer_list[i].reviewDate;
             this.answer_checked_info.push(res.data.data.answer_list[i]);
           }
         }

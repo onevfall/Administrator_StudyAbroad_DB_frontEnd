@@ -143,7 +143,7 @@ export default {
         image_url = args.image_array[0]; //选第一张图片
       }
       axios
-        .post("admin/newsflash/release", {
+        .post("admin/newsflash", {
           title: this.messageTitle,
           tag: tag,
           region: this.messageRegion,
@@ -208,10 +208,12 @@ export default {
       method: "get",
     })
       .then((res) => {
-        this.news_info = res.data.data;
-        this.messageTitle = this.news_info.newsFlashTitle;
-        this.messageContent = this.news_info.newsFlashContent;
-        this.messageRegion = this.news_info.newsFlashRegion;
+        console.log(res.data.data)
+        this.news_info = res.data.data
+        console.log(this.news_info)
+        this.messageTitle = this.news_info.NewsFlashTitle;
+        this.messageContent = this.news_info.NewsFlashContent;
+        this.messageRegion = this.news_info.NewsFlashRegion;
 
         const xhrFile = new XMLHttpRequest();
         console.log("开始解析oss");

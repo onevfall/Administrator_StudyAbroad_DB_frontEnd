@@ -19,22 +19,22 @@
           <el-row style="margin-top:20px">
             <el-col :span="3"></el-col>
             <el-col :span="4" style="text-align:left">回答ID：</el-col>
-            <el-col :span="4" style="text-align:left">{{ answer_info.AnswerId }}</el-col>
+            <el-col :span="4" style="text-align:left">{{ answer_info.answerId }}</el-col>
           </el-row>
           <el-row style="margin-top:50px">
             <el-col :span="3"></el-col>
             <el-col :span="4" style="text-align:left">问题标题：</el-col>
-            <el-col :span="10" style="text-align:left">{{ answer_info.QuestionTitle }}</el-col>
+            <el-col :span="10" style="text-align:left">{{ answer_info.questionTitle }}</el-col>
           </el-row>
           <el-row style="margin-top:50px">
             <el-col :span="3"></el-col>
             <el-col :span="4" style="text-align:left">回答内容：</el-col>
-            <el-col :span="10" style="text-align:left"><p v-html="answer_info.AnswerContent"></p></el-col>
+            <el-col :span="10" style="text-align:left"><p v-html="answer_info.answerContent"></p></el-col>
           </el-row>
           <el-row style="margin-top:50px">
             <el-col :span="3"></el-col>
             <el-col :span="4" style="text-align:left">回答时间</el-col>
-            <el-col :span="10" style="text-align:left">{{ answer_info.AnswerDate }}</el-col>
+            <el-col :span="10" style="text-align:left">{{ answer_info.answerDate }}</el-col>
           </el-row>
           <el-row style="margin-top:50px">
             <el-col :span="3"></el-col>
@@ -135,12 +135,12 @@ export default ({
       .then((res) => {
         console.log(res.data.data);
         this.answer_info=res.data.data;
-        this.answer_info.AnswerDate=this.answer_info.AnswerDate.replace("T"," ");
+        this.answer_info.answerDate=this.answer_info.answerDate;
         const xhrFile = new XMLHttpRequest();
-        xhrFile.open("GET", this.answer_info.AnswerContent, true);
+        xhrFile.open("GET", this.answer_info.answerContent, true);
         xhrFile.send();
         xhrFile.onload = () => {
-        this.answer_info.AnswerContent = xhrFile.response;}
+        this.answer_info.answerContent = xhrFile.response;}
         this.isLoading=false;
       })
       .catch((err) => {

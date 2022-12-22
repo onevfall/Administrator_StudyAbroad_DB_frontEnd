@@ -186,7 +186,7 @@ export default ({
       .then((res) => {
         console.log(res.data.data);
         this.answercomment_info=res.data.data;
-        this.answercomment_info.ReportedDate=this.answercomment_info.ReportedDate.replace("T"," ");
+        this.answercomment_info.ReportedDate=this.answercomment_info.ReportedDate;
         this.answercomment_info.AnswerCommentDate=this.answercomment_info.AnswerCommentDate.replace("T"," ");
         if(this.answercomment_info.RepliedAnswerContent==null){
           this.answercomment_info.RepliedAnswerContent=this.answercomment_info.RepliedComment;

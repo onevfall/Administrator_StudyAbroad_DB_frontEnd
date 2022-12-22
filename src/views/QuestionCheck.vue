@@ -17,17 +17,17 @@
           <el-row style="margin-top:20px">
             <el-col :span="3"></el-col>
             <el-col :span="4" style="text-align:left">问题ID：</el-col>
-            <el-col :span="4" style="text-align:left">{{ question_info.QuestionId }}</el-col>
+            <el-col :span="4" style="text-align:left">{{ question_info.questionId }}</el-col>
           </el-row>
           <el-row style="margin-top:50px">
             <el-col :span="3"></el-col>
             <el-col :span="4" style="text-align:left">问题标题：</el-col>
-            <el-col :span="10" style="text-align:left">{{ question_info.QuestionTitle }}</el-col>
+            <el-col :span="10" style="text-align:left">{{ question_info.questionTitle }}</el-col>
           </el-row>
           <el-row style="margin-top:50px">
             <el-col :span="3"></el-col>
             <el-col :span="4" style="text-align:left">问题内容：</el-col>
-            <el-col :span="10" style="text-align:left"><p v-html="question_info.QuestionContent"></p></el-col>
+            <el-col :span="10" style="text-align:left"><p v-html="question_info.questionContent"></p></el-col>
           </el-row>
           <el-row style="margin-top:50px">
             <el-col :span="3"></el-col>
@@ -129,12 +129,12 @@ export default ({
         console.log(res.data.data);
         this.question_info=res.data.data;
         const xhrFile = new XMLHttpRequest();
-        xhrFile.open("GET", this.question_info.QuestionContent, true);
+        xhrFile.open("GET", this.question_info.questionContent, true);
         xhrFile.send();
 
         xhrFile.onload = () => {
         //res.data.data.blog_content=xhrFile.response;
-        this.question_info.QuestionContent = xhrFile.response;}
+        this.question_info.questionContent = xhrFile.response;}
         this.isLoading=false;
       })
       .catch((err) => {

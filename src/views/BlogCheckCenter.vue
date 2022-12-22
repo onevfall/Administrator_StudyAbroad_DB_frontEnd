@@ -60,14 +60,14 @@ export default ({
         console.log(res.data.data);
         for(var i=0;i<res.data.data.blog_list.length;i++)
         {
-          res.data.data.blog_list[i].PostDate=res.data.data.blog_list[i].BlogDate.replace("T"," ");
-          res.data.data.blog_list[i].PostTitle=res.data.data.blog_list[i].BlogSummary;
-          res.data.data.blog_list[i].PostId=res.data.data.blog_list[i].BlogId;
-          if(res.data.data.blog_list[i].ReviewDate==null)
+          res.data.data.blog_list[i].PostDate=res.data.data.blog_list[i].blogDate;
+          res.data.data.blog_list[i].PostTitle=res.data.data.blog_list[i].blogSummary;
+          res.data.data.blog_list[i].PostId=res.data.data.blog_list[i].blogId;
+          if(res.data.data.blog_list[i].reviewDate==null)
             this.blog_tocheck_info.push(res.data.data.blog_list[i]);
           else
           {
-            res.data.data.blog_list[i].ReviewDate=res.data.data.blog_list[i].ReviewDate.replace("T"," ");
+            res.data.data.blog_list[i].reviewDate=res.data.data.blog_list[i].reviewDate;
             this.blog_checked_info.push(res.data.data.blog_list[i]);
           }
         }

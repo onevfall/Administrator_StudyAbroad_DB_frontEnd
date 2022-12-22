@@ -19,9 +19,9 @@
         >
           <el-option
             v-for="item in all_school_list"
-            :key="item.university_id"
-            :label="item.university_chname"
-            :value="item.university_id"
+            :key="item.universityId"
+            :label="item.universityChName"
+            :value="item.universityId"
           />
         </el-select>
         <span style="margin: 10px; vertical-align: bottom">
@@ -137,16 +137,16 @@ export default {
         "&tag=QS_rank";
       axios({
         // 点击搜索时加载符合条件的数据
-        url: "college/university/rank" + x,
+        url: "college/list" + x,
         method: "get",
       })
         .then((res) => {
           console.log(res);
-          console.log(res.data.data.university_list);
+          console.log(res.data.obj.collegeBasicInfoList);
           console.log("搜索成功");
           console.log(this.country_value);
           console.log(this.rank_type_value);
-          this.school_list = res.data.data.university_list;
+          this.school_list = res.data.obj.collegeBasicInfoList;
           this.isLoading = false;
         })
         .catch((errMsg) => {
@@ -158,17 +158,17 @@ export default {
       if (res) {
         this.isLoading = true;
         axios({
-          url: "college/university/num" + "?rank_year=2022",
+          url: "college/list" + "?rank_year=2022",
           method: "get",
         }).then((res) => {
           console.log("已获取到数据");
-          this.all_num = res.data.data.num;
-          this.page_num = Math.ceil(res.data.data.num / this.PAGESIZE); //向上取整
-          this.all_school_list = res.data.data.university_list;
+          this.all_num = res.data.obj.college_num;
+          this.page_num = Math.ceil(res.data.obj.college_num / this.PAGESIZE); //向上取整
+          this.all_school_list = res.data.obj.collegeBasicInfoList;
           // 进行当页数据检索
           axios({
             url:
-              "college/university/rank" +
+              "college/list" +
               "?rank_year=2022" +
               "&" +
               "page_size=" +
@@ -177,7 +177,7 @@ export default {
             method: "get",
           })
             .then((res) => {
-              this.school_list = res.data.data.university_list;
+              this.school_list = res.data.obj.collegeBasicInfoList;
               this.isLoading = false;
               this.cur_page = 1;
             })
@@ -205,18 +205,18 @@ export default {
     }
     this.isLoading = true;
     axios({
-      url: "college/university/num" + "?rank_year=2022",
+      url: "college/list" + "?rank_year=2022",
       method: "get",
     })
       .then((res) => {
         console.log("已获取到数据");
-        this.all_num = res.data.data.num;
-        this.page_num = Math.ceil(res.data.data.num / this.PAGESIZE); //向上取整
-        this.all_school_list = res.data.data.university_list;
+        this.all_num = res.data.obj.college_num;
+        this.page_num = Math.ceil(res.data.obj.college_num / this.PAGESIZE); //向上取整
+        this.all_school_list = res.data.obj.collegeBasicInfoList;
         // 进行当页数据检索
         axios({
           url:
-            "college/university/rank" +
+            "college/list" +
             "?rank_year=2022" +
             "&" +
             "page_size=" +
@@ -225,7 +225,7 @@ export default {
           method: "get",
         })
           .then((res) => {
-            this.school_list = res.data.data.university_list;
+            this.school_list = res.data.obj.collegeBasicInfoList;
 
             this.isLoading = false;
           })
