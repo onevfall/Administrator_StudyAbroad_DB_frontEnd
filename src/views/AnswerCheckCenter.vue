@@ -60,10 +60,10 @@ export default ({
         console.log(res.data.data);
         for(var i=0;i<res.data.data.answer_list.length;i++)
         {
-          res.data.data.answer_list[i].PostDate=res.data.data.answer_list[i].answerDate;
-          res.data.data.answer_list[i].PostTitle=res.data.data.answer_list[i].answerSummary;
-          res.data.data.answer_list[i].PostId=res.data.data.answer_list[i].answerId;
-          res.data.data.answer_list[i].PostSupplement="原问题："+res.data.data.answer_list[i].questionTitle;
+          res.data.data.answer_list[i].postDate=res.data.data.answer_list[i].answerDate;
+          res.data.data.answer_list[i].postTitle=res.data.data.answer_list[i].answerSummary;
+          res.data.data.answer_list[i].postId=res.data.data.answer_list[i].answerId;
+          res.data.data.answer_list[i].postSupplement="原问题："+res.data.data.answer_list[i].questionTitle;
 
           if(res.data.data.answer_list[i].reviewDate==null)
             this.answer_tocheck_info.push(res.data.data.answer_list[i]);

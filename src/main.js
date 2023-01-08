@@ -16,7 +16,7 @@ import store from './store'
 
 //配置全局baseURL默认值
 axios.defaults.baseURL="/api"
-axios.defaults.headers.post['Content-Type']='application/x-www-form-urlencoded'
+axios.defaults.headers.post['Content-Type']='application/json'
 // axios.defaults.headers["Access-Control-Allow-Origin"]="*"
 //引入 根组件
 import App from './App.vue'
