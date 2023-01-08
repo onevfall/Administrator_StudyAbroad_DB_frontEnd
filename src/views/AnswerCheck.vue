@@ -84,12 +84,12 @@ export default ({
         ElMessage.error('请选择是否审核通过');
       }
       else{
-        axios.post("admin/check/submit_answer", {
+        axios.post("admin/check/submit_answer",null,{params:{
           answer_id:this.answer_id,
           administrator_id:this.administrator_id,
           review_result:this.ReviewResult,
           review_reason:this.ReviewReason,
-        })
+        }})
         .then((res) => {
           console.log(this.answer_id);
           console.log(this.administrator_id);

@@ -87,12 +87,12 @@ export default ({
         ElMessage.error('请选择是否审核通过');
       }
       else{
-        axios.post("admin/check/submit_blog", {
+        axios.post("admin/check/submit_blog",null,{params:{
           blog_id:this.blog_id,
           administrator_id:this.administrator_id,
           review_result:this.ReviewResult,
           review_reason:this.ReviewReason,
-        })
+        }})
         .then((res) => {
           console.log(res);
           var response = res.data;

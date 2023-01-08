@@ -60,9 +60,9 @@ export default ({
         console.log(res.data.data);
         for(var i=0;i<res.data.data.blog_list.length;i++)
         {
-          res.data.data.blog_list[i].PostDate=res.data.data.blog_list[i].blogDate;
-          res.data.data.blog_list[i].PostTitle=res.data.data.blog_list[i].blogSummary;
-          res.data.data.blog_list[i].PostId=res.data.data.blog_list[i].blogId;
+          res.data.data.blog_list[i].postDate=res.data.data.blog_list[i].blogDate;
+          res.data.data.blog_list[i].postTitle=res.data.data.blog_list[i].blogSummary;
+          res.data.data.blog_list[i].postId=res.data.data.blog_list[i].blogId;
           if(res.data.data.blog_list[i].reviewDate==null)
             this.blog_tocheck_info.push(res.data.data.blog_list[i]);
           else

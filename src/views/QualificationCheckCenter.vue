@@ -59,16 +59,16 @@ export default ({
         console.log(res.data.data);
         for(var i=0;i<res.data.data.qualification_list.length;i++)
         {
-          res.data.data.qualification_list[i].PostDate=res.data.data.qualification_list[i].summitDate.replace("T"," ");
-          res.data.data.qualification_list[i].PostTitle=res.data.data.qualification_list[i].universityChName+" "
+          res.data.data.qualification_list[i].postDate=res.data.data.qualification_list[i].summitDate.replace("T"," ");
+          res.data.data.qualification_list[i].postTitle=res.data.data.qualification_list[i].universityChName+" "
                                                         +res.data.data.qualification_list[i].identity+" "
                                                         +res.data.data.qualification_list[i].major;
-          res.data.data.qualification_list[i].PostId=res.data.data.qualification_list[i].identityId;
+          res.data.data.qualification_list[i].postId=res.data.data.qualification_list[i].identityId;
           if(res.data.data.qualification_list[i].reviewDate==null)
             this.qualification_tocheck_info.push(res.data.data.qualification_list[i]);
           else
           {
-            res.data.data.qualification_list[i].ReviewDate=res.data.data.qualification_list[i].reviewDate;
+            res.data.data.qualification_list[i].reviewDate=res.data.data.qualification_list[i].reviewDate;
             this.qualification_checked_info.push(res.data.data.qualification_list[i]);
           }
           console.log(this.qualification_checked_info);
