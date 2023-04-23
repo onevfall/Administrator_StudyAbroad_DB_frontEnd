@@ -5,7 +5,7 @@ module.exports = defineConfig({
     proxy:{
       '/api':{
         //target为后端数据接口的地址
-        target:'http://43.143.84.166:8888/',
+        target:'http://49.235.72.134:8888/',
         //target:'http://43.142.41.192:6001/',
         ws: false,
         changeOrigin:true,
